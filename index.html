@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Creator Growth Agency – Content Revenue Growth</title>
+  <meta name="description" content="Systematische Monetarisierung & Wachstumsstrategie für Streamer: Multi-Channel, Sponsoring, Editing & Reporting." />
+  <meta name="theme-color" content="#0f172a" />
+
+  <style>
+    :root{
+      --bg: #0b1220;
+      --bg2:#0f172a;
+      --card:#111b2f;
+      --muted:#94a3b8;
+      --text:#e5e7eb;
+      --white:#ffffff;
+      --line: rgba(148,163,184,.18);
+      --accent:#59d07b; /* soft green */
+      --accent2:#22c55e;
+      --shadow: 0 18px 40px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1120px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:
+        radial-gradient(1200px 600px at 15% 10%, rgba(34,197,94,.12), transparent 60%),
+        radial-gradient(900px 500px at 85% 25%, rgba(89,208,123,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color: var(--text);
+      line-height:1.5;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      background: rgba(11,18,32,.72);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:16px;
+    }
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
+    .logo{
+      width:34px; height:34px; border-radius:12px;
+      background: linear-gradient(145deg, rgba(89,208,123,.25), rgba(34,197,94,.08));
+      border:1px solid rgba(89,208,123,.35);
+      box-shadow: 0 8px 20px rgba(34,197,94,.08);
+      display:grid; place-items:center;
+    }
+    .logo svg{width:18px; height:18px; opacity:.95}
+    .brand small{display:block; color:var(--muted); font-weight:600; margin-top:-2px}
+
+    .menu{display:flex; gap:18px; align-items:center}
+    .menu a{
+      color: var(--muted);
+      font-weight:650;
+      font-size: 14px;
+      padding:10px 8px;
+      border-radius: 10px;
+    }
+    .menu a:hover{color:var(--text); background: rgba(148,163,184,.08)}
+
+    .cta{
+      display:flex; gap:10px; align-items:center;
+    }
+    .btn{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      color: var(--text);
+      font-weight:750;
+      border-radius: 14px;
+      padding: 10px 14px;
+      font-size:14px;
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.04)}
+    .btn-primary{
+      background: linear-gradient(145deg, rgba(34,197,94,.95), rgba(89,208,123,.78));
+      border-color: rgba(34,197,94,.65);
+      color:#061015;
+      box-shadow: 0 14px 30px rgba(34,197,94,.22);
+    }
+    .btn-primary:hover{background: linear-gradient(145deg, rgba(34,197,94,1), rgba(89,208,123,.88))}
+
+    /* Hero */
+    .hero{padding:56px 0 24px}
+    .hero-grid{
+      display:grid; gap:22px;
+      grid-template-columns: 1.15fr .85fr;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns:1fr}
+      .menu{display:none}
+    }
+
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      padding:8px 12px;
+      border:1px solid rgba(89,208,123,.28);
+      background: rgba(34,197,94,.08);
+      border-radius: 999px;
+      color: #c7f9d4;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing:.2px;
+    }
+    .kicker .dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
+    h1{
+      margin:14px 0 10px;
+      font-size: 44px;
+      line-height: 1.05;
+      letter-spacing: -0.8px;
+    }
+    @media (max-width: 520px){
+      h1{font-size: 36px}
+    }
+    .lead{color: var(--muted); font-size: 16px; max-width: 60ch}
+    .hero-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px}
+    .trust{
+      margin-top:14px;
+      display:flex; gap:14px; flex-wrap:wrap; color: var(--muted);
+      font-size: 13px;
+    }
+    .trust strong{color: var(--text)}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border-radius: 999px;
+      background: rgba(148,163,184,.08);
+      border:1px solid var(--line);
+    }
+
+    .hero-card{
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      padding:18px;
+    }
+    .hero-card:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(500px 260px at 80% 15%, rgba(34,197,94,.22), transparent 55%);
+      pointer-events:none;
+    }
+    .stats{
+      display:grid; gap:12px;
+      grid-template-columns: 1fr 1fr;
+      margin-top:12px;
+      position:relative;
+    }
+    .stat{
+      border:1px solid var(--line);
+      border-radius: 16px;
+      padding:14px;
+      background: rgba(17,27,47,.42);
+    }
+    .stat .num{font-size: 22px; font-weight: 900; letter-spacing:-.3px}
+    .stat .lbl{color: var(--muted); font-size: 12px; margin-top:4px}
+    .mini{
+      margin-top:12px;
+      border-top:1px solid var(--line);
+      padding-top:12px;
+      color: var(--muted);
+      font-size: 13px;
+      position:relative;
+    }
+    .mini b{color: var(--text)}
+
+    /* Sections */
+    section{padding:34px 0}
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:16px;
+      margin-bottom: 14px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: 26px;
+      letter-spacing:-.4px;
+    }
+    .section-title p{margin:0; color: var(--muted); max-width: 70ch}
+
+    .grid3{
+      display:grid; gap:14px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 980px){ .grid3{grid-template-columns:1fr} }
+
+    .card{
+      background: rgba(17,27,47,.40);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: 0 10px 26px rgba(0,0,0,.18);
+    }
+    .card h3{margin:4px 0 6px; font-size: 16px}
+    .card p{margin:0; color: var(--muted); font-size: 14px}
+    .icon{
+      width:40px; height:40px; border-radius: 14px;
+      display:grid; place-items:center;
+      background: rgba(34,197,94,.10);
+      border: 1px solid rgba(34,197,94,.25);
+      margin-bottom:10px;
+    }
+    .icon svg{width:18px;height:18px; fill:none; stroke: var(--accent); stroke-width:2}
+
+    /* Process */
+    .process{
+      display:grid; gap:14px;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    @media (max-width: 980px){ .process{grid-template-columns:1fr} }
+    .step{
+      padding:16px;
+      border-radius: var(--radius);
+      border: 1px dashed rgba(148,163,184,.25);
+      background: rgba(255,255,255,.02);
+    }
+    .step .n{
+      font-weight:900; color:#061015;
+      display:inline-flex; align-items:center; justify-content:center;
+      width:28px; height:28px; border-radius:10px;
+      background: linear-gradient(145deg, rgba(34,197,94,1), rgba(89,208,123,.85));
+      margin-bottom:10px;
+    }
+    .step h4{margin:0 0 6px}
+    .step ul{margin:0; padding-left:16px; color: var(--muted); font-size: 14px}
+
+    /* Pricing */
+    .pricing{
+      display:grid; gap:14px;
+      grid-template-columns: 1.2fr .8fr;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){ .pricing{grid-template-columns:1fr} }
+    .price{
+      font-size: 34px; font-weight: 950; letter-spacing:-.5px;
+      margin: 8px 0 4px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      background: rgba(34,197,94,.10);
+      border:1px solid rgba(34,197,94,.22);
+      color:#c7f9d4;
+      padding:8px 10px;
+      border-radius: 999px;
+      font-weight: 750;
+      font-size: 13px;
+    }
+    .list{margin:12px 0 0; padding-left:18px; color: var(--muted)}
+    .list li{margin:6px 0}
+
+    /* FAQ */
+    details{
+      border:1px solid var(--line);
+      border-radius: 14px;
+      padding:12px 14px;
+      background: rgba(255,255,255,.02);
+    }
+    details + details{margin-top:10px}
+    summary{cursor:pointer; font-weight:800}
+    details p{margin:8px 0 0; color: var(--muted); font-size:14px}
+
+    /* Footer */
+    footer{
+      padding:28px 0 40px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .foot{
+      display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    }
+    .legal{
+      display:flex; gap:12px; flex-wrap:wrap;
+    }
+    .legal a{color: var(--muted); text-decoration:underline; text-underline-offset:3px}
+    .legal a:hover{color: var(--text)}
+
+    /* Contact modal */
+    dialog{
+      border:none; border-radius: 18px;
+      background: #0b1220;
+      color: var(--text);
+      width:min(560px, 92vw);
+      box-shadow: var(--shadow);
+      padding:0;
+    }
+    .modal-head{
+      padding:16px 16px 0;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .modal-body{padding:0 16px 16px}
+    .xbtn{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      border-radius: 12px;
+      padding:8px 10px;
+      cursor:pointer;
+    }
+    form{display:grid; gap:10px; margin-top:10px}
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      outline:none;
+    }
+    textarea{min-height:110px; resize:vertical}
+    .hint{color: var(--muted); font-size: 12px}
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <div class="nav">
+        <a class="brand" href="#top">
+          <span class="logo" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M6 6h12v12H6z" stroke="currentColor" fill="none"/></svg>
+          </span>
+          <span>
+            Creator Growth Agency
+            <small>Content Revenue Growth</small>
+          </span>
+        </a>
+
+        <nav class="menu" aria-label="Hauptnavigation">
+          <a href="#leistungen">Leistungen</a>
+          <a href="#prozess">Arbeitsweise</a>
+          <a href="#kosten">Kosten</a>
+          <a href="#faq">FAQ</a>
+          <a href="#kontakt">Kontakt</a>
+        </nav>
+
+        <div class="cta">
+          <a class="btn" href="#kosten">Kosten ansehen</a>
+          <button class="btn btn-primary" id="openModal">Kennenlern-Call</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="top" class="wrap">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="kicker"><span class="dot"></span> Für ambitionierte Streamer (300–3.000+ Ø Viewer)</div>
+          <h1>Systematische Monetarisierung & Multi-Channel Wachstum.</h1>
+          <p class="lead">
+            Wir machen aus deinem Stream ein skalierbares Creator-Business: Content-Verwertung (24/7 & Uncut),
+            proaktive Sponsoren-Akquise, Editing (bis zu 5 Videos/Woche) und sauberes Reporting.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#kontakt">Angebot anfragen</a>
+            <a class="btn" href="#prozess">So arbeiten wir</a>
+          </div>
+
+          <div class="trust">
+            <span class="pill">✅ Transparentes Modell: <strong>500€ + 25%</strong></span>
+            <span class="pill">✅ Kündigungsfrist: <strong>1 Monat</strong></span>
+            <span class="pill">✅ Fokus: <strong>Mehr Umsatz, weniger Aufwand</strong></span>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Überblick">
+          <div class="badge">Analyse → Strategie → Umsetzung → Reporting</div>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="num">24/7</div>
+              <div class="lbl">Content-Verwertung bestehender Assets</div>
+            </div>
+            <div class="stat">
+              <div class="num">5×/Woche</div>
+              <div class="lbl">Editing & Publishing (max.)</div>
+            </div>
+            <div class="stat">
+              <div class="num">25%</div>
+              <div class="lbl">nur auf neue Einnahmen (Share)</div>
+            </div>
+            <div class="stat">
+              <div class="num">500€</div>
+              <div class="lbl">Retainer für Umsetzung & Struktur</div>
+            </div>
+          </div>
+
+          <div class="mini">
+            <b>Wichtig:</b> Keine Beteiligung an bereits bestehenden Sponsoren/Deals vor Start. Revenue-Share nur für neue, von uns aufgebaute Kanäle & neu akquirierte Placements.
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="leistungen">
+      <div class="section-title">
+        <div>
+          <h2>Leistungen</h2>
+          <p>Keine „wir schneiden nur Videos“-Bude – sondern ein System, das deinen Output & Umsatz skaliert.</p>
+        </div>
+      </div>
+
+      <div class="grid3">
+        <div class="card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24"><path d="M4 19V5m0 14h16M8 15l3-3 3 2 4-5" /></svg>
+          </div>
+          <h3>24/7 Content-Monetarisierung</h3>
+          <p>Neuer Kanal, der bestehenden Content 24/7 verwertet. Ziel: zusätzliche Werbeeinnahmen & passive Reichweite.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24"><path d="M10 8l6 4-6 4V8z"/><path d="M4 6h16v12H4z"/></svg>
+          </div>
+          <h3>Uncut-Stream-Kanal</h3>
+          <p>Streams als VOD-Library: Upload, Struktur, Titel/SEO. Monetarisierung ohne Extra-Aufwand.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24"><path d="M12 3l9 4-9 4-9-4 9-4z"/><path d="M3 7v10l9 4 9-4V7"/></svg>
+          </div>
+          <h3>Sponsoren-Akquise</h3>
+          <p>Proaktives Outreach (falls gewünscht): passende Marken finden, Pitches, Verhandlung & Placement-Setup.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h10v10H4z"/><path d="M14 14l6 6"/></svg>
+          </div>
+          <h3>Editing & Publishing</h3>
+          <p>Bis zu 5 Videos/Woche für den Hauptkanal: Schnitt, Hooks, Struktur, Upload-Plan & Distribution.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24"><path d="M3 12h18"/><path d="M12 3v18"/></svg>
+          </div>
+          <h3>Kanal-Organisation</h3>
+          <p>Ordnung statt Chaos: Content-Archiv, Upload-Kalender, Namensschema, Rechte & Freigaben.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24"><path d="M6 18V8"/><path d="M12 18V4"/><path d="M18 18v-6"/></svg>
+          </div>
+          <h3>Reporting & Optimierung</h3>
+          <p>Monatliche Auswertung (CTR, Retention, RPM) + konkrete Maßnahmen, was wir im nächsten Monat verbessern.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="prozess">
+      <div class="section-title">
+        <div>
+          <h2>Unsere Arbeitsweise</h2>
+          <p>Ein klarer Prozess wirkt seriös – und macht für dich planbar, was du wirklich bekommst.</p>
+        </div>
+      </div>
+
+      <div class="process">
+        <div class="step">
+          <div class="n">1</div>
+          <h4>Analyse & Planung</h4>
+          <ul>
+            <li>Content-Audit: Stream-Themen, Hooks, Formate</li>
+            <li>Channel-Setup & Ziele (KPI-Definition)</li>
+            <li>Roadmap für 30 Tage</li>
+          </ul>
+        </div>
+        <div class="step">
+          <div class="n">2</div>
+          <h4>Monetarisierung & Distribution</h4>
+          <ul>
+            <li>24/7-Kanal Setup (Content-Pipeline)</li>
+            <li>Uncut-Kanal Struktur (Playlists/SEO)</li>
+            <li>Multi-Channel Clip-System</li>
+          </ul>
+        </div>
+        <div class="step">
+          <div class="n">3</div>
+          <h4>Sponsoren-Akquise</h4>
+          <ul>
+            <li>Brand-Fit & Pitch-Deck</li>
+            <li>Outreach + Verhandlung</li>
+            <li>Placement-Planung & Auslieferung</li>
+          </ul>
+        </div>
+        <div class="step">
+          <div class="n">4</div>
+          <h4>Reporting & Optimierung</h4>
+          <ul>
+            <li>Monatsreport (KPIs, Learnings)</li>
+            <li>A/B-Ansätze (Titel/Thumb/Hook)</li>
+            <li>Optimierungsplan für nächsten Monat</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="kosten">
+      <div class="section-title">
+        <div>
+          <h2>Kosten & Partnerschaftsmodell</h2>
+          <p>Transparent, kündbar, und fair: Fixbetrag für Umsetzung + Share nur dort, wo wir neue Umsätze erzeugen.</p>
+        </div>
+      </div>
+
+      <div class="pricing">
+        <div class="card">
+          <span class="badge">Retainer + Erfolgsbeteiligung</span>
+          <div class="price">500€ <span style="font-size:14px; font-weight:800; color:var(--muted)">/ Monat</span></div>
+          <p style="margin:0;color:var(--muted)">für operative Umsetzung, Struktur & laufende Betreuung.</p>
+
+          <ul class="list">
+            <li><b>25%</b> auf Einnahmen aus <b>24/7-Kanal</b></li>
+            <li><b>25%</b> auf Einnahmen aus <b>Uncut-Kanal</b></li>
+            <li><b>25%</b> pro <b>neuem Sponsoring-Placement</b> (nur von uns akquiriert)</li>
+            <li><b>Bis zu 5 Videos/Woche</b> Editing für den Hauptkanal</li>
+            <li><b>Kündigungsfrist:</b> 1 Monat (beidseitig)</li>
+          </ul>
+
+          <p class="hint" style="margin-top:10px">
+            Hinweis: Keine Beteiligung an bereits bestehenden Sponsoren/Deals vor Start. Abrechnung monatlich anhand nachvollziehbarer Plattform-Reports.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Für wen passt das?</h3>
+          <p>Am besten für Creator, die bereits Momentum haben und skalieren wollen.</p>
+          <ul class="list">
+            <li>Regelmäßige Streams + klare Nische</li>
+            <li>Wunsch nach mehr Output ohne mehr Zeit</li>
+            <li>Offen für System/Prozess statt „sporadische Clips“</li>
+          </ul>
+
+          <div style="margin-top:14px; border-top:1px solid var(--line); padding-top:14px">
+            <h3>Start</h3>
+            <p style="margin:0;color:var(--muted)">Kennenlern-Call → Audit → 30-Tage Plan → Umsetzung.</p>
+            <div class="hero-actions" style="margin-top:12px">
+              <button class="btn btn-primary" id="openModal2">Call buchen</button>
+              <a class="btn" href="#faq">Fragen?</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="section-title">
+        <div>
+          <h2>FAQ</h2>
+          <p>Die typischen Fragen, die Creator (berechtigterweise) stellen.</p>
+        </div>
+      </div>
+
+      <details>
+        <summary>Warum 500€ + 25%? Ist das nicht doppelt?</summary>
+        <p>Die 500€ decken die laufende operative Arbeit (Editing, Uploads, Struktur, Reporting). Die 25% gelten nur für neue Einnahmenquellen, die wir aufbauen (24/7, Uncut, neue Placements). So ist das Modell planbar und leistungsorientiert.</p>
+      </details>
+
+      <details>
+        <summary>Was ist mit meinen bestehenden Sponsoren?</summary>
+        <p>Bestehende Sponsoren/Deals vor Start bleiben komplett bei dir. Provision gibt es nur auf neue Placements, die durch unsere Akquise entstehen.</p>
+      </details>
+
+      <details>
+        <summary>Was genau sind „max. 5 Videos/Woche“?</summary>
+        <p>Gemeint sind bearbeitete Videos für den Hauptkanal (z. B. Highlights/Longform/Shorts je nach Strategie). Der konkrete Mix wird im 30-Tage Plan festgelegt.</p>
+      </details>
+
+      <details>
+        <summary>Wie läuft die Kündigung?</summary>
+        <p>Beidseitig 1 Monat Kündigungsfrist. Fair und flexibel.</p>
+      </details>
+    </section>
+
+    <section id="kontakt">
+      <div class="section-title">
+        <div>
+          <h2>Kontakt</h2>
+          <p>Schreib kurz deine Kanäle + Ziele. Wir antworten mit einem konkreten nächsten Schritt.</p>
+        </div>
+      </div>
+
+      <div class="grid3">
+        <div class="card" style="grid-column: span 2;">
+          <h3 style="margin-top:0">Kurzanfrage</h3>
+          <form onsubmit="return false;">
+            <input id="c_name" placeholder="Name / Creator-Name" />
+            <input id="c_links" placeholder="Links (Twitch/YouTube/TikTok) – optional" />
+            <textarea id="c_msg" placeholder="Kurz: Was ist dein Ziel? (z. B. mehr Umsatz, mehr Output, Sponsoren, YouTube-Wachstum)"></textarea>
+            <button class="btn btn-primary" id="copyMsg">Nachricht kopieren</button>
+            <div class="hint">Der Button kopiert eine fertige Nachricht in deine Zwischenablage, die du per Discord/Email senden kannst.</div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-top:0">Direkt</h3>
+          <p style="margin-bottom:10px">Trage hier echte Daten ein:</p>
+          <ul class="list">
+            <li><b>Email:</b> hello@deinedomain.de</li>
+            <li><b>Discord:</b> deinname#0000</li>
+            <li><b>Telefon:</b> +49 …</li>
+          </ul>
+          <a class="btn" href="#impressum" style="margin-top:10px; display:inline-block;">Impressum</a>
+          <a class="btn" href="#datenschutz" style="margin-top:10px; display:inline-block;">Datenschutz</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="impressum">
+      <div class="section-title">
+        <div>
+          <h2>Impressum</h2>
+          <p>Platzhalter – bitte mit echten Daten ersetzen (in Deutschland sehr wichtig).</p>
+        </div>
+      </div>
+      <div class="card">
+        <p><b>Firma/Name:</b> [Dein Name / Unternehmensname]</p>
+        <p><b>Anschrift:</b> [Straße, PLZ, Ort, Land]</p>
+        <p><b>Kontakt:</b> [E-Mail], [Telefon]</p>
+        <p><b>USt-IdNr.:</b> [falls vorhanden]</p>
+        <p><b>Verantwortlich i.S.d. § 18 Abs. 2 MStV:</b> [Name, Adresse]</p>
+      </div>
+    </section>
+
+    <section id="datenschutz">
+      <div class="section-title">
+        <div>
+          <h2>Datenschutz</h2>
+          <p>Platzhalter – für echte Nutzung bitte durch korrekte Datenschutzerklärung ersetzen.</p>
+        </div>
+      </div>
+      <div class="card">
+        <p>Diese Website speichert ohne aktive Einbindung von Tracking/Analytics keine personenbezogenen Daten. Wenn du Kontakt per E-Mail/Discord aufnimmst, werden deine Angaben zur Bearbeitung deiner Anfrage verwendet.</p>
+        <p><b>Hinweis:</b> Sobald du Tools wie Analytics, Meta Pixel, Kontaktformulare mit Server, Newsletter etc. nutzt, brauchst du eine vollständige DSGVO-konforme Erklärung.</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap foot">
+        <div>© <span id="y"></span> Creator Growth Agency</div>
+        <div class="legal">
+          <a href="#impressum">Impressum</a>
+          <a href="#datenschutz">Datenschutz</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <dialog id="modal">
+    <div class="modal-head">
+      <div style="font-weight:900">Kennenlern-Call anfragen</div>
+      <button class="xbtn" id="closeModal">Schließen</button>
+    </div>
+    <div class="modal-body">
+      <div class="hint">Füll das kurz aus – wir erstellen danach einen 30-Tage Plan.</div>
+      <form onsubmit="return false;">
+        <input id="m_name" placeholder="Name / Creator-Name" />
+        <input id="m_channels" placeholder="Links zu deinen Kanälen" />
+        <textarea id="m_goal" placeholder="Ziel (z. B. mehr Umsatz, Sponsoren, YouTube-Wachstum, Content-System)"></textarea>
+        <button class="btn btn-primary" id="copyModalMsg">Nachricht kopieren</button>
+        <div class="hint">Du kannst die kopierte Nachricht direkt per Discord/Email verschicken.</div>
+      </form>
+    </div>
+  </dialog>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const openers = [document.getElementById('openModal'), document.getElementById('openModal2')].filter(Boolean);
+    const closeBtn = document.getElementById('closeModal');
+
+    openers.forEach(btn => btn.addEventListener('click', () => modal.showModal()));
+    closeBtn.addEventListener('click', () => modal.close());
+    modal.addEventListener('click', (e) => {
+      const rect = modal.getBoundingClientRect();
+      const inDialog = rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+                       rect.left <= e.clientX && e.clientX <= rect.left + rect.width;
+      if (!inDialog) modal.close();
+    });
+
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    function copyToClipboard(text){
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Kopiert ✅ – jetzt in Discord/Email einfügen.");
+      }).catch(() => {
+        alert("Kopieren fehlgeschlagen. Bitte manuell markieren & kopieren.");
+      });
+    }
+
+    document.getElementById('copyMsg').addEventListener('click', () => {
+      const name = document.getElementById('c_name').value.trim() || "[Name]";
+      const links = document.getElementById('c_links').value.trim() || "[Links]";
+      const msg = document.getElementById('c_msg').value.trim() || "[Ziel/Infos]";
+      const text =
+`Hi, ich bin ${name}.
+
+Meine Kanäle: ${links}
+
+Ziel: ${msg}
+
+Ich interessiere mich für euer Modell (500€ Retainer + 25% nur auf neue Einnahmenquellen: 24/7-Kanal, Uncut-Kanal, neue Sponsoren). 
+Können wir einen Kennenlern-Call machen?`;
+      copyToClipboard(text);
+    });
+
+    document.getElementById('copyModalMsg').addEventListener('click', () => {
+      const name = document.getElementById('m_name').value.trim() || "[Name]";
+      const channels = document.getElementById('m_channels').value.trim() || "[Links]";
+      const goal = document.getElementById('m_goal').value.trim() || "[Ziel]";
+      const text =
+`Hi, ich bin ${name}.
+
+Kanäle: ${channels}
+Ziel: ${goal}
+
+Ich würde gern einen Kennenlern-Call machen (Content-Monetarisierung 24/7 & Uncut, Editing bis 5/Woche, Sponsoren-Akquise, Reporting).`;
+      copyToClipboard(text);
+    });
+  </script>
+</body>
+</html>
