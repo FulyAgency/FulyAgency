@@ -1,576 +1,386 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>InfluenceHub — Creator x Brands</title>
-  <meta name="description" content="Startseite einer Influencer/Brand-Plattform: Deals, Briefings, Freigaben, Auszahlungen." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>InfluenceConnect | Influencer & Marken verbinden</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#ffffff;
-      --text:#0b1220;
-      --muted:#526277;
-      --border:#e6ecf4;
-      --soft:#f6f8fc;
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: #1a1a1a;
+      background: #fff;
+      line-height: 1.6;
+    }
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: #fff;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+      z-index: 1000;
+    }
+    nav {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-family: 'Poppins', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #0066ff;
+    }
+    nav ul {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: #0066ff; }
 
-      /* andere Farben (weiß bleibt) */
-      --primary:#6d28d9;       /* violet */
-      --primary-700:#5b21b6;
-      --accent:#06b6d4;        /* cyan */
-      --accent-700:#0891b2;
-
-      --shadow: 0 18px 55px rgba(15,23,42,.10);
-      --radius: 18px;
+    /* Hero */
+    #hero {
+      padding: 180px 24px 120px;
+      text-align: center;
+      background: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
     }
-
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.5;
+    #hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(42px, 8vw, 64px);
+      margin-bottom: 16px;
+      color: #0f172a;
     }
-    a{ color:inherit; text-decoration:none; }
-    .container{ width:min(1160px, calc(100% - 48px)); margin-inline:auto; }
-
-    /* Header */
-    header{
-      position:sticky; top:0; z-index:50;
-      background:rgba(255,255,255,.86);
-      backdrop-filter: blur(12px);
-      border-bottom:1px solid var(--border);
+    #hero h2 {
+      font-size: clamp(24px, 5vw, 32px);
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: #334155;
     }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:14px; padding:14px 0;
+    #hero p {
+      font-size: 20px;
+      max-width: 720px;
+      margin: 0 auto 40px;
+      color: #475569;
     }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:1000; letter-spacing:-.02em;
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.25s;
     }
-    .logo{
-      width:36px; height:36px; border-radius:12px;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      box-shadow: 0 14px 28px rgba(109,40,217,.18);
+    .btn-primary {
+      background: #0066ff;
+      color: white;
     }
-    nav.links{ display:flex; gap:10px; align-items:center; }
-    nav.links a{
-      padding:10px 12px; border-radius:12px;
-      color:var(--muted); font-weight:900;
+    .btn-primary:hover { background: #0055dd; transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #0066ff;
+      color: #0066ff;
+      margin-left: 16px;
     }
-    nav.links a:hover{ background:var(--soft); color:var(--text); }
-
-    .cta{ display:flex; gap:10px; align-items:center; }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:12px 16px;
-      border-radius:14px;
-      border:1px solid transparent;
-      font-weight:950;
-      cursor:pointer;
-      user-select:none;
-      transition: transform .08s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
-      white-space:nowrap;
-    }
-    .btn:active{ transform: translateY(1px); }
-    .btn-primary{ background:var(--primary); color:#fff; box-shadow: 0 16px 30px rgba(109,40,217,.18); }
-    .btn-primary:hover{ background:var(--primary-700); }
-    .btn-ghost{ background:#fff; border-color:var(--border); }
-    .btn-ghost:hover{ border-color:#d4dceb; }
-    .btn-accent{
-      background: rgba(6,182,212,.14);
-      border-color: rgba(6,182,212,.35);
-      color:#043a44;
-    }
-    .btn-accent:hover{
-      background: rgba(6,182,212,.22);
-      border-color: rgba(6,182,212,.55);
-    }
-
-    .burger{
-      display:none;
-      width:44px; height:44px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background:#fff;
-      align-items:center; justify-content:center;
-      cursor:pointer;
-    }
-    .burger span{ width:18px; height:2px; background:var(--text); position:relative; display:block; }
-    .burger span:before,.burger span:after{ content:""; position:absolute; left:0; width:18px; height:2px; background:var(--text); }
-    .burger span:before{ top:-6px; } .burger span:after{ top:6px; }
-
-    .mobile{ display:none; padding:0 0 14px 0; }
-    .mobile .stack{ display:flex; flex-direction:column; gap:8px; padding:10px 0; }
-    .mobile a{
-      padding:12px; border-radius:14px;
-      border:1px solid var(--border);
-      background:#fff;
-      font-weight:950;
-    }
-    .mobile a:hover{ background:var(--soft); }
+    .btn-outline:hover { background: #0066ff; color: white; }
 
     /* Sections */
-    main{ padding-bottom: 24px; }
-    .hero{ padding:56px 0 18px 0; }
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:20px;
-      align-items:stretch;
+    section {
+      padding: 100px 24px;
+      max-width: 1280px;
+      margin: 0 auto;
     }
-    .badge{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:6px 12px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background: rgba(109,40,217,.06);
-      color: var(--primary);
-      font-weight:950;
-      font-size:14px;
-    }
-    .title{
-      font-size: clamp(36px, 4.3vw, 60px);
-      line-height:1.02;
-      margin:12px 0 12px 0;
-      letter-spacing:-.045em;
-      font-weight:1100;
-    }
-    .sub{
-      margin:0;
-      color:var(--muted);
-      font-size:18px;
-      font-weight:650;
-      max-width: 62ch;
-    }
-    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
-
-    .panel{
-      border:1px solid var(--border);
-      border-radius: 22px;
-      background:
-        radial-gradient(900px 320px at 15% 10%, rgba(109,40,217,.14), transparent 60%),
-        radial-gradient(900px 320px at 85% 25%, rgba(6,182,212,.16), transparent 60%),
-        #fff;
-      box-shadow: var(--shadow);
-      padding:18px;
-    }
-    .panel-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
-    .pill{
-      font-size:12px; font-weight:950;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid rgba(11,18,32,.12);
-      background: rgba(255,255,255,.70);
-    }
-    .mini-card{
-      margin-top:12px;
-      border:1px solid rgba(11,18,32,.10);
-      border-radius:18px;
-      background: rgba(255,255,255,.78);
-      padding:14px;
-    }
-    .kpis{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:10px;
-      margin-top:12px;
-    }
-    .k{
-      border:1px solid rgba(11,18,32,.10);
-      border-radius:16px;
-      background: rgba(255,255,255,.78);
-      padding:12px;
-    }
-    .k .num{ font-weight:1100; font-size:18px; letter-spacing:-.02em; }
-    .k .lbl{ color:var(--muted); font-weight:850; font-size:12px; }
-
-    .section{ padding:34px 0; }
-    .section h2{
-      margin:0 0 10px 0;
-      font-size:28px;
-      letter-spacing:-.02em;
-      font-weight:1100;
-    }
-    .lead{
-      margin:0 0 18px 0;
-      color:var(--muted);
-      font-weight:650;
-      max-width: 70ch;
+    h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 42px;
+      text-align: center;
+      margin-bottom: 48px;
+      color: #0f172a;
     }
 
-    .grid-3{ display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; }
-    .card{
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      background:#fff;
-      box-shadow: 0 10px 30px rgba(15,23,42,.06);
+    /* Influencer Grid */
+    .influencer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      margin-bottom: 48px;
     }
-    .pad{ padding:18px; }
-
-    .icon{
-      width:46px; height:46px; border-radius:16px;
-      display:flex; align-items:center; justify-content:center;
-      font-weight:1100;
-      background: rgba(6,182,212,.14);
-      border:1px solid rgba(6,182,212,.30);
-      color:#06444f;
+    .influencer-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-align: center;
+      padding: 24px;
     }
-    .card h3{ margin:12px 0 6px 0; font-size:18px; letter-spacing:-.01em; }
-    .card p{ margin:0; color:var(--muted); font-weight:650; }
-
-    .how{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:16px;
-      align-items:start;
+    .influencer-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.12);
     }
-    .step{
-      display:flex; gap:12px;
-      padding:14px;
-      border:1px solid var(--border);
-      border-radius:18px;
-      background:#fff;
+    .influencer-card img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 16px;
     }
-    .step .n{
-      width:34px; height:34px; border-radius:12px;
-      display:flex; align-items:center; justify-content:center;
-      font-weight:1100;
-      background: rgba(109,40,217,.12);
-      border:1px solid rgba(109,40,217,.24);
-      color: var(--primary-700);
-      flex:0 0 auto;
+    .influencer-card h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
     }
-    .step strong{ font-weight:1100; }
-    .step p{ margin:4px 0 0 0; color:var(--muted); font-weight:650; }
-
-    .logos{
-      display:flex; gap:12px; flex-wrap:wrap;
-      opacity:.9;
-    }
-    .logo-pill{
-      padding:10px 12px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background: #fff;
-      color: #283244;
-      font-weight:950;
-      font-size:13px;
+    .influencer-card p {
+      color: #64748b;
+      font-size: 16px;
     }
 
-    .cta-band{
-      border:1px solid var(--border);
-      border-radius: 22px;
-      background: linear-gradient(180deg, #fff, rgba(109,40,217,.05));
-      box-shadow: var(--shadow);
-      padding: 18px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:14px;
-      flex-wrap:wrap;
+    /* Feature Lists */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      margin: 48px 0;
+    }
+    .feature {
+      background: #f8fafc;
+      padding: 32px;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+    }
+    .feature h3 {
+      font-size: 24px;
+      margin-bottom: 16px;
+      color: #0f172a;
+    }
+    .feature ul {
+      list-style: none;
+      font-size: 17px;
+      color: #475569;
+    }
+    .feature li {
+      margin: 12px 0;
+      position: relative;
+      padding-left: 28px;
+    }
+    .feature li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #0066ff;
+      font-weight: bold;
     }
 
-    footer{
-      border-top:1px solid var(--border);
-      padding:22px 0;
-      color:var(--muted);
-      margin-top: 10px;
+    /* Kontakt */
+    #kontakt form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
-    .footer-grid{ display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; }
-    .footer-links{ display:flex; gap:12px; flex-wrap:wrap; }
-    .footer-links a{ color:var(--muted); font-weight:900; }
-    .footer-links a:hover{ color:var(--text); }
+    input, textarea {
+      padding: 14px 16px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    textarea { min-height: 140px; }
 
-    @media (max-width: 980px){
-      .hero-grid{ grid-template-columns: 1fr; }
-      .grid-3{ grid-template-columns: 1fr; }
-      .how{ grid-template-columns: 1fr; }
-      .kpis{ grid-template-columns: 1fr; }
+    footer {
+      background: #0f172a;
+      color: #94a3b8;
+      text-align: center;
+      padding: 60px 24px 30px;
+      font-size: 15px;
     }
-    @media (max-width: 780px){
-      nav.links, .cta{ display:none; }
-      .burger{ display:flex; }
-      .mobile{ display:block; }
-      .mobile[hidden]{ display:none; }
+    footer a { color: #60a5fa; text-decoration: none; }
+
+    /* Cookie Banner */
+    #cookie-banner {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: #1e293b;
+      color: white;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      z-index: 999;
+      font-size: 15px;
+    }
+    #cookie-banner button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    #cookie-accept { background: #0066ff; color: white; }
+    #cookie-decline { background: #475569; color: white; }
+
+    @media (max-width: 768px) {
+      nav ul { gap: 16px; font-size: 15px; }
+      #hero { padding-top: 140px; }
+      h2 { font-size: 36px; }
     }
   </style>
 </head>
-
 <body>
-<header>
-  <div class="container">
-    <div class="nav">
-      <a class="brand" href="#">
-        <span class="logo" aria-hidden="true"></span>
-        <span>InfluenceHub</span>
-      </a>
 
-      <nav class="links" aria-label="Navigation">
-        <a href="#creator">Creator</a>
-        <a href="#brands">Brands</a>
-        <a href="#how">So funktioniert’s</a>
-        <a href="#faq">FAQ</a>
-      </nav>
+  <header>
+    <nav>
+      <div class="logo">InfluenceConnect</div>
+      <ul>
+        <li><a href="#influencer">Influencer</a></li>
+        <li><a href="#unternehmen">Unternehmen</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </nav>
+  </header>
 
-      <div class="cta">
-        <a class="btn btn-ghost" href="#contact">Kontakt</a>
-        <a class="btn btn-primary" href="#creator">Jetzt starten</a>
+  <section id="hero">
+    <h1>InfluenceConnect</h1>
+    <h2>Influencer mit Marken verbinden</h2>
+    <p>Authentische Kooperationen schaffen – Influencer behalten <strong>80 %</strong> vom Umsatz, <strong>keine Vertragsbindung</strong>, maximale Flexibilität.</p>
+    <a href="#influencer" class="btn btn-primary">Als Influencer starten</a>
+    <a href="#unternehmen" class="btn btn-outline">Als Marke kooperieren</a>
+  </section>
+
+  <section id="unsere-influencer">
+    <h2>Unsere Influencer</h2>
+    <div class="influencer-grid">
+      <div class="influencer-card">
+        <img src="https://via.placeholder.com/140?text=JH" alt="Jordan Hisham">
+        <h3>Jordan Hisham</h3>
+        <p>Lifestyle • Fashion<br>≈ 170K Follower</p>
       </div>
-
-      <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false">
-        <span></span>
-      </button>
+      <div class="influencer-card">
+        <img src="https://via.placeholder.com/140?text=RA" alt="Roumaissa">
+        <h3>Roumaissa Allata</h3>
+        <p>Fashion • Beauty • Lifestyle<br>≈ 2.1M Follower</p>
+      </div>
+      <div class="influencer-card">
+        <img src="https://via.placeholder.com/140?text=IE" alt="Ingy">
+        <h3>Ingy Elengbawy</h3>
+        <p>Beauty • Fashion<br>≈ 600K Follower</p>
+      </div>
+      <!-- Du kannst hier beliebig viele weitere Karten hinzufügen -->
     </div>
+    <div style="text-align:center;">
+      <a href="#influencer" class="btn btn-primary">Mehr Influencer anzeigen</a>
+    </div>
+  </section>
 
-    <div class="mobile" id="mobileNav" hidden>
-      <div class="stack">
-        <a href="#creator">Creator</a>
-        <a href="#brands">Brands</a>
-        <a href="#how">So funktioniert’s</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Kontakt</a>
+  <section id="influencer" class="features-section">
+    <h2>Für Influencer</h2>
+    <p style="text-align:center; font-size:20px; max-width:800px; margin:0 auto 48px;">
+      Ab 20.000 Followern: Arbeite frei mit Top-Marken zusammen – höchste Provision & volle Flexibilität.
+    </p>
+    <div class="features">
+      <div class="feature">
+        <h3>80 % Provision</h3>
+        <p>Die höchste Rate der Branche – du behältst den Großteil des Umsatzes.</p>
       </div>
-      <div class="stack">
-        <a class="btn btn-primary" href="#creator">Jetzt starten</a>
-        <a class="btn btn-ghost" href="#contact">Kontakt</a>
+      <div class="feature">
+        <h3>Keine Vertragsbindung</h3>
+        <p>Bleib immer flexibel, keine langfristigen Verpflichtungen.</p>
+      </div>
+      <div class="feature">
+        <h3>Zugang zu starken Marken</h3>
+        <p>Exklusive Kampagnen mit bekannten Brands & Produkten.</p>
+      </div>
+      <div class="feature">
+        <h3>Professioneller Support</h3>
+        <p>Persönliche Betreuung & Hilfestellung bei jeder Kooperation.</p>
       </div>
     </div>
+    <div style="text-align:center;">
+      <a href="#kontakt" class="btn btn-primary">Jetzt bewerben</a>
+    </div>
+  </section>
+
+  <section id="unternehmen" class="features-section" style="background:#f8fafc;">
+    <h2>Für Unternehmen</h2>
+    <div class="features">
+      <div class="feature">
+        <h3>Authentische Werbung</h3>
+        <p>Dein Produkt wird natürlich in echten Lebenssituationen präsentiert.</p>
+      </div>
+      <div class="feature">
+        <h3>Präzises Targeting</h3>
+        <p>Erreiche genau deine Wunschkunden über passende Creator.</p>
+      </div>
+      <div class="feature">
+        <h3>Messbare Ergebnisse</h3>
+        <p>Transparente Analysen & Reports zu Reichweite, Engagement & Umsatz.</p>
+      </div>
+      <div class="feature">
+        <h3>Markenboost</h3>
+        <p>Steigere Bekanntheit, Vertrauen und Neukundengewinnung.</p>
+      </div>
+    </div>
+    <div style="text-align:center;">
+      <a href="#kontakt" class="btn btn-primary">Kooperation anfragen</a>
+    </div>
+  </section>
+
+  <section id="services">
+    <h2>E-Commerce Services</h2>
+    <p style="text-align:center; font-size:20px; max-width:900px; margin:0 auto 48px;">
+      Von der Produktidee bis zum Versand – wir unterstützen dich beim Aufbau deiner eigenen Marke.
+    </p>
+    <div class="features">
+      <div class="feature"><h3>Produktentwicklung</h3><p>Recherche & Konzeption von Gewinner-Produkten.</p></div>
+      <div class="feature"><h3>Produktion</h3><p>Zuverlässige Partner & hohe Qualität.</p></div>
+      <div class="feature"><h3>Import & Zoll</h3><p>Komplette Abwicklung – stressfrei.</p></div>
+      <div class="feature"><h3>Marketing & Content</h3><p>Influencer-Kampagnen + Ads + Shooting.</p></div>
+      <div class="feature"><h3>Fulfillment</h3><p>Lager, Verpackung, Versand aus einer Hand.</p></div>
+      <div class="feature"><h3>Analysen</h3><p>Datengetriebene Optimierung deiner Performance.</p></div>
+    </div>
+    <div style="text-align:center;">
+      <a href="#kontakt" class="btn btn-primary">Kostenloses Beratungsgespräch</a>
+    </div>
+  </section>
+
+  <section id="kontakt" style="background:#f8fafc;">
+    <h2>Kontakt</h2>
+    <form>
+      <input type="text" placeholder="Dein Name" required>
+      <input type="email" placeholder="Deine E-Mail" required>
+      <textarea placeholder="Deine Nachricht – erzähl uns von dir / deiner Marke" required></textarea>
+      <button type="submit" class="btn btn-primary" style="align-self:center; padding:14px 48px;">Nachricht senden</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2026 InfluenceConnect – Alle Rechte vorbehalten.<br>
+    <a href="#">Impressum</a> • <a href="#">Datenschutz</a> • <a href="#">AGB</a></p>
+  </footer>
+
+  <div id="cookie-banner">
+    <p>Wir nutzen Cookies, um dir das beste Erlebnis zu bieten. Mehr in unserer <a href="#" style="color:#60a5fa;">Datenschutzerklärung</a>.</p>
+    <button id="cookie-accept">Alle akzeptieren</button>
+    <button id="cookie-decline">Ablehnen</button>
   </div>
-</header>
 
-<main class="container">
-  <!-- HERO -->
-  <section class="hero" id="top">
-    <div class="hero-grid">
-      <div>
-        <span class="badge">✨ Deals • Briefings • Freigaben • Auszahlungen</span>
-        <h1 class="title">Eine Plattform, die Creator und Brands sauber zusammenbringt.</h1>
-        <p class="sub">
-          Kampagnen starten, Deliverables tracken und Zusammenarbeit standardisieren —
-          ohne Chaos in DMs. Klarer Flow wie bei typischen Influencer-Plattformen.
-        </p>
-
-        <div class="actions">
-          <a class="btn btn-primary" href="#creator">Ich bin Creator</a>
-          <a class="btn btn-ghost" href="#brands">Ich bin Brand</a>
-          <a class="btn btn-accent" href="#how">Ablauf ansehen</a>
-        </div>
-
-        <div class="section" style="padding:22px 0 0 0">
-          <div class="logos" aria-label="Beispiel-Logos">
-            <span class="logo-pill">BrandOne</span>
-            <span class="logo-pill">GlowCo</span>
-            <span class="logo-pill">UrbanWear</span>
-            <span class="logo-pill">FitLabs</span>
-            <span class="logo-pill">TasteBox</span>
-          </div>
-        </div>
-      </div>
-
-      <aside class="panel" aria-label="Dashboard Vorschau">
-        <div class="panel-head">
-          <strong style="font-weight:1100">Campaign Board</strong>
-          <span class="pill">Live • 12 Creator</span>
-        </div>
-
-        <div class="mini-card">
-          <div style="font-weight:1100">Sommer Drop — UGC + Reels</div>
-          <div style="color:var(--muted);font-weight:650;margin-top:4px">
-            Deliverables: 1 Reel + 3 Stories • Deadline: 7 Tage
-          </div>
-          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
-            <span class="pill">Briefing</span>
-            <span class="pill">Assets</span>
-            <span class="pill">Approval</span>
-            <span class="pill">Payout</span>
-          </div>
-        </div>
-
-        <div class="kpis">
-          <div class="k"><div class="num">80%</div><div class="lbl">Creator Earnings</div></div>
-          <div class="k"><div class="num">3–7</div><div class="lbl">Tage bis Launch</div></div>
-          <div class="k"><div class="num">1</div><div class="lbl">Ort für alles</div></div>
-        </div>
-
-        <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-          <a class="btn btn-primary" href="#contact">Demo anfragen</a>
-          <a class="btn btn-ghost" href="#how">So läuft’s</a>
-        </div>
-      </aside>
-    </div>
-  </section>
-
-  <!-- CREATOR / BRAND SPLIT -->
-  <section class="section" id="creator">
-    <h2>Für Creator</h2>
-    <p class="lead">Finde Kampagnen, arbeite nach klaren Briefings und liefere Deliverables ab — ohne Hin und Her.</p>
-
-    <div class="grid-3">
-      <div class="card pad">
-        <div class="icon">🎯</div>
-        <h3>Passende Matches</h3>
-        <p>Nischen-, Zielgruppen- und Format-Fit statt Massenanfragen.</p>
-      </div>
-      <div class="card pad">
-        <div class="icon">📦</div>
-        <h3>Briefing-Paket</h3>
-        <p>Assets, Do/Don'ts und Deadlines zentral — weniger Rückfragen.</p>
-      </div>
-      <div class="card pad">
-        <div class="icon">💸</div>
-        <h3>Transparente Auszahlung</h3>
-        <p>Status, Freigabe und Payout nachvollziehbar an einem Ort.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="brands">
-    <h2>Für Brands</h2>
-    <p class="lead">Creator finden, Kampagnen launchen, Freigaben und Reporting standardisieren — skalierbar fürs Team.</p>
-
-    <div class="grid-3">
-      <div class="card pad">
-        <div class="icon">🔎</div>
-        <h3>Creator-Shortlists</h3>
-        <p>Nach Stil, Audience und Plattform filtern und speichern.</p>
-      </div>
-      <div class="card pad">
-        <div class="icon">✅</div>
-        <h3>Approval Workflow</h3>
-        <p>Review & Freigabe ohne endlose Chat-Threads.</p>
-      </div>
-      <div class="card pad">
-        <div class="icon">📈</div>
-        <h3>Proof & Reporting</h3>
-        <p>Links/Belege sammeln und Ergebnisse schneller auswerten.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section class="section" id="how">
-    <div class="how">
-      <div>
-        <h2>So funktioniert’s</h2>
-        <p class="lead">Der klassische Flow einer Influencer-Plattform: matchen → briefen → liefern → freigeben → auszahlen.</p>
-
-        <div class="step">
-          <div class="n">1</div>
-          <div><strong>Match</strong><p>Brand findet Creator (oder Creator findet Kampagne).</p></div>
-        </div>
-        <div class="step" style="margin-top:10px">
-          <div class="n">2</div>
-          <div><strong>Briefing</strong><p>Guidelines, Assets, Deliverables, Deadline — alles zentral.</p></div>
-        </div>
-        <div class="step" style="margin-top:10px">
-          <div class="n">3</div>
-          <div><strong>Deliverable & Approval</strong><p>Links hochladen → Review → Freigabe → Payout.</p></div>
-        </div>
-
-        <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-          <a class="btn btn-primary" href="#contact">Demo anfragen</a>
-          <a class="btn btn-ghost" href="#faq">FAQ</a>
-        </div>
-      </div>
-
-      <div class="card pad" style="background:var(--soft); box-shadow:none">
-        <h2 style="margin:0 0 10px 0">Was du bekommst</h2>
-        <p class="lead" style="margin-bottom:14px">Ein System statt Tool-Wildwuchs.</p>
-
-        <div class="grid-3" style="grid-template-columns:1fr; gap:10px">
-          <div class="card pad" style="box-shadow:none">
-            <div style="font-weight:1100">Campaign Board</div>
-            <p>Alle Kampagnen, Status, Deadlines und Deliverables in einer Übersicht.</p>
-          </div>
-          <div class="card pad" style="box-shadow:none">
-            <div style="font-weight:1100">Briefing Center</div>
-            <p>Assets, Guidelines und Anforderungen sauber gesammelt.</p>
-          </div>
-          <div class="card pad" style="box-shadow:none">
-            <div style="font-weight:1100">Approval + Payout</div>
-            <p>Freigabeprozess und Auszahlung logisch verknüpft.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA BAND -->
-  <section class="section" id="contact">
-    <div class="cta-band">
-      <div>
-        <div style="font-weight:1100;font-size:20px;letter-spacing:-.02em">Bereit für klarere Kampagnen?</div>
-        <div style="color:var(--muted);font-weight:650">Sag kurz, ob du Creator oder Brand bist — wir schicken dir den passenden Einstieg.</div>
-      </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <a class="btn btn-primary" href="#creator">Creator Einstieg</a>
-        <a class="btn btn-ghost" href="#brands">Brand Einstieg</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="section" id="faq">
-    <h2>FAQ</h2>
-    <p class="lead">Kurz & typisch für solche Seiten. Texte kannst du 1:1 austauschen.</p>
-
-    <div class="grid-3" style="grid-template-columns:1fr; gap:10px">
-      <div class="card pad" style="box-shadow:none">
-        <div style="font-weight:1100">Wie läuft eine Kooperation ab?</div>
-        <p>Match → Briefing → Deliverables → Review/Freigabe → Auszahlung.</p>
-      </div>
-      <div class="card pad" style="box-shadow:none">
-        <div style="font-weight:1100">Gibt es Mindestlaufzeiten?</div>
-        <p>Beispiel: Nein — flexible Zusammenarbeit je Kampagne.</p>
-      </div>
-      <div class="card pad" style="box-shadow:none">
-        <div style="font-weight:1100">Wie werden Deliverables geprüft?</div>
-        <p>Über einen einfachen Review-Status inkl. Kommentarverlauf.</p>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div style="font-weight:1100;color:var(--text)">InfluenceHub</div>
-        <div style="max-width:58ch;margin-top:6px;font-weight:650">
-          Startseiten-Template für eine Influencer/Brand-Plattform.
-        </div>
-      </div>
-      <div class="footer-links">
-        <a href="#top">Nach oben</a>
-        <a href="#">Impressum</a>
-        <a href="#">Datenschutz</a>
-      </div>
-    </div>
-    <div style="margin-top:12px;font-weight:900">© <span id="year"></span> InfluenceHub</div>
-  </div>
-</footer>
-
-<script>
-  // Mobile menu toggle
-  const burger = document.getElementById("burger");
-  const mobile = document.getElementById("mobileNav");
-  burger?.addEventListener("click", () => {
-    const open = !mobile.hasAttribute("hidden");
-    if (open) { mobile.setAttribute("hidden",""); burger.setAttribute("aria-expanded","false"); }
-    else { mobile.removeAttribute("hidden"); burger.setAttribute("aria-expanded","true"); }
-  });
-
-  // Close mobile menu after clicking a link
-  document.querySelectorAll("#mobileNav a").forEach(a => {
-    a.addEventListener("click", () => {
-      mobile.setAttribute("hidden","");
-      burger.setAttribute("aria-expanded","false");
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const banner = document.getElementById('cookie-banner');
+      document.getElementById('cookie-accept').onclick = () => banner.style.display = 'none';
+      document.getElementById('cookie-decline').onclick = () => banner.style.display = 'none';
     });
-  });
-
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
+  </script>
 </body>
 </html>
