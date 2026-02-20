@@ -2,798 +2,792 @@
 <html lang="de">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Creator Growth Agency – Content Revenue Growth</title>
-  <meta name="description" content="Systematische Monetarisierung & Wachstumsstrategie für Streamer: Multi-Channel, Sponsoring, Editing & Reporting." />
-  <meta name="theme-color" content="#0f172a" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NovaCollab — Creator & Marken</title>
+  <meta name="description" content="Ein modernes, weißes Multi-Page-Layout als Single-File App mit Unterseiten." />
 
   <style>
     :root{
-      --bg: #0b1220;
-      --bg2:#0f172a;
-      --card:#111b2f;
-      --muted:#94a3b8;
-      --text:#e5e7eb;
-      --white:#ffffff;
-      --line: rgba(148,163,184,.18);
-      --accent:#59d07b; /* soft green */
-      --accent2:#22c55e;
-      --shadow: 0 18px 40px rgba(0,0,0,.35);
-      --radius: 18px;
-      --radius2: 26px;
-      --max: 1120px;
+      --bg:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --border:#e2e8f0;
+      --soft:#f8fafc;
+
+      /* andere Farben */
+      --primary:#4f46e5;      /* indigo */
+      --primary-700:#4338ca;
+      --accent:#14b8a6;       /* teal */
+      --accent-700:#0f766e;
+
+      --shadow:0 10px 30px rgba(15,23,42,.08);
+      --radius:18px;
     }
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
+    *{ box-sizing:border-box; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background:
-        radial-gradient(1200px 600px at 15% 10%, rgba(34,197,94,.12), transparent 60%),
-        radial-gradient(900px 500px at 85% 25%, rgba(89,208,123,.10), transparent 60%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
-      color: var(--text);
+      font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background:var(--bg);
+      color:var(--text);
       line-height:1.5;
     }
+    a{ color:inherit; text-decoration:none; }
+    .container{ width:min(1120px, calc(100% - 48px)); margin-inline:auto; }
 
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
-
-    /* Topbar */
-    .topbar{
+    header{
       position:sticky; top:0; z-index:50;
-      background: rgba(11,18,32,.72);
+      background:rgba(255,255,255,.82);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line);
+      border-bottom:1px solid var(--border);
     }
     .nav{
       display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
-      gap:16px;
+      padding:14px 0; gap:18px;
     }
-    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:900; letter-spacing:-.02em;
+    }
     .logo{
-      width:34px; height:34px; border-radius:12px;
-      background: linear-gradient(145deg, rgba(89,208,123,.25), rgba(34,197,94,.08));
-      border:1px solid rgba(89,208,123,.35);
-      box-shadow: 0 8px 20px rgba(34,197,94,.08);
-      display:grid; place-items:center;
+      width:36px; height:36px; border-radius:12px;
+      background:linear-gradient(135deg,var(--primary),var(--accent));
+      box-shadow:0 10px 22px rgba(20,184,166,.18);
     }
-    .logo svg{width:18px; height:18px; opacity:.95}
-    .brand small{display:block; color:var(--muted); font-weight:600; margin-top:-2px}
 
-    .menu{display:flex; gap:18px; align-items:center}
-    .menu a{
-      color: var(--muted);
-      font-weight:650;
-      font-size: 14px;
-      padding:10px 8px;
-      border-radius: 10px;
+    .navlinks{ display:flex; gap:14px; align-items:center; }
+    .navlinks a{
+      padding:10px 12px; border-radius:12px;
+      color:var(--muted); font-weight:800;
     }
-    .menu a:hover{color:var(--text); background: rgba(148,163,184,.08)}
+    .navlinks a:hover{ background:var(--soft); color:var(--text); }
+    .navlinks a.active{ background:rgba(79,70,229,.08); color:var(--primary); }
 
-    .cta{
-      display:flex; gap:10px; align-items:center;
-    }
-    .btn{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.02);
-      color: var(--text);
-      font-weight:750;
-      border-radius: 14px;
-      padding: 10px 14px;
-      font-size:14px;
+    .nav-cta{ display:flex; gap:10px; align-items:center; }
+
+    .burger{
+      display:none;
+      width:44px; height:44px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:white;
+      align-items:center; justify-content:center;
       cursor:pointer;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
     }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.04)}
-    .btn-primary{
-      background: linear-gradient(145deg, rgba(34,197,94,.95), rgba(89,208,123,.78));
-      border-color: rgba(34,197,94,.65);
-      color:#061015;
-      box-shadow: 0 14px 30px rgba(34,197,94,.22);
+    .burger span{
+      width:18px; height:2px; background:var(--text);
+      position:relative; display:block;
     }
-    .btn-primary:hover{background: linear-gradient(145deg, rgba(34,197,94,1), rgba(89,208,123,.88))}
+    .burger span::before,.burger span::after{
+      content:""; position:absolute; left:0;
+      width:18px; height:2px; background:var(--text);
+    }
+    .burger span::before{ top:-6px; }
+    .burger span::after{ top:6px; }
 
-    /* Hero */
-    .hero{padding:56px 0 24px}
+    .mobile{ display:none; padding:0 0 14px 0; }
+    .mobile .stack{ display:flex; flex-direction:column; gap:8px; padding:10px 0; }
+    .mobile a{
+      padding:12px 12px; border-radius:12px;
+      border:1px solid var(--border);
+      background:white;
+      font-weight:900;
+    }
+    .mobile a:hover{ background:var(--soft); }
+
+    .badge{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:6px 12px;
+      border:1px solid var(--border);
+      background:rgba(79,70,229,.06);
+      color:var(--primary);
+      border-radius:999px;
+      font-weight:700;
+      font-size:14px;
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 16px;
+      border-radius:12px;
+      border:1px solid transparent;
+      font-weight:900;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+    .btn:active{ transform:translateY(1px); }
+    .btn-primary{ background:var(--primary); color:#fff; box-shadow:0 10px 20px rgba(79,70,229,.18); }
+    .btn-primary:hover{ background:var(--primary-700); }
+    .btn-ghost{ background:#fff; border-color:var(--border); }
+    .btn-ghost:hover{ border-color:#cbd5e1; }
+    .btn-accent{ background:var(--accent); color:#032a27; }
+    .btn-accent:hover{ background:var(--accent-700); color:#e6fffb; }
+
+    main{ padding-bottom:20px; }
+
+    .hero{ padding:54px 0 24px 0; }
     .hero-grid{
-      display:grid; gap:22px;
-      grid-template-columns: 1.15fr .85fr;
-      align-items:stretch;
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:28px;
+      align-items:start;
     }
-    @media (max-width: 980px){
-      .hero-grid{grid-template-columns:1fr}
-      .menu{display:none}
+    .h-title{
+      font-size:clamp(34px,4vw,54px);
+      line-height:1.05;
+      letter-spacing:-.03em;
+      margin:14px 0 12px 0;
     }
+    .h-sub{ color:var(--muted); font-size:18px; max-width:60ch; }
+    .hero-actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
 
-    .kicker{
-      display:inline-flex; gap:10px; align-items:center;
-      padding:8px 12px;
-      border:1px solid rgba(89,208,123,.28);
-      background: rgba(34,197,94,.08);
-      border-radius: 999px;
-      color: #c7f9d4;
-      font-weight: 700;
-      font-size: 13px;
-      letter-spacing:.2px;
-    }
-    .kicker .dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
-    h1{
-      margin:14px 0 10px;
-      font-size: 44px;
-      line-height: 1.05;
-      letter-spacing: -0.8px;
-    }
-    @media (max-width: 520px){
-      h1{font-size: 36px}
-    }
-    .lead{color: var(--muted); font-size: 16px; max-width: 60ch}
-    .hero-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px}
-    .trust{
-      margin-top:14px;
-      display:flex; gap:14px; flex-wrap:wrap; color: var(--muted);
-      font-size: 13px;
-    }
-    .trust strong{color: var(--text)}
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 10px;
-      border-radius: 999px;
-      background: rgba(148,163,184,.08);
-      border:1px solid var(--line);
-    }
-
-    .hero-card{
-      border-radius: var(--radius2);
-      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
+    .panel{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:linear-gradient(180deg,#fff,#fff 65%,rgba(79,70,229,.03));
+      box-shadow:var(--shadow);
       padding:18px;
     }
-    .hero-card:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background: radial-gradient(500px 260px at 80% 15%, rgba(34,197,94,.22), transparent 55%);
-      pointer-events:none;
+    .kpi{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      margin-top:14px;
     }
-    .stats{
+    .kpi .card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+      padding:12px;
+    }
+    .kpi .num{ font-weight:950; font-size:18px; }
+    .kpi .lbl{ color:var(--muted); font-weight:800; font-size:13px; }
+
+    .section{ padding:34px 0; }
+    .section h2{ font-size:28px; letter-spacing:-.02em; margin:0 0 12px 0; }
+    .lead{ color:var(--muted); margin:0 0 18px 0; }
+
+    .grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .feature{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:#fff;
+      padding:16px;
+    }
+    .feature .icon{
+      width:42px; height:42px;
+      border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      background:rgba(20,184,166,.12);
+      color:var(--accent-700);
+      font-weight:950;
+    }
+    .feature h3{ margin:12px 0 6px 0; font-size:18px; }
+    .feature p{ margin:0; color:var(--muted); font-weight:600; }
+
+    .split{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .callout{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:var(--soft);
+      padding:18px;
+    }
+    .callout h3{ margin:0 0 6px 0; }
+    .callout p{ margin:0 0 14px 0; color:var(--muted); font-weight:600; }
+
+    .pricing{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .plan{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:#fff;
+      padding:18px;
+      box-shadow:0 8px 22px rgba(15,23,42,.06);
+    }
+    .plan.highlight{
+      border-color:rgba(79,70,229,.35);
+      box-shadow:0 14px 34px rgba(79,70,229,.14);
+    }
+    .plan .price{
+      font-size:32px;
+      font-weight:950;
+      letter-spacing:-.03em;
+    }
+    .plan ul{ margin:12px 0 0 0; padding-left:18px; color:var(--muted); font-weight:700; }
+    .plan li{ margin:7px 0; }
+
+    .breadcrumb{
+      color:var(--muted);
+      font-weight:800;
+      font-size:14px;
+      margin:18px 0 0 0;
+    }
+    .breadcrumb a{ color:var(--primary); }
+    .page-title{
+      font-size:36px;
+      letter-spacing:-.03em;
+      margin:10px 0 10px 0;
+    }
+    .page-sub{ color:var(--muted); margin:0 0 18px 0; font-weight:600; }
+
+    .form{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:#fff;
+      padding:18px;
+      box-shadow:var(--shadow);
       display:grid; gap:12px;
-      grid-template-columns: 1fr 1fr;
-      margin-top:12px;
-      position:relative;
+      max-width:680px;
     }
-    .stat{
-      border:1px solid var(--line);
-      border-radius: 16px;
-      padding:14px;
-      background: rgba(17,27,47,.42);
-    }
-    .stat .num{font-size: 22px; font-weight: 900; letter-spacing:-.3px}
-    .stat .lbl{color: var(--muted); font-size: 12px; margin-top:4px}
-    .mini{
-      margin-top:12px;
-      border-top:1px solid var(--line);
-      padding-top:12px;
-      color: var(--muted);
-      font-size: 13px;
-      position:relative;
-    }
-    .mini b{color: var(--text)}
-
-    /* Sections */
-    section{padding:34px 0}
-    .section-title{
-      display:flex; align-items:flex-end; justify-content:space-between; gap:16px;
-      margin-bottom: 14px;
-    }
-    .section-title h2{
-      margin:0;
-      font-size: 26px;
-      letter-spacing:-.4px;
-    }
-    .section-title p{margin:0; color: var(--muted); max-width: 70ch}
-
-    .grid3{
-      display:grid; gap:14px;
-      grid-template-columns: repeat(3, 1fr);
-    }
-    @media (max-width: 980px){ .grid3{grid-template-columns:1fr} }
-
-    .card{
-      background: rgba(17,27,47,.40);
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      padding:16px;
-      box-shadow: 0 10px 26px rgba(0,0,0,.18);
-    }
-    .card h3{margin:4px 0 6px; font-size: 16px}
-    .card p{margin:0; color: var(--muted); font-size: 14px}
-    .icon{
-      width:40px; height:40px; border-radius: 14px;
-      display:grid; place-items:center;
-      background: rgba(34,197,94,.10);
-      border: 1px solid rgba(34,197,94,.25);
-      margin-bottom:10px;
-    }
-    .icon svg{width:18px;height:18px; fill:none; stroke: var(--accent); stroke-width:2}
-
-    /* Process */
-    .process{
-      display:grid; gap:14px;
-      grid-template-columns: repeat(4, 1fr);
-    }
-    @media (max-width: 980px){ .process{grid-template-columns:1fr} }
-    .step{
-      padding:16px;
-      border-radius: var(--radius);
-      border: 1px dashed rgba(148,163,184,.25);
-      background: rgba(255,255,255,.02);
-    }
-    .step .n{
-      font-weight:900; color:#061015;
-      display:inline-flex; align-items:center; justify-content:center;
-      width:28px; height:28px; border-radius:10px;
-      background: linear-gradient(145deg, rgba(34,197,94,1), rgba(89,208,123,.85));
-      margin-bottom:10px;
-    }
-    .step h4{margin:0 0 6px}
-    .step ul{margin:0; padding-left:16px; color: var(--muted); font-size: 14px}
-
-    /* Pricing */
-    .pricing{
-      display:grid; gap:14px;
-      grid-template-columns: 1.2fr .8fr;
-      align-items:stretch;
-    }
-    @media (max-width: 980px){ .pricing{grid-template-columns:1fr} }
-    .price{
-      font-size: 34px; font-weight: 950; letter-spacing:-.5px;
-      margin: 8px 0 4px;
-    }
-    .badge{
-      display:inline-flex; align-items:center; gap:8px;
-      background: rgba(34,197,94,.10);
-      border:1px solid rgba(34,197,94,.22);
-      color:#c7f9d4;
-      padding:8px 10px;
-      border-radius: 999px;
-      font-weight: 750;
-      font-size: 13px;
-    }
-    .list{margin:12px 0 0; padding-left:18px; color: var(--muted)}
-    .list li{margin:6px 0}
-
-    /* FAQ */
-    details{
-      border:1px solid var(--line);
-      border-radius: 14px;
-      padding:12px 14px;
-      background: rgba(255,255,255,.02);
-    }
-    details + details{margin-top:10px}
-    summary{cursor:pointer; font-weight:800}
-    details p{margin:8px 0 0; color: var(--muted); font-size:14px}
-
-    /* Footer */
-    footer{
-      padding:28px 0 40px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .foot{
-      display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
-    }
-    .legal{
-      display:flex; gap:12px; flex-wrap:wrap;
-    }
-    .legal a{color: var(--muted); text-decoration:underline; text-underline-offset:3px}
-    .legal a:hover{color: var(--text)}
-
-    /* Contact modal */
-    dialog{
-      border:none; border-radius: 18px;
-      background: #0b1220;
-      color: var(--text);
-      width:min(560px, 92vw);
-      box-shadow: var(--shadow);
-      padding:0;
-    }
-    .modal-head{
-      padding:16px 16px 0;
-      display:flex; justify-content:space-between; align-items:center;
-    }
-    .modal-body{padding:0 16px 16px}
-    .xbtn{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      border-radius: 12px;
-      padding:8px 10px;
-      cursor:pointer;
-    }
-    form{display:grid; gap:10px; margin-top:10px}
+    label{ font-weight:900; }
     input, textarea{
       width:100%;
       padding:12px 12px;
-      border-radius: 12px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      color: var(--text);
+      border-radius:12px;
+      border:1px solid var(--border);
+      font:inherit;
       outline:none;
+      background:#fff;
     }
-    textarea{min-height:110px; resize:vertical}
-    .hint{color: var(--muted); font-size: 12px}
+    input:focus, textarea:focus{ border-color:rgba(79,70,229,.5); box-shadow:0 0 0 4px rgba(79,70,229,.12); }
+    textarea{ min-height:120px; resize:vertical; }
+
+    footer{
+      margin-top:28px;
+      border-top:1px solid var(--border);
+      padding:22px 0;
+      color:var(--muted);
+    }
+    .footer-grid{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    .footer-links{ display:flex; gap:12px; flex-wrap:wrap; }
+    .footer-links a{ color:var(--muted); font-weight:800; }
+    .footer-links a:hover{ color:var(--text); }
+
+    @media (max-width:960px){
+      .hero-grid{ grid-template-columns:1fr; }
+      .grid-3{ grid-template-columns:1fr; }
+      .split{ grid-template-columns:1fr; }
+      .pricing{ grid-template-columns:1fr; }
+    }
+    @media (max-width:760px){
+      .navlinks,.nav-cta{ display:none; }
+      .burger{ display:flex; }
+      .mobile{ display:block; }
+      .mobile[hidden]{ display:none; }
+    }
   </style>
 </head>
 
 <body>
-  <div class="topbar">
-    <div class="wrap">
+  <header>
+    <div class="container">
       <div class="nav">
-        <a class="brand" href="#top">
-          <span class="logo" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M6 6h12v12H6z" stroke="currentColor" fill="none"/></svg>
-          </span>
-          <span>
-            Creator Growth Agency
-            <small>Content Revenue Growth</small>
-          </span>
+        <a class="brand" href="#/">
+          <span class="logo" aria-hidden="true"></span>
+          <span>NovaCollab</span>
         </a>
 
-        <nav class="menu" aria-label="Hauptnavigation">
-          <a href="#leistungen">Leistungen</a>
-          <a href="#prozess">Arbeitsweise</a>
-          <a href="#kosten">Kosten</a>
-          <a href="#faq">FAQ</a>
-          <a href="#kontakt">Kontakt</a>
+        <nav class="navlinks" aria-label="Hauptnavigation">
+          <a data-nav href="#/influencers">Influencer</a>
+          <a data-nav href="#/brands">Marken</a>
+          <a data-nav href="#/pricing">Preise</a>
+          <a data-nav href="#/resources">Ressourcen</a>
+          <a data-nav href="#/contact">Kontakt</a>
         </nav>
 
-        <div class="cta">
-          <a class="btn" href="#kosten">Kosten ansehen</a>
-          <button class="btn btn-primary" id="openModal">Absprache</button>
+        <div class="nav-cta">
+          <a class="btn btn-ghost" href="#/contact">Demo anfragen</a>
+          <a class="btn btn-primary" href="#/influencers">Jetzt starten</a>
+        </div>
+
+        <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false">
+          <span></span>
+        </button>
+      </div>
+
+      <div class="mobile" id="mobileNav" hidden>
+        <div class="stack">
+          <a data-nav href="#/influencers">Für Influencer</a>
+          <a data-nav href="#/brands">Für Marken</a>
+          <a data-nav href="#/pricing">Preise</a>
+          <a data-nav href="#/resources">Ressourcen</a>
+          <a data-nav href="#/contact">Kontakt</a>
+        </div>
+        <div class="stack">
+          <a class="btn btn-primary" href="#/influencers">Jetzt starten</a>
+          <a class="btn btn-ghost" href="#/contact">Demo anfragen</a>
         </div>
       </div>
     </div>
-  </div>
+  </header>
 
-  <main id="top" class="wrap">
-    <section class="hero">
-      <div class="hero-grid">
+  <main class="container" id="app" aria-live="polite"></main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
         <div>
-          <div class="kicker"><span class="dot"></span> Für ambitionierte Streamer (300–3.000+  Viewer)</div>
-          <h1>Systematische Monetarisierung & Multi-Channel Wachstum.</h1>
-          <p class="lead">
-            Wir machen aus deinem Stream ein skalierbares Creator-Business: Content-Verwertung (24/7 & Uncut),
-            proaktive Sponsoren-Akquise, Editing (bis zu 5 Videos/Woche) und sauberes Reporting.
-          </p>
-
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#kontakt">Angebot anfragen</a>
-            <a class="btn" href="#prozess">So arbeiten wir</a>
-          </div>
-
-          <div class="trust">
-            <span class="pill">✅ Transparentes Modell: <strong>500€ + 25%</strong></span>
-            <span class="pill">✅ Kündigungsfrist: <strong>3 Monate </strong></span>
-            <span class="pill">✅ Fokus: <strong>Mehr Umsatz, weniger Aufwand</strong></span>
+          <div style="font-weight:950;color:var(--text)">NovaCollab</div>
+          <div style="max-width:52ch;margin-top:6px">
+            Single-File Multi-Page Template: Kampagnen, Deals und Creator-Partnerschaften — sauber & schnell.
           </div>
         </div>
-
-        <aside class="hero-card" aria-label="Überblick">
-          <div class="badge">Analyse → Strategie → Umsetzung → Reporting</div>
-
-          <div class="stats">
-            <div class="stat">
-              <div class="num">24/7 Live</div>
-              <div class="lbl">Content-Verwertung bestehender Assets</div>
-            </div>
-            <div class="stat">
-              <div class="num">5×/Woche</div>
-              <div class="lbl">Editing & Publishing (max.)</div>
-            </div>
-            <div class="stat">
-              <div class="num">25%</div>
-              <div class="lbl">auf abgesprochene Einnahmen (Share)</div>
-            </div>
-            <div class="stat">
-              <div class="num">500€</div>
-              <div class="lbl">Retainer für Umsetzung & Struktur</div>
-            </div>
-          </div>
-
-          <div class="mini">
-            <b>Wichtig:</b> Keine Beteiligung an bereits bestehenden Sponsoren/Deals vor Start. Revenue-Share für neue, von uns aufgebaute Kanäle & akquirierte Placements.
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section id="leistungen">
-      <div class="section-title">
-        <div>
-          <h2>Leistungen</h2>
-          <p>Keine „wir schneiden nur Videos“-Bude – sondern ein System, das deinen Output & Umsatz potenziel skaliert.</p>
+        <div class="footer-links">
+          <a href="#/resources">Ressourcen</a>
+          <a href="#/legal/imprint">Impressum</a>
+          <a href="#/legal/privacy">Datenschutz</a>
         </div>
       </div>
-
-      <div class="grid3">
-        <div class="card">
-          <div class="icon">
-            <svg viewBox="0 0 24 24"><path d="M4 19V5m0 14h16M8 15l3-3 3 2 4-5" /></svg>
-          </div>
-          <h3>24/7 Content-Monetarisierung</h3>
-          <p>Neuer Kanal auf Twitch, der bestehenden oder vorgegebenen Content 24/7 verwerten kann. Ziel: zusätzliche Werbeeinnahmen & passive Reichweite.</p>
-        </div>
-
-        <div class="card">
-          <div class="icon">
-            <svg viewBox="0 0 24 24"><path d="M10 8l6 4-6 4V8z"/><path d="M4 6h16v12H4z"/></svg>
-          </div>
-          <h3>Uncut-Stream-Kanal</h3>
-          <p>Streams als VOD-Library: Upload, Struktur, Titel. Geplannte Monetarisierung mit der Zeit und potenziel starke Einnahmequelle.</p>
-        </div>
-
-        <div class="card">
-          <div class="icon">
-            <svg viewBox="0 0 24 24"><path d="M12 3l9 4-9 4-9-4 9-4z"/><path d="M3 7v10l9 4 9-4V7"/></svg>
-          </div>
-          <h3>Sponsoren-Akquise</h3>
-          <p>Proaktives Outreach (falls gewünscht): passende Marken finden, Pitches, Verhandlung & Placement-Setup.</p>
-        </div>
-
-        <div class="card">
-          <div class="icon">
-            <svg viewBox="0 0 24 24"><path d="M4 4h10v10H4z"/><path d="M14 14l6 6"/></svg>
-          </div>
-          <h3>Editing & Publishing</h3>
-          <p>Bis zu 5 Videos/Woche für den Hauptkanal: Schnitt, Hooks, Struktur, Upload-Plan & Distribution.</p>
-        </div>
-
-        <div class="card">
-          <div class="icon">
-            <svg viewBox="0 0 24 24"><path d="M3 12h18"/><path d="M12 3v18"/></svg>
-          </div>
-          <h3>Kanal-Organisation</h3>
-          <p>Ordnung statt Chaos: Content-Archiv, Upload-Kalender, Rechte & Freigaben.</p>
-        </div>
-
-        <div class="card">
-          <div class="icon">
-            <svg viewBox="0 0 24 24"><path d="M6 18V8"/><path d="M12 18V4"/><path d="M18 18v-6"/></svg>
-          </div>
-          <h3>Reporting & Optimierung</h3>
-          <p>Monatliche Auswertung (Retention, RPM) + konkrete Maßnahmen nach Absprache, was wir im nächsten Monat verbessern.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="prozess">
-      <div class="section-title">
-        <div>
-          <h2>Unsere Arbeitsweise</h2>
-          <p>Ein klarer Prozess wirkt seriös – und macht für dich planbar, was du wirklich bekommst.</p>
-        </div>
-      </div>
-
-      <div class="process">
-        <div class="step">
-          <div class="n">1</div>
-          <h4>Analyse & Planung</h4>
-          <ul>
-            <li>Content-Audit: Stream-Themen nach Absprache</li>
-            <li>Channel-Setup & Ziele (KPI-Definition)</li>
-            <li>Strukturelle Vorgehensweise</li>
-          </ul>
-        </div>
-        <div class="step">
-          <div class="n">2</div>
-          <h4>Monetarisierung & Distribution</h4>
-          <ul>
-            <li>24/7-Kanal Setup (Content-Pipeline)</li>
-            <li>Uncut-Kanal Struktur (Playlists/SEO)</li>
-            <li>Multi-Channel Clip-System</li>
-          </ul>
-        </div>
-        <div class="step">
-          <div class="n">3</div>
-          <h4>Sponsoren-Akquise</h4>
-          <ul>
-            <li>Brand-Fit & Pitch-Deck</li>
-            <li>Outreach + Verhandlung</li>
-            <li>Placement-Planung & Auslieferung</li>
-          </ul>
-        </div>
-        <div class="step">
-          <div class="n">4</div>
-          <h4>Reporting & Optimierung</h4>
-          <ul>
-            <li>Monatsreport (Erfolge Learnings)</li>
-            <li>A/B-Ansätze (Titel/Thumb)</li>
-            <li>Optimierungsplan für nächsten Monat</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="kosten">
-      <div class="section-title">
-        <div>
-          <h2>Kosten & Partnerschaftsmodell</h2>
-          <p>Transparent, kündbar, und fair: Fixbetrag für Umsetzung + Share dort, wo wir zur Umsatzsteigerung mitwirken.</p>
-        </div>
-      </div>
-
-      <div class="pricing">
-        <div class="card">
-          <span class="badge">Retainer + Erfolgsbeteiligung</span>
-          <div class="price">500€ <span style="font-size:14px; font-weight:800; color:var(--muted)">/ Monat</span></div>
-          <p style="margin:0;color:var(--muted)">für operative Umsetzung, Struktur & laufende Betreuung.</p>
-
-          <ul class="list">
-            <li><b>25%</b> auf Einnahmen aus <b>24/7-Twitch-Kanal</b></li>
-            <li><b>25%</b> auf Einnahmen aus <b>Uncut-Youtube-Kanal</b></li>
-            <li><b>25%</b> pro <b>neuem Sponsoring-Placement</b> (von uns akquiriert)</li>
-            <li><b>25%</b> auf Einnahmen aus <b>Haupt-Twitch-Kanal nach Absprache</b></li>
-            <li><b>Bis zu 5 Videos/Woche</b> Editing für den Hauptkanal</li>
-            <li><b>Kündigungsfrist:</b> 3 Monate (beidseitig)</li>
-          </ul>
-
-          <p class="hint" style="margin-top:10px">
-            Hinweis: Keine Beteiligung an bereits bestehenden Sponsoren/Deals vor Start. Abrechnung monatlich anhand nachvollziehbarer Plattform-Reports.
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>Für wen passt das?</h3>
-          <p>Am besten für Creator, die bereits Momentum haben und skalieren wollen.</p>
-          <ul class="list">
-            <li>Regelmäßige Streams + Aktivität</li>
-            <li>Wunsch nach mehr Output, mehr Zeit und ein sicheres Managment.</li>
-            <li>Abgesprochenes System</li>
-          </ul>
-
-          <div style="margin-top:14px; border-top:1px solid var(--line); padding-top:14px">
-            <h3>Start</h3>
-            <p style="margin:0;color:var(--muted)">Absprache → Plan → Umsetzung.</p>
-            <div class="hero-actions" style="margin-top:12px">
-              <button class="btn btn-primary" id="openModal2">Absprache</button>
-              <a class="btn" href="#faq">Fragen?</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="faq">
-      <div class="section-title">
-        <div>
-          <h2>FAQ</h2>
-          <p>Die typischen Fragen, die Creator (berechtigterweise) stellen.</p>
-        </div>
-      </div>
-
-      <details>
-        <summary>Warum 500€ + 25%? </summary>
-        <p>Die 500€ decken die laufende operative Arbeit (Editing, Uploads, Struktur, Reporting). Die 25% gelten für  Einnahmenquellen, die wir aufbauen (24/7, Uncut, Placements). So ist das Modell planbar und leistungsorientiert.</p>
-      </details>
-
-      <details>
-        <summary>Was ist mit meinen bestehenden Sponsoren?</summary>
-        <p>Bereits bestehende Werbepartner/Deals bleiben komplett bei dem Creator. Provision gibt es auf neue Placements, die durch unsere Akquise entstehen.</p>
-      </details>
-
-      <details>
-        <summary>Was genau sind „max. 5 Videos/Woche“?</summary>
-        <p>Gemeint sind bearbeitete Videos für den Hauptkanal (z. B. Highlights/Longform/shorts je nach Absprache). Der konkrete Mix wird mit dem Creater abgesprochen und festgelegt. Eine Vollzeit Beschäftigung eines Cutters wäre möglich jedoch mit einem höheren Gehalt.</p>
-      </details>
-
-      <details>
-        <summary>Wie läuft die Kündigung?</summary>
-        <p>Beidseitig 3 Monate Kündigungsfrist. Fair und flexibel. Im Fall eines Abbruchs der Partnerschaft wird unbearbeiteter Content dem Creator zur Verfügunggestellt.</p>
-      </details>
-    </section>
-
-    <section id="kontakt">
-      <div class="section-title">
-        <div>
-          <h2>Kontakt</h2>
-          <p>Lass uns wissen wenn du fragen hast. Wir antworten mit einem konkreten nächsten Schritt und den passenden Antworten.</p>
-        </div>
-      </div>
-
-      <div class="grid3">
-        <div class="card" style="grid-column: span 2;">
-          <h3 style="margin-top:0">Kurzanfrage</h3>
-          <form onsubmit="return false;">
-            <input id="c_name" placeholder="Name / Creator-Name" />
-            <input id="c_links" placeholder="Links (Twitch/YouTube/TikTok) – optional" />
-            <textarea id="c_msg" placeholder="Kurz: Was ist dein Ziel? (z. B. mehr Umsatz, mehr Output, Sponsoren, YouTube-Wachstum)"></textarea>
-            <button class="btn btn-primary" id="copyMsg">Nachricht kopieren</button>
-            <div class="hint">Der Button kopiert eine fertige Nachricht in deine Zwischenablage, die du per Discord/Email senden kannst.</div>
-          </form>
-        </div>
-
-        <div class="card">
-          <h3 style="margin-top:0">Direkt</h3>
-          <p style="margin-bottom:10px">--:</p>
-          <ul class="list">
-            <li><b>Email:</b> business@fulyagency.net</li>
-            <li><b>Discord:</b> legendk0338</li>
-          </ul>
-          <a class="btn" href="#impressum" style="margin-top:10px; display:inline-block;">Impressum</a>
-          <a class="btn" href="#datenschutz" style="margin-top:10px; display:inline-block;">Datenschutz</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="impressum">
-      <div class="section-title">
-        <div>
-          <h2>Impressum</h2>
-        </div>
-      </div>
-      <div class="card">
-        <p><b>Firma/Name:</b> [FulyAgency]</p>
-        <p><b>Anschrift:</b> [Grendbach, 45276, Essen, Deutschland]</p>
-        <p><b>Kontakt:</b> [socialbuisness06@gmail.com],</p>
-        <p><b>Verantwortlich i.S.d. § 18 Abs. 2 MStV:</b> [Makrini Mohamed, 45276 Essen]</p>
-      </div>
-    </section>
-
-    <section id="datenschutz">
-      <div class="section-title">
-        <div>
-          <h2>Datenschutz</h2>
-          <p>Platzhalter – für echte Nutzung bitte durch korrekte Datenschutzerklärung ersetzen.</p>
-        </div>
-      </div>
-      <div class="card">
-        <p>Diese Website speichert ohne aktive Einbindung von Tracking/Analytics keine personenbezogenen Daten.</p>
-        <p><b>Hinweis:</b> Datenschutzerklärung
-1. Verantwortlicher
-
-Verantwortlich für die Datenverarbeitung auf dieser Website ist:
-
-FulyAgency
-[Dein vollständiger Name]
-Grendbach, 45276 Essen
-Deutschland
-E-Mail: socialbusiness06@gmail.com
-
-
-          
-2. Hosting & technische Bereitstellung
-Diese Website wird bei Netlify, Inc., 2325 3rd Street, Suite 296, San Francisco, CA 94107, USA gehostet.
-Beim Aufruf der Website werden automatisch sogenannte Server-Logfiles erfasst (z. B. IP-Adresse, Datum und Uhrzeit des Zugriffs, Browsertyp, Betriebssystem). Diese Verarbeitung erfolgt zur Sicherstellung eines störungsfreien Betriebs der Website. 
-Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der sicheren Bereitstellung der Website).
-Da Netlify ein Anbieter mit Sitz in den USA ist, kann eine Datenübermittlung in ein Drittland erfolgen. Die Übermittlung erfolgt auf Grundlage der Art. 44 ff. DSGVO sowie der EU-Standardvertragsklauseln gemäß Art. 46 DSGVO.
-
-
-
-          
-3. Deployment über GitHub
-Die Website wird technisch über GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA bereitgestellt.
-Im Rahmen des Deployments kann es technisch zur Verarbeitung von IP-Adressen kommen.
-Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (technisches Interesse an stabiler Bereitstellung).
-Auch hier kann eine Datenübermittlung in die USA erfolgen auf Grundlage der Art. 44 ff. DSGVO sowie der EU-Standardvertragsklauseln nach Art. 46 DSGVO.
-
-
-
-          
-4. Kontaktaufnahme (E-Mail / Discord)
-
-Wenn Sie uns per E-Mail oder über Discord kontaktieren, werden Ihre angegebenen Daten (z. B. Name, Kontaktdaten, Inhalt der Anfrage) zur Bearbeitung Ihrer Anfrage verarbeitet.
-Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) oder Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an Kommunikation).
-Für die Kommunikation kann die Plattform Discord (Discord Inc., 444 De Haro Street, Suite 200, San Francisco, CA 94107, USA) genutzt werden. Dabei kann es zu einer Übermittlung personenbezogener Daten in die USA kommen. Diese erfolgt auf Grundlage der Art. 44 ff. DSGVO sowie geeigneter Garantien nach Art. 46 DSGVO.
-Es gelten ergänzend die Datenschutzbestimmungen des jeweiligen Anbieters.
-
-
-
-          
-5. Speicherdauer
-Personenbezogene Daten werden nur so lange gespeichert, wie dies zur Bearbeitung der Anfrage erforderlich ist oder gesetzliche Aufbewahrungspflichten bestehen.
-
-
-
-          
-6. Ihre Rechte
-Sie haben das Recht auf:
-Auskunft (Art. 15 DSGVO)
-Berichtigung (Art. 16 DSGVO)
-Löschung (Art. 17 DSGVO)
-Einschränkung der Verarbeitung (Art. 18 DSGVO)
-Datenübertragbarkeit (Art. 20 DSGVO)
-Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)
-Zur Ausübung Ihrer Rechte genügt eine formlose Mitteilung an die oben genannte E-Mail-Adresse.</p>
-      </div>
-    </section>
-
-    <footer>
-      <div class="wrap foot">
-        <div>© <span id="y"></span> Creator Growth Agency</div>
-        <div class="legal">
-          <a href="#impressum">Impressum</a>
-          <a href="#datenschutz">Datenschutz</a>
-        </div>
-      </div>
-    </footer>
-  </main>
-
-  <dialog id="modal">
-    <div class="modal-head">
-      <div style="font-weight:900">Kontakt anfragen</div>
-      <button class="xbtn" id="closeModal">Schließen</button>
+      <div style="margin-top:12px;font-weight:800">© <span id="year"></span> NovaCollab</div>
     </div>
-    <div class="modal-body">
-      <div class="hint">Füll das kurz aus – wir kümmern uns um einen Vertrag bei Interesse.</div>
-      <form onsubmit="return false;">
-        <input id="m_name" placeholder="Creator-Name" />
-        <input id="m_channels" placeholder="Links zu deinem Twitch/Youtube Kanal" />
-        <textarea id="m_goal" placeholder="Ziel (z. B. mehr Umsatz, Sponsoren, YouTube-Wachstum, Content-System)"></textarea>
-        <button class="btn btn-primary" id="copyModalMsg">Nachricht kopieren</button>
-        <div class="hint">Du kannst die kopierte Nachricht direkt per Email verschicken.</div>
-      </form>
-    </div>
-  </dialog>
+  </footer>
 
   <script>
-    const modal = document.getElementById('modal');
-    const openers = [document.getElementById('openModal'), document.getElementById('openModal2')].filter(Boolean);
-    const closeBtn = document.getElementById('closeModal');
+    // --------- kleine Router-Logik (Hash-Routes wie #/resources/guides) ----------
+    const app = document.getElementById("app");
 
-    openers.forEach(btn => btn.addEventListener('click', () => modal.showModal()));
-    closeBtn.addEventListener('click', () => modal.close());
-    modal.addEventListener('click', (e) => {
-      const rect = modal.getBoundingClientRect();
-      const inDialog = rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
-                       rect.left <= e.clientX && e.clientX <= rect.left + rect.width;
-      if (!inDialog) modal.close();
-    });
+    const html = (strings, ...vals) =>
+      strings.map((s, i) => s + (vals[i] ?? "")).join("");
 
-    document.getElementById('y').textContent = new Date().getFullYear();
-
-    function copyToClipboard(text){
-      navigator.clipboard.writeText(text).then(() => {
-        alert("Kopiert ✅ – jetzt in Discord/Email einfügen.");
-      }).catch(() => {
-        alert("Kopieren fehlgeschlagen. Bitte manuell markieren & kopieren.");
+    function setActiveNav(path) {
+      document.querySelectorAll("[data-nav]").forEach(a => {
+        a.classList.remove("active");
+        const href = a.getAttribute("href");
+        if (!href) return;
+        const route = href.replace(/^#/, "");
+        // Highlight: active wenn path gleich route oder darunter (mehrere Ebenen)
+        if (path === route || path.startsWith(route + "/")) a.classList.add("active");
       });
     }
 
-    document.getElementById('copyMsg').addEventListener('click', () => {
-      const name = document.getElementById('c_name').value.trim() || "[Name]";
-      const links = document.getElementById('c_links').value.trim() || "[Links]";
-      const msg = document.getElementById('c_msg').value.trim() || "[Ziel/Infos]";
-      const text =
-`Hi, ich bin ${name}.
+    function closeMobileNav() {
+      const burger = document.getElementById("burger");
+      const mobile = document.getElementById("mobileNav");
+      if (!burger || !mobile) return;
+      mobile.setAttribute("hidden", "");
+      burger.setAttribute("aria-expanded", "false");
+    }
 
-Meine Kanäle: ${links}
+    // Mobile Menü Toggle
+    document.addEventListener("click", (e) => {
+      const burger = document.getElementById("burger");
+      const mobile = document.getElementById("mobileNav");
+      if (!burger || !mobile) return;
 
-Ziel: ${msg}
-
-Ich interessiere mich für euer Modell (500€ Retainer + 25% nur auf neue Einnahmenquellen: 24/7-Kanal, Uncut-Kanal, neue Sponsoren). 
-Können wir einen Deal aushandeln?`;
-      copyToClipboard(text);
+      if (e.target === burger || burger.contains(e.target)) {
+        const isOpen = !mobile.hasAttribute("hidden");
+        if (isOpen) {
+          mobile.setAttribute("hidden", "");
+          burger.setAttribute("aria-expanded", "false");
+        } else {
+          mobile.removeAttribute("hidden");
+          burger.setAttribute("aria-expanded", "true");
+        }
+      }
     });
 
-    document.getElementById('copyModalMsg').addEventListener('click', () => {
-      const name = document.getElementById('m_name').value.trim() || "[Name]";
-      const channels = document.getElementById('m_channels').value.trim() || "[Links]";
-      const goal = document.getElementById('m_goal').value.trim() || "[Ziel]";
-      const text =
-`Hi, ich bin ${name}.
+    // Close mobile nav when navigating
+    window.addEventListener("hashchange", closeMobileNav);
 
-Kanäle: ${channels}
-Ziel: ${goal}
+    const pages = {
+      "/": () => html`
+        <section class="hero">
+          <div class="hero-grid">
+            <div>
+              <span class="badge">✨ Neue Kampagnen in Minuten</span>
+              <h1 class="h-title">Creator-Kooperationen, die sich leicht anfühlen.</h1>
+              <p class="h-sub">
+                NovaCollab verbindet Influencer und Marken — mit klaren Deals, Briefings, Tracking und Auszahlungen.
+                Weißes Design. Andere Akzentfarben. Mehrere Ebenen an Seiten.
+              </p>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="#/influencers">Als Influencer starten</a>
+                <a class="btn btn-ghost" href="#/brands">Für Marken ansehen</a>
+                <a class="btn btn-accent" href="#/pricing">Preise</a>
+              </div>
+            </div>
 
-Ich würde gern einen Deal festlegen (Content-Monetarisierung 24/7 & Uncut, Editing bis 5/Woche, Sponsoren-Akquise, Reporting).`;
-      copyToClipboard(text);
-    });
+            <aside class="panel">
+              <div style="font-weight:950;font-size:18px">Dashboard-Vorschau</div>
+              <div style="color:var(--muted);margin-top:6px;font-weight:600">
+                Übersicht über Kampagnen, Status und Auszahlungen.
+              </div>
+
+              <div class="kpi">
+                <div class="card"><div class="num">+24%</div><div class="lbl">höhere Reply-Rate</div></div>
+                <div class="card"><div class="num">3–7 Tage</div><div class="lbl">bis Launch</div></div>
+                <div class="card"><div class="num">1 Klick</div><div class="lbl">für Briefing</div></div>
+                <div class="card"><div class="num">Autom.</div><div class="lbl">Auszahlung</div></div>
+              </div>
+
+              <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+                <a class="btn btn-ghost" href="#/resources">Guides</a>
+                <a class="btn btn-primary" href="#/contact">Demo anfragen</a>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Warum NovaCollab?</h2>
+          <p class="lead">Mehr Struktur, weniger Chaos: Kommunikation, Briefings und Deliverables an einem Ort.</p>
+
+          <div class="grid-3">
+            <div class="feature">
+              <div class="icon">A</div>
+              <h3>Angebote & Deals</h3>
+              <p>Transparente Konditionen, klarer Umfang und faire Vergütung — ohne Ping-Pong.</p>
+            </div>
+            <div class="feature">
+              <div class="icon">B</div>
+              <h3>Briefing-Center</h3>
+              <p>Assets, Guidelines und Deadlines sauber gesammelt. Weniger Rückfragen.</p>
+            </div>
+            <div class="feature">
+              <div class="icon">C</div>
+              <h3>Status & Proof</h3>
+              <p>Deliverables, Links und Freigaben mit einem Blick — inklusive Verlauf.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="split">
+            <div class="callout">
+              <h3>Für Influencer</h3>
+              <p>Finde passende Kampagnen, liefere ab — und behalte alles im Blick.</p>
+              <a class="btn btn-primary" href="#/influencers">Mehr erfahren</a>
+            </div>
+            <div class="callout">
+              <h3>Für Marken</h3>
+              <p>Finde Creator, starte Kampagnen schneller und standardisiere Prozesse im Team.</p>
+              <a class="btn btn-ghost" href="#/brands">Mehr erfahren</a>
+            </div>
+          </div>
+        </section>
+      `,
+
+      "/influencers": () => html`
+        <div class="breadcrumb"><a href="#/">Home</a> / Influencer</div>
+        <h1 class="page-title">Für Influencer</h1>
+        <p class="page-sub">Kampagnen finden, verhandeln, liefern — alles an einem Ort.</p>
+
+        <section class="section">
+          <div class="grid-3">
+            <div class="feature"><div class="icon">1</div><h3>Matches</h3><p>Nur Kampagnen, die zu deiner Nische passen.</p></div>
+            <div class="feature"><div class="icon">2</div><h3>Briefings</h3><p>Alle Infos & Assets strukturiert, ohne Chaos im Chat.</p></div>
+            <div class="feature"><div class="icon">3</div><h3>Auszahlung</h3><p>Status & Payment transparent — weniger Nachfragen.</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="callout">
+            <h3>Flow in 3 Steps</h3>
+            <p>1) Profil → 2) Deal annehmen → 3) Deliverable hochladen & Freigabe</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+              <a class="btn btn-primary" href="#/contact">Creator-Onboarding anfragen</a>
+              <a class="btn btn-ghost" href="#/resources/guides">Guides ansehen</a>
+            </div>
+          </div>
+        </section>
+      `,
+
+      "/brands": () => html`
+        <div class="breadcrumb"><a href="#/">Home</a> / Marken</div>
+        <h1 class="page-title">Für Marken</h1>
+        <p class="page-sub">Creator finden, Kampagnen schneller launchen und sauber dokumentieren.</p>
+
+        <section class="section">
+          <div class="grid-3">
+            <div class="feature"><div class="icon">S</div><h3>Shortlist</h3><p>Creator-Shortlists nach Zielgruppe & Stil.</p></div>
+            <div class="feature"><div class="icon">K</div><h3>Kampagnen</h3><p>Briefings, Deadlines, Freigaben & Assets zentral.</p></div>
+            <div class="feature"><div class="icon">R</div><h3>Reporting</h3><p>Links/Proofs sammeln und Ergebnisse strukturiert auswerten.</p></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="split">
+            <div class="callout">
+              <h3>Standardisiert fürs Team</h3>
+              <p>Einheitliche Prozesse, weniger Abhängigkeit von Einzelpersonen.</p>
+              <a class="btn btn-primary" href="#/contact">Demo anfragen</a>
+            </div>
+            <div class="callout">
+              <h3>Skalierbar</h3>
+              <p>Mehr Kampagnen parallel ohne Tool-Wildwuchs.</p>
+              <a class="btn btn-ghost" href="#/pricing">Preise</a>
+            </div>
+          </div>
+        </section>
+      `,
+
+      "/pricing": () => html`
+        <div class="breadcrumb"><a href="#/">Home</a> / Preise</div>
+        <h1 class="page-title">Preise</h1>
+        <p class="page-sub">Drei einfache Pakete (Beispiel-Pricing — kannst du anpassen).</p>
+
+        <section class="section">
+          <div class="pricing">
+            <div class="plan">
+              <div style="font-weight:950">Starter</div>
+              <div class="price">€0</div>
+              <div style="color:var(--muted);font-weight:700">Für erste Kooperationen</div>
+              <ul>
+                <li>Profil & Basis-Dashboard</li>
+                <li>Briefings & Deliverables</li>
+                <li>Basis-Support</li>
+              </ul>
+              <div style="margin-top:14px">
+                <a class="btn btn-ghost" href="#/contact">Starten</a>
+              </div>
+            </div>
+
+            <div class="plan highlight">
+              <div style="font-weight:950;color:var(--primary)">Pro</div>
+              <div class="price">€49</div>
+              <div style="color:var(--muted);font-weight:700">Für wachsende Kampagnen</div>
+              <ul>
+                <li>Team-Workflows</li>
+                <li>Freigabe-Prozess</li>
+                <li>Erweitertes Reporting</li>
+              </ul>
+              <div style="margin-top:14px">
+                <a class="btn btn-primary" href="#/contact">Demo anfragen</a>
+              </div>
+            </div>
+
+            <div class="plan">
+              <div style="font-weight:950">Business</div>
+              <div class="price">Custom</div>
+              <div style="color:var(--muted);font-weight:700">Für große Teams</div>
+              <ul>
+                <li>SSO / Rollen & Rechte</li>
+                <li>SLA & Onboarding</li>
+                <li>Individuelle Integrationen</li>
+              </ul>
+              <div style="margin-top:14px">
+                <a class="btn btn-accent" href="#/contact">Kontakt</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      `,
+
+      "/resources": () => html`
+        <div class="breadcrumb"><a href="#/">Home</a> / Ressourcen</div>
+        <h1 class="page-title">Ressourcen</h1>
+        <p class="page-sub">Mehrere Ebenen: Hier geht’s zu Unterseiten wie Guides und Case Studies.</p>
+
+        <section class="section">
+          <div class="grid-3">
+            <a class="feature" href="#/resources/guides">
+              <div class="icon">G</div><h3>Guides</h3>
+              <p>Best Practices für Briefings, Deals und Reporting.</p>
+            </a>
+            <a class="feature" href="#/resources/case-studies">
+              <div class="icon">C</div><h3>Case Studies</h3>
+              <p>Beispiele, wie Partnerschaften skaliert werden.</p>
+            </a>
+            <a class="feature" href="#/resources/templates">
+              <div class="icon">T</div><h3>Templates</h3>
+              <p>Vorlagen für Briefings & Deliverables.</p>
+            </a>
+          </div>
+        </section>
+      `,
+
+      "/resources/guides": () => html`
+        <div class="breadcrumb"><a href="#/">Home</a> / <a href="#/resources">Ressourcen</a> / Guides</div>
+        <h1 class="page-title">Guides</h1>
+        <p class="page-sub">Unterseite (Ebene 2) — du kannst beliebig weitere Ebenen hinzufügen.</p>
+
+        <section class="section">
+          <div class="grid-3">
+            <div class="feature"><div class="icon">1</div><h3>Briefing-Checkliste</h3><p>Was in jedes Briefing gehört.</p></div>
+            <div class="feature"><div class="icon">2</div><h3>Deliverables definieren</h3><p>Formate, Deadlines, Freigaben.</p></div>
+            <div class="feature"><div class="icon">3</div><h3>KPIs auswählen</h3><p>Welche Kennzahlen zum Ziel passen.</p></div>
+          </div>
+
+          <div class="callout" style="margin-top:16px">
+            <h3>Noch tiefer?</h3>
+            <p>Beispiel für Ebene 3: <a href="#/resources/guides/briefing" style="color:var(--primary);font-weight:900">#/resources/guides/briefing</a></p>
+            <a class="btn btn-ghost" href="#/resources/guides/briefing">Ebene 3 öffnen</a>
+          </div>
+        </section>
+      `,
+
+      "/resources/guides/briefing": () => html`
+        <div class="breadcrumb">
+          <a href="#/">Home</a> / <a href="#/resources">Ressourcen</a> / <a href="#/resources/guides">Guides</a> / Briefing
+        </div>
+        <h1 class="page-title">Guide: Briefing-Struktur</h1>
+        <p class="page-sub">Ebene 3 — Beispielcontent (leicht austauschbar).</p>
+
+        <section class="section">
+          <div class="feature">
+            <div class="icon">✓</div>
+            <h3>Empfohlene Struktur</h3>
+            <p>
+              Ziel • Zielgruppe • Kernbotschaft • Do/Don'ts • Deliverables • Deadline • Hashtags/Links • Freigabeprozess • Payment.
+            </p>
+            <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+              <a class="btn btn-primary" href="#/contact">Hilfe beim Setup</a>
+              <a class="btn btn-ghost" href="#/resources/templates">Templates</a>
+            </div>
+          </div>
+        </section>
+      `,
+
+      "/resources/case-studies": () => html`
+        <div class="breadcrumb"><a href="#/">Home</a> / <a href="#/resources">Ressourcen</a> / Case Studies</div>
+        <h1 class="page-title">Case Studies</h1>
+        <p class="page-sub">Beispiele (Platzhalter) — ersetze sie durch echte Cases.</p>
+
+        <section class="section">
+          <div class="grid-3">
+            <div class="feature"><div class="icon">A</div><h3>Brand A</h3><p>Launch in 5 Tagen, 12 Creator, klarer Freigabe-Flow.</p></div>
+            <div class="feature"><div class="icon">B</div><h3>Brand B</h3><p>Weniger DMs, mehr Struktur: 30% weniger Rückfragen.</p></div>
+            <div class="feature"><div class="icon">C</div><h3>Brand C</h3><p>Reporting automatisiert, Links & Proofs zentral gesammelt.</p></div>
+          </div>
+        </section>
+      `,
+
+      "/resources/templates": () => html`
+        <div class="breadcrumb"><a href="#/">Home</a> / <a href="#/resources">Ressourcen</a> / Templates</div>
+        <h1 class="page-title">Templates</h1>
+        <p class="page-sub">Kurze Vorlagen (Beispiele).</p>
+
+        <section class="section">
+          <div class="split">
+            <div class="feature">
+              <div class="icon">B</div>
+              <h3>Briefing-Template</h3>
+              <p>Ziel, Botschaft, Do/Don'ts, Deliverables, Deadline, Assets.</p>
+            </div>
+            <div class="feature">
+              <div class="icon">D</div>
+              <h3>Deliverable-Check</h3>
+              <p>Link, Caption, Hashtags, Markierungen, Upload-Zeitpunkt.</p>
+            </div>
+          </div>
+        </section>
+      `,
+
+      "/contact": () => html`
+        <div class="breadcrumb"><a href="#/">Home</a> / Kontakt</div>
+        <h1 class="page-title">Kontakt</h1>
+        <p class="page-sub">Beispiel-Formular (ohne Backend). Du kannst später Email/API anschließen.</p>
+
+        <section class="section">
+          <form class="form" id="contactForm">
+            <div>
+              <label for="name">Name</label>
+              <input id="name" name="name" placeholder="Max Mustermann" required />
+            </div>
+            <div>
+              <label for="email">E-Mail</label>
+              <input id="email" name="email" type="email" placeholder="max@email.de" required />
+            </div>
+            <div>
+              <label for="msg">Nachricht</label>
+              <textarea id="msg" name="msg" placeholder="Worum geht’s?"></textarea>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <button class="btn btn-primary" type="submit">Senden</button>
+              <a class="btn btn-ghost" href="#/pricing">Preise</a>
+            </div>
+            <div id="formNote" style="color:var(--muted);font-weight:700"></div>
+          </form>
+        </section>
+      `,
+
+      "/legal/imprint": () => html`
+        <div class="breadcrumb"><a href="#/">Home</a> / Impressum</div>
+        <h1 class="page-title">Impressum</h1>
+        <p class="page-sub">Platzhalter — hier trägst du deine Firmendaten ein.</p>
+        <section class="section">
+          <div class="feature">
+            <div class="icon">i</div>
+            <h3>Angaben</h3>
+            <p>
+              Firmenname • Adresse • Vertretungsberechtigte Person • Kontakt • Handelsregister • USt-ID
+            </p>
+          </div>
+        </section>
+      `,
+
+      "/legal/privacy": () => html`
+        <div class="breadcrumb"><a href="#/">Home</a> / Datenschutz</div>
+        <h1 class="page-title">Datenschutzerklärung</h1>
+        <p class="page-sub">Platzhalter — bitte juristisch korrekt ausformulieren lassen.</p>
+        <section class="section">
+          <div class="feature">
+            <div class="icon">§</div>
+            <h3>Hinweis</h3>
+            <p>
+              Zwecke der Verarbeitung • Hosting • Cookies/Tracking • Kontaktformular • Betroffenenrechte • Auftragsverarbeiter
+            </p>
+          </div>
+        </section>
+      `,
+    };
+
+    function normalizePath(hash) {
+      const raw = (hash || "#/").replace(/^#/, "");
+      // sicherstellen, dass es mit / startet
+      return raw.startsWith("/") ? raw : "/" + raw;
+    }
+
+    function render() {
+      const path = normalizePath(location.hash);
+      const view = pages[path] || pages["/resources"] && path.startsWith("/resources")
+        ? pages[path] // exact match first
+        : null;
+
+      // Fallback: 404 freundlich
+      const content = pages[path]
+        ? pages[path]()
+        : html`
+          <div class="breadcrumb"><a href="#/">Home</a> / 404</div>
+          <h1 class="page-title">Seite nicht gefunden</h1>
+          <p class="page-sub">Diese Route existiert nicht: <code>${path}</code></p>
+          <section class="section">
+            <div class="callout">
+              <h3>Weiter</h3>
+              <p>Zur Startseite oder in die Ressourcen.</p>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+                <a class="btn btn-primary" href="#/">Startseite</a>
+                <a class="btn btn-ghost" href="#/resources">Ressourcen</a>
+              </div>
+            </div>
+          </section>
+        `;
+
+      app.innerHTML = content;
+      setActiveNav(path);
+
+      // Kontaktformular Demo (kein Backend)
+      const form = document.getElementById("contactForm");
+      if (form) {
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const note = document.getElementById("formNote");
+          if (note) note.textContent = "Demo: Formular abgeschickt (hier später Backend/Email anbinden).";
+          form.reset();
+        }, { once: true });
+      }
+    }
+
+    // initial
+    document.getElementById("year").textContent = new Date().getFullYear();
+    window.addEventListener("hashchange", render);
+    if (!location.hash) location.hash = "#/";
+    render();
   </script>
 </body>
 </html>
