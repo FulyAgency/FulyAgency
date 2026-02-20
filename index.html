@@ -3,791 +3,859 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>NovaCollab — Creator & Marken</title>
-  <meta name="description" content="Ein modernes, weißes Multi-Page-Layout als Single-File App mit Unterseiten." />
-
+  <title>Collably — Influencer x Brands</title>
   <style>
     :root{
       --bg:#ffffff;
-      --text:#0f172a;
-      --muted:#475569;
-      --border:#e2e8f0;
-      --soft:#f8fafc;
+      --text:#0b1220;
+      --muted:#546174;
+      --border:#e6ebf2;
+      --soft:#f7f9fc;
+      --shadow: 0 18px 50px rgba(15,23,42,.08);
+      --radius: 18px;
 
-      /* andere Farben */
-      --primary:#4f46e5;      /* indigo */
-      --primary-700:#4338ca;
-      --accent:#14b8a6;       /* teal */
-      --accent-700:#0f766e;
-
-      --shadow:0 10px 30px rgba(15,23,42,.08);
-      --radius:18px;
+      /* andere Farben (weiß bleibt Basis) */
+      --primary:#ff3d7f;      /* pink */
+      --primary-700:#e12d6c;
+      --accent:#1ecad3;       /* cyan */
+      --accent-700:#0eaab2;
+      --ink:#0b1220;
     }
 
     *{ box-sizing:border-box; }
     body{
       margin:0;
-      font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       background:var(--bg);
       color:var(--text);
       line-height:1.5;
     }
     a{ color:inherit; text-decoration:none; }
-    .container{ width:min(1120px, calc(100% - 48px)); margin-inline:auto; }
+    .container{ width:min(1140px, calc(100% - 48px)); margin-inline:auto; }
 
+    /* Header */
     header{
-      position:sticky; top:0; z-index:50;
-      background:rgba(255,255,255,.82);
-      backdrop-filter: blur(10px);
+      position:sticky; top:0; z-index:30;
+      background:rgba(255,255,255,.86);
+      backdrop-filter: blur(12px);
       border-bottom:1px solid var(--border);
     }
     .nav{
       display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0; gap:18px;
+      padding:14px 0; gap:14px;
     }
     .brand{
       display:flex; align-items:center; gap:10px;
-      font-weight:900; letter-spacing:-.02em;
+      font-weight:1000; letter-spacing:-.02em;
     }
     .logo{
       width:36px; height:36px; border-radius:12px;
-      background:linear-gradient(135deg,var(--primary),var(--accent));
-      box-shadow:0 10px 22px rgba(20,184,166,.18);
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      box-shadow: 0 14px 28px rgba(255,61,127,.18);
     }
-
-    .navlinks{ display:flex; gap:14px; align-items:center; }
-    .navlinks a{
+    nav.links{ display:flex; gap:10px; align-items:center; }
+    nav.links a{
       padding:10px 12px; border-radius:12px;
-      color:var(--muted); font-weight:800;
+      font-weight:900; color:var(--muted);
     }
-    .navlinks a:hover{ background:var(--soft); color:var(--text); }
-    .navlinks a.active{ background:rgba(79,70,229,.08); color:var(--primary); }
-
-    .nav-cta{ display:flex; gap:10px; align-items:center; }
-
-    .burger{
-      display:none;
-      width:44px; height:44px;
-      border-radius:12px;
-      border:1px solid var(--border);
-      background:white;
-      align-items:center; justify-content:center;
-      cursor:pointer;
-    }
-    .burger span{
-      width:18px; height:2px; background:var(--text);
-      position:relative; display:block;
-    }
-    .burger span::before,.burger span::after{
-      content:""; position:absolute; left:0;
-      width:18px; height:2px; background:var(--text);
-    }
-    .burger span::before{ top:-6px; }
-    .burger span::after{ top:6px; }
-
-    .mobile{ display:none; padding:0 0 14px 0; }
-    .mobile .stack{ display:flex; flex-direction:column; gap:8px; padding:10px 0; }
-    .mobile a{
-      padding:12px 12px; border-radius:12px;
-      border:1px solid var(--border);
-      background:white;
-      font-weight:900;
-    }
-    .mobile a:hover{ background:var(--soft); }
-
-    .badge{
-      display:inline-flex; gap:8px; align-items:center;
-      padding:6px 12px;
-      border:1px solid var(--border);
-      background:rgba(79,70,229,.06);
-      color:var(--primary);
-      border-radius:999px;
-      font-weight:700;
-      font-size:14px;
-    }
+    nav.links a:hover{ background:var(--soft); color:var(--text); }
+    nav.links a.active{ background: rgba(255,61,127,.10); color: var(--primary-700); }
+    .cta{ display:flex; gap:10px; align-items:center; }
 
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:10px;
       padding:12px 16px;
-      border-radius:12px;
+      border-radius:14px;
       border:1px solid transparent;
-      font-weight:900;
+      font-weight:950;
       cursor:pointer;
-      user-select:none;
       transition: transform .08s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+      user-select:none;
+      white-space:nowrap;
     }
-    .btn:active{ transform:translateY(1px); }
-    .btn-primary{ background:var(--primary); color:#fff; box-shadow:0 10px 20px rgba(79,70,229,.18); }
-    .btn-primary:hover{ background:var(--primary-700); }
-    .btn-ghost{ background:#fff; border-color:var(--border); }
-    .btn-ghost:hover{ border-color:#cbd5e1; }
-    .btn-accent{ background:var(--accent); color:#032a27; }
-    .btn-accent:hover{ background:var(--accent-700); color:#e6fffb; }
+    .btn:active{ transform: translateY(1px); }
+    .btn-primary{
+      background: var(--primary);
+      color:#fff;
+      box-shadow: 0 16px 30px rgba(255,61,127,.18);
+    }
+    .btn-primary:hover{ background: var(--primary-700); }
+    .btn-ghost{
+      background:#fff;
+      border-color: var(--border);
+    }
+    .btn-ghost:hover{ border-color:#d5dceb; }
+    .btn-accent{
+      background: rgba(30,202,211,.14);
+      border-color: rgba(30,202,211,.35);
+      color: #06464a;
+    }
+    .btn-accent:hover{
+      background: rgba(30,202,211,.22);
+      border-color: rgba(30,202,211,.55);
+    }
 
-    main{ padding-bottom:20px; }
+    .burger{
+      display:none;
+      width:44px; height:44px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:#fff;
+      align-items:center; justify-content:center;
+      cursor:pointer;
+    }
+    .burger span{ width:18px; height:2px; background:var(--ink); position:relative; display:block; }
+    .burger span::before,.burger span::after{
+      content:""; position:absolute; left:0; width:18px; height:2px; background:var(--ink);
+    }
+    .burger span::before{ top:-6px; } .burger span::after{ top:6px; }
 
-    .hero{ padding:54px 0 24px 0; }
-    .hero-grid{
+    .mobile{ display:none; padding:0 0 14px 0; }
+    .mobile .stack{ display:flex; flex-direction:column; gap:8px; padding:10px 0; }
+    .mobile a{
+      padding:12px; border-radius:14px;
+      border:1px solid var(--border);
+      background:#fff;
+      font-weight:950;
+    }
+    .mobile a:hover{ background:var(--soft); }
+
+    /* Layout helpers */
+    main{ padding-bottom:18px; }
+    .section{ padding:34px 0; }
+    .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+
+    .card{
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background:#fff;
+      box-shadow: 0 8px 30px rgba(15,23,42,.05);
+    }
+    .pad{ padding:18px; }
+
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(255,61,127,.06);
+      color: var(--primary-700);
+      font-weight:900;
+      font-size:14px;
+    }
+
+    /* Hero */
+    .hero{
+      padding:54px 0 22px 0;
+    }
+    .hero-wrap{
       display:grid;
-      grid-template-columns:1.2fr .8fr;
-      gap:28px;
-      align-items:start;
+      grid-template-columns: 1.1fr .9fr;
+      gap:20px;
+      align-items:stretch;
     }
-    .h-title{
-      font-size:clamp(34px,4vw,54px);
-      line-height:1.05;
-      letter-spacing:-.03em;
-      margin:14px 0 12px 0;
+    .title{
+      font-size: clamp(36px, 4.2vw, 58px);
+      line-height:1.03;
+      margin:12px 0 12px 0;
+      letter-spacing:-.04em;
+      font-weight:1100;
     }
-    .h-sub{ color:var(--muted); font-size:18px; max-width:60ch; }
+    .sub{
+      color:var(--muted);
+      font-size:18px;
+      max-width: 62ch;
+      font-weight:650;
+      margin:0;
+    }
     .hero-actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
 
-    .panel{
+    .hero-panel{
       border:1px solid var(--border);
-      border-radius:var(--radius);
-      background:linear-gradient(180deg,#fff,#fff 65%,rgba(79,70,229,.03));
-      box-shadow:var(--shadow);
+      border-radius: 22px;
+      background:
+        radial-gradient(900px 300px at 20% 10%, rgba(255,61,127,.14), transparent 60%),
+        radial-gradient(900px 300px at 80% 30%, rgba(30,202,211,.16), transparent 60%),
+        #fff;
+      box-shadow: var(--shadow);
       padding:18px;
     }
-    .kpi{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:12px;
-      margin-top:14px;
+    .panel-head{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      margin-bottom: 12px;
     }
-    .kpi .card{
-      border:1px solid var(--border);
+    .panel-head strong{ font-weight:1100; }
+    .pill{
+      font-size:12px;
+      font-weight:950;
+      color:#0b1220;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(11,18,32,.10);
+      background: rgba(255,255,255,.7);
+    }
+
+    .kpis{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+      margin-top:12px;
+    }
+    .kpis .k{
+      border:1px solid rgba(11,18,32,.10);
       border-radius:16px;
-      background:#fff;
+      background: rgba(255,255,255,.75);
       padding:12px;
     }
-    .kpi .num{ font-weight:950; font-size:18px; }
-    .kpi .lbl{ color:var(--muted); font-weight:800; font-size:13px; }
+    .k .num{ font-weight:1100; font-size:18px; letter-spacing:-.02em; }
+    .k .lbl{ color:var(--muted); font-weight:850; font-size:12px; }
 
-    .section{ padding:34px 0; }
-    .section h2{ font-size:28px; letter-spacing:-.02em; margin:0 0 12px 0; }
-    .lead{ color:var(--muted); margin:0 0 18px 0; }
-
-    .grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    /* Feature blocks like influencer platforms */
     .feature{
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      background:#fff;
-      padding:16px;
+      padding:18px;
     }
-    .feature .icon{
-      width:42px; height:42px;
-      border-radius:14px;
+    .icon{
+      width:44px; height:44px;
+      border-radius:16px;
       display:flex; align-items:center; justify-content:center;
-      background:rgba(20,184,166,.12);
-      color:var(--accent-700);
-      font-weight:950;
+      font-weight:1100;
+      background: rgba(30,202,211,.14);
+      color: #05565b;
+      border:1px solid rgba(30,202,211,.30);
     }
-    .feature h3{ margin:12px 0 6px 0; font-size:18px; }
-    .feature p{ margin:0; color:var(--muted); font-weight:600; }
+    .feature h3{ margin:12px 0 6px 0; font-size:18px; letter-spacing:-.01em; }
+    .feature p{ margin:0; color:var(--muted); font-weight:650; }
 
-    .split{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-    .callout{
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      background:var(--soft);
-      padding:18px;
+    .how{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      align-items:start;
     }
-    .callout h3{ margin:0 0 6px 0; }
-    .callout p{ margin:0 0 14px 0; color:var(--muted); font-weight:600; }
+    .step{
+      display:flex; gap:12px;
+      padding:14px;
+      border:1px solid var(--border);
+      border-radius: 18px;
+      background: #fff;
+    }
+    .step .n{
+      width:34px; height:34px;
+      border-radius:12px;
+      display:flex; align-items:center; justify-content:center;
+      font-weight:1100;
+      background: rgba(255,61,127,.12);
+      color: var(--primary-700);
+      border:1px solid rgba(255,61,127,.24);
+      flex:0 0 auto;
+    }
+    .step strong{ font-weight:1100; }
+    .step p{ margin:4px 0 0 0; color:var(--muted); font-weight:650; }
 
-    .pricing{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-    .plan{
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      background:#fff;
-      padding:18px;
-      box-shadow:0 8px 22px rgba(15,23,42,.06);
+    .divider{
+      height:1px; background:var(--border);
+      margin: 24px 0;
     }
-    .plan.highlight{
-      border-color:rgba(79,70,229,.35);
-      box-shadow:0 14px 34px rgba(79,70,229,.14);
-    }
-    .plan .price{
-      font-size:32px;
-      font-weight:950;
-      letter-spacing:-.03em;
-    }
-    .plan ul{ margin:12px 0 0 0; padding-left:18px; color:var(--muted); font-weight:700; }
-    .plan li{ margin:7px 0; }
 
     .breadcrumb{
-      color:var(--muted);
-      font-weight:800;
+      margin: 18px 0 0 0;
+      color: var(--muted);
+      font-weight:850;
       font-size:14px;
-      margin:18px 0 0 0;
     }
-    .breadcrumb a{ color:var(--primary); }
+    .breadcrumb a{ color: var(--primary-700); }
     .page-title{
-      font-size:36px;
+      font-size: 36px;
       letter-spacing:-.03em;
-      margin:10px 0 10px 0;
+      margin: 10px 0 10px 0;
+      font-weight:1100;
     }
-    .page-sub{ color:var(--muted); margin:0 0 18px 0; font-weight:600; }
+    .page-sub{
+      margin:0 0 18px 0;
+      color:var(--muted);
+      font-weight:650;
+    }
 
-    .form{
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      background:#fff;
-      padding:18px;
-      box-shadow:var(--shadow);
-      display:grid; gap:12px;
-      max-width:680px;
+    .pricing{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
     }
-    label{ font-weight:900; }
-    input, textarea{
-      width:100%;
-      padding:12px 12px;
-      border-radius:12px;
+    .plan{ padding:18px; }
+    .plan.highlight{
+      border: 1px solid rgba(255,61,127,.35);
+      box-shadow: 0 18px 50px rgba(255,61,127,.10);
+    }
+    .price{ font-size:32px; font-weight:1100; letter-spacing:-.03em; }
+    .plan ul{ margin:12px 0 0 0; padding-left:18px; color:var(--muted); font-weight:750; }
+    .plan li{ margin:7px 0; }
+
+    .faq details{
       border:1px solid var(--border);
-      font:inherit;
-      outline:none;
+      border-radius:16px;
+      padding: 12px 14px;
       background:#fff;
     }
-    input:focus, textarea:focus{ border-color:rgba(79,70,229,.5); box-shadow:0 0 0 4px rgba(79,70,229,.12); }
-    textarea{ min-height:120px; resize:vertical; }
+    .faq details + details{ margin-top:10px; }
+    .faq summary{ cursor:pointer; font-weight:1000; }
+    .faq p{ color:var(--muted); font-weight:650; margin:8px 0 0 0; }
 
     footer{
-      margin-top:28px;
-      border-top:1px solid var(--border);
-      padding:22px 0;
-      color:var(--muted);
+      margin-top: 26px;
+      border-top: 1px solid var(--border);
+      padding: 22px 0;
+      color: var(--muted);
     }
     .footer-grid{
-      display:flex;
-      justify-content:space-between;
-      gap:16px;
-      flex-wrap:wrap;
+      display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
     }
     .footer-links{ display:flex; gap:12px; flex-wrap:wrap; }
-    .footer-links a{ color:var(--muted); font-weight:800; }
-    .footer-links a:hover{ color:var(--text); }
+    .footer-links a{ color: var(--muted); font-weight:900; }
+    .footer-links a:hover{ color: var(--text); }
 
-    @media (max-width:960px){
-      .hero-grid{ grid-template-columns:1fr; }
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-wrap{ grid-template-columns:1fr; }
+      .grid-2{ grid-template-columns:1fr; }
       .grid-3{ grid-template-columns:1fr; }
-      .split{ grid-template-columns:1fr; }
+      .how{ grid-template-columns:1fr; }
       .pricing{ grid-template-columns:1fr; }
     }
-    @media (max-width:760px){
-      .navlinks,.nav-cta{ display:none; }
+    @media (max-width: 780px){
+      nav.links, .cta{ display:none; }
       .burger{ display:flex; }
       .mobile{ display:block; }
       .mobile[hidden]{ display:none; }
+      .kpis{ grid-template-columns:1fr; }
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="container">
-      <div class="nav">
-        <a class="brand" href="#/">
-          <span class="logo" aria-hidden="true"></span>
-          <span>NovaCollab</span>
-        </a>
+<header>
+  <div class="container">
+    <div class="nav">
+      <a class="brand" href="#/">
+        <span class="logo" aria-hidden="true"></span>
+        <span>Collably</span>
+      </a>
 
-        <nav class="navlinks" aria-label="Hauptnavigation">
-          <a data-nav href="#/influencers">Influencer</a>
-          <a data-nav href="#/brands">Marken</a>
-          <a data-nav href="#/pricing">Preise</a>
-          <a data-nav href="#/resources">Ressourcen</a>
-          <a data-nav href="#/contact">Kontakt</a>
-        </nav>
+      <nav class="links" aria-label="Navigation">
+        <a data-nav href="#/creators">Creator</a>
+        <a data-nav href="#/brands">Brands</a>
+        <a data-nav href="#/pricing">Preise</a>
+        <a data-nav href="#/resources">Ressourcen</a>
+        <a data-nav href="#/contact">Kontakt</a>
+      </nav>
 
-        <div class="nav-cta">
-          <a class="btn btn-ghost" href="#/contact">Demo anfragen</a>
-          <a class="btn btn-primary" href="#/influencers">Jetzt starten</a>
-        </div>
-
-        <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false">
-          <span></span>
-        </button>
+      <div class="cta">
+        <a class="btn btn-ghost" href="#/contact">Demo</a>
+        <a class="btn btn-primary" href="#/creators">Jetzt starten</a>
       </div>
 
-      <div class="mobile" id="mobileNav" hidden>
-        <div class="stack">
-          <a data-nav href="#/influencers">Für Influencer</a>
-          <a data-nav href="#/brands">Für Marken</a>
-          <a data-nav href="#/pricing">Preise</a>
-          <a data-nav href="#/resources">Ressourcen</a>
-          <a data-nav href="#/contact">Kontakt</a>
-        </div>
-        <div class="stack">
-          <a class="btn btn-primary" href="#/influencers">Jetzt starten</a>
-          <a class="btn btn-ghost" href="#/contact">Demo anfragen</a>
-        </div>
+      <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false"><span></span></button>
+    </div>
+
+    <div class="mobile" id="mobileNav" hidden>
+      <div class="stack">
+        <a data-nav href="#/creators">Creator</a>
+        <a data-nav href="#/brands">Brands</a>
+        <a data-nav href="#/pricing">Preise</a>
+        <a data-nav href="#/resources">Ressourcen</a>
+        <a data-nav href="#/contact">Kontakt</a>
+      </div>
+      <div class="stack">
+        <a class="btn btn-primary" href="#/creators">Jetzt starten</a>
+        <a class="btn btn-ghost" href="#/contact">Demo</a>
       </div>
     </div>
-  </header>
+  </div>
+</header>
 
-  <main class="container" id="app" aria-live="polite"></main>
+<main class="container" id="app"></main>
 
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div style="font-weight:950;color:var(--text)">NovaCollab</div>
-          <div style="max-width:52ch;margin-top:6px">
-            Single-File Multi-Page Template: Kampagnen, Deals und Creator-Partnerschaften — sauber & schnell.
-          </div>
-        </div>
-        <div class="footer-links">
-          <a href="#/resources">Ressourcen</a>
-          <a href="#/legal/imprint">Impressum</a>
-          <a href="#/legal/privacy">Datenschutz</a>
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="font-weight:1100;color:var(--text)">Collably</div>
+        <div style="max-width:56ch;margin-top:6px;font-weight:650">
+          Influencer x Brand Plattform — Single-File Routing mit Unterseiten-Ebenen.
         </div>
       </div>
-      <div style="margin-top:12px;font-weight:800">© <span id="year"></span> NovaCollab</div>
+      <div class="footer-links">
+        <a href="#/resources">Ressourcen</a>
+        <a href="#/legal/imprint">Impressum</a>
+        <a href="#/legal/privacy">Datenschutz</a>
+      </div>
     </div>
-  </footer>
+    <div style="margin-top:12px;font-weight:900">© <span id="year"></span> Collably</div>
+  </div>
+</footer>
 
-  <script>
-    // --------- kleine Router-Logik (Hash-Routes wie #/resources/guides) ----------
-    const app = document.getElementById("app");
+<script>
+  // Mobile menu
+  document.addEventListener("click", (e) => {
+    const burger = document.getElementById("burger");
+    const mobile = document.getElementById("mobileNav");
+    if (!burger || !mobile) return;
 
-    const html = (strings, ...vals) =>
-      strings.map((s, i) => s + (vals[i] ?? "")).join("");
-
-    function setActiveNav(path) {
-      document.querySelectorAll("[data-nav]").forEach(a => {
-        a.classList.remove("active");
-        const href = a.getAttribute("href");
-        if (!href) return;
-        const route = href.replace(/^#/, "");
-        // Highlight: active wenn path gleich route oder darunter (mehrere Ebenen)
-        if (path === route || path.startsWith(route + "/")) a.classList.add("active");
-      });
+    if (e.target === burger || burger.contains(e.target)) {
+      const isOpen = !mobile.hasAttribute("hidden");
+      if (isOpen) { mobile.setAttribute("hidden",""); burger.setAttribute("aria-expanded","false"); }
+      else { mobile.removeAttribute("hidden"); burger.setAttribute("aria-expanded","true"); }
     }
+  });
+  window.addEventListener("hashchange", () => {
+    const burger = document.getElementById("burger");
+    const mobile = document.getElementById("mobileNav");
+    if (!burger || !mobile) return;
+    mobile.setAttribute("hidden","");
+    burger.setAttribute("aria-expanded","false");
+  });
 
-    function closeMobileNav() {
-      const burger = document.getElementById("burger");
-      const mobile = document.getElementById("mobileNav");
-      if (!burger || !mobile) return;
-      mobile.setAttribute("hidden", "");
-      burger.setAttribute("aria-expanded", "false");
-    }
+  const app = document.getElementById("app");
+  const html = (s,...v)=>s.map((x,i)=>x+(v[i]??"")).join("");
 
-    // Mobile Menü Toggle
-    document.addEventListener("click", (e) => {
-      const burger = document.getElementById("burger");
-      const mobile = document.getElementById("mobileNav");
-      if (!burger || !mobile) return;
-
-      if (e.target === burger || burger.contains(e.target)) {
-        const isOpen = !mobile.hasAttribute("hidden");
-        if (isOpen) {
-          mobile.setAttribute("hidden", "");
-          burger.setAttribute("aria-expanded", "false");
-        } else {
-          mobile.removeAttribute("hidden");
-          burger.setAttribute("aria-expanded", "true");
-        }
-      }
+  function pathFromHash(){
+    const raw = (location.hash || "#/").replace(/^#/, "");
+    return raw.startsWith("/") ? raw : "/" + raw;
+  }
+  function setActiveNav(path){
+    document.querySelectorAll("[data-nav]").forEach(a=>{
+      a.classList.remove("active");
+      const route = a.getAttribute("href").replace(/^#/, "");
+      if (path===route || path.startsWith(route + "/")) a.classList.add("active");
     });
+  }
 
-    // Close mobile nav when navigating
-    window.addEventListener("hashchange", closeMobileNav);
+  const pages = {
+    "/": () => html`
+      <section class="hero">
+        <div class="hero-wrap">
+          <div>
+            <span class="badge">✨ Deals. Briefings. Auszahlungen.</span>
+            <h1 class="title">Influencer & Brands – in einem sauberen Flow.</h1>
+            <p class="sub">
+              Kampagnen starten, Deliverables tracken, Freigaben sammeln –
+              ohne Chaos in DMs. Klarer Aufbau wie bei typischen Creator-Plattformen.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#/creators">Ich bin Creator</a>
+              <a class="btn btn-ghost" href="#/brands">Ich bin Brand</a>
+              <a class="btn btn-accent" href="#/resources">Ressourcen</a>
+            </div>
 
-    const pages = {
-      "/": () => html`
-        <section class="hero">
-          <div class="hero-grid">
-            <div>
-              <span class="badge">✨ Neue Kampagnen in Minuten</span>
-              <h1 class="h-title">Creator-Kooperationen, die sich leicht anfühlen.</h1>
-              <p class="h-sub">
-                NovaCollab verbindet Influencer und Marken — mit klaren Deals, Briefings, Tracking und Auszahlungen.
-                Weißes Design. Andere Akzentfarben. Mehrere Ebenen an Seiten.
-              </p>
-              <div class="hero-actions">
-                <a class="btn btn-primary" href="#/influencers">Als Influencer starten</a>
-                <a class="btn btn-ghost" href="#/brands">Für Marken ansehen</a>
-                <a class="btn btn-accent" href="#/pricing">Preise</a>
+            <div class="divider"></div>
+
+            <div class="grid-3">
+              <div class="card feature">
+                <div class="icon">⚡</div>
+                <h3>Schnell live</h3>
+                <p>Standard-Briefings + Vorlagen → Launch in Tagen statt Wochen.</p>
+              </div>
+              <div class="card feature">
+                <div class="icon">🧾</div>
+                <h3>Klare Deals</h3>
+                <p>Umfang, Timing, Assets und Regeln sauber dokumentiert.</p>
+              </div>
+              <div class="card feature">
+                <div class="icon">✅</div>
+                <h3>Freigaben</h3>
+                <p>Review & Approval ohne endloses Hin und Her.</p>
+              </div>
+            </div>
+          </div>
+
+          <aside class="hero-panel">
+            <div class="panel-head">
+              <strong>Campaign Board</strong>
+              <span class="pill">Live • 12 Creator</span>
+            </div>
+
+            <div class="card pad" style="border-radius:18px;border:1px solid rgba(11,18,32,.10);background:rgba(255,255,255,.78)">
+              <div style="font-weight:1000">Sommer Drop — UGC + Reels</div>
+              <div style="color:var(--muted);font-weight:650;margin-top:4px">Deliverables: 1 Reel + 3 Stories • Deadline: 7 Tage</div>
+              <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
+                <span class="pill">Briefing</span>
+                <span class="pill">Assets</span>
+                <span class="pill">Approval</span>
+                <span class="pill">Payout</span>
               </div>
             </div>
 
-            <aside class="panel">
-              <div style="font-weight:950;font-size:18px">Dashboard-Vorschau</div>
-              <div style="color:var(--muted);margin-top:6px;font-weight:600">
-                Übersicht über Kampagnen, Status und Auszahlungen.
-              </div>
-
-              <div class="kpi">
-                <div class="card"><div class="num">+24%</div><div class="lbl">höhere Reply-Rate</div></div>
-                <div class="card"><div class="num">3–7 Tage</div><div class="lbl">bis Launch</div></div>
-                <div class="card"><div class="num">1 Klick</div><div class="lbl">für Briefing</div></div>
-                <div class="card"><div class="num">Autom.</div><div class="lbl">Auszahlung</div></div>
-              </div>
-
-              <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-                <a class="btn btn-ghost" href="#/resources">Guides</a>
-                <a class="btn btn-primary" href="#/contact">Demo anfragen</a>
-              </div>
-            </aside>
-          </div>
-        </section>
-
-        <section class="section">
-          <h2>Warum NovaCollab?</h2>
-          <p class="lead">Mehr Struktur, weniger Chaos: Kommunikation, Briefings und Deliverables an einem Ort.</p>
-
-          <div class="grid-3">
-            <div class="feature">
-              <div class="icon">A</div>
-              <h3>Angebote & Deals</h3>
-              <p>Transparente Konditionen, klarer Umfang und faire Vergütung — ohne Ping-Pong.</p>
+            <div class="kpis">
+              <div class="k"><div class="num">80%</div><div class="lbl">Creator Earnings</div></div>
+              <div class="k"><div class="num">3–7</div><div class="lbl">Tage bis Launch</div></div>
+              <div class="k"><div class="num">1</div><div class="lbl">Ort für alles</div></div>
             </div>
-            <div class="feature">
-              <div class="icon">B</div>
-              <h3>Briefing-Center</h3>
-              <p>Assets, Guidelines und Deadlines sauber gesammelt. Weniger Rückfragen.</p>
-            </div>
-            <div class="feature">
-              <div class="icon">C</div>
-              <h3>Status & Proof</h3>
-              <p>Deliverables, Links und Freigaben mit einem Blick — inklusive Verlauf.</p>
-            </div>
-          </div>
-        </section>
 
-        <section class="section">
-          <div class="split">
-            <div class="callout">
-              <h3>Für Influencer</h3>
-              <p>Finde passende Kampagnen, liefere ab — und behalte alles im Blick.</p>
-              <a class="btn btn-primary" href="#/influencers">Mehr erfahren</a>
-            </div>
-            <div class="callout">
-              <h3>Für Marken</h3>
-              <p>Finde Creator, starte Kampagnen schneller und standardisiere Prozesse im Team.</p>
-              <a class="btn btn-ghost" href="#/brands">Mehr erfahren</a>
-            </div>
-          </div>
-        </section>
-      `,
-
-      "/influencers": () => html`
-        <div class="breadcrumb"><a href="#/">Home</a> / Influencer</div>
-        <h1 class="page-title">Für Influencer</h1>
-        <p class="page-sub">Kampagnen finden, verhandeln, liefern — alles an einem Ort.</p>
-
-        <section class="section">
-          <div class="grid-3">
-            <div class="feature"><div class="icon">1</div><h3>Matches</h3><p>Nur Kampagnen, die zu deiner Nische passen.</p></div>
-            <div class="feature"><div class="icon">2</div><h3>Briefings</h3><p>Alle Infos & Assets strukturiert, ohne Chaos im Chat.</p></div>
-            <div class="feature"><div class="icon">3</div><h3>Auszahlung</h3><p>Status & Payment transparent — weniger Nachfragen.</p></div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="callout">
-            <h3>Flow in 3 Steps</h3>
-            <p>1) Profil → 2) Deal annehmen → 3) Deliverable hochladen & Freigabe</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
-              <a class="btn btn-primary" href="#/contact">Creator-Onboarding anfragen</a>
-              <a class="btn btn-ghost" href="#/resources/guides">Guides ansehen</a>
-            </div>
-          </div>
-        </section>
-      `,
-
-      "/brands": () => html`
-        <div class="breadcrumb"><a href="#/">Home</a> / Marken</div>
-        <h1 class="page-title">Für Marken</h1>
-        <p class="page-sub">Creator finden, Kampagnen schneller launchen und sauber dokumentieren.</p>
-
-        <section class="section">
-          <div class="grid-3">
-            <div class="feature"><div class="icon">S</div><h3>Shortlist</h3><p>Creator-Shortlists nach Zielgruppe & Stil.</p></div>
-            <div class="feature"><div class="icon">K</div><h3>Kampagnen</h3><p>Briefings, Deadlines, Freigaben & Assets zentral.</p></div>
-            <div class="feature"><div class="icon">R</div><h3>Reporting</h3><p>Links/Proofs sammeln und Ergebnisse strukturiert auswerten.</p></div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="split">
-            <div class="callout">
-              <h3>Standardisiert fürs Team</h3>
-              <p>Einheitliche Prozesse, weniger Abhängigkeit von Einzelpersonen.</p>
+            <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
               <a class="btn btn-primary" href="#/contact">Demo anfragen</a>
-            </div>
-            <div class="callout">
-              <h3>Skalierbar</h3>
-              <p>Mehr Kampagnen parallel ohne Tool-Wildwuchs.</p>
               <a class="btn btn-ghost" href="#/pricing">Preise</a>
             </div>
-          </div>
-        </section>
-      `,
-
-      "/pricing": () => html`
-        <div class="breadcrumb"><a href="#/">Home</a> / Preise</div>
-        <h1 class="page-title">Preise</h1>
-        <p class="page-sub">Drei einfache Pakete (Beispiel-Pricing — kannst du anpassen).</p>
-
-        <section class="section">
-          <div class="pricing">
-            <div class="plan">
-              <div style="font-weight:950">Starter</div>
-              <div class="price">€0</div>
-              <div style="color:var(--muted);font-weight:700">Für erste Kooperationen</div>
-              <ul>
-                <li>Profil & Basis-Dashboard</li>
-                <li>Briefings & Deliverables</li>
-                <li>Basis-Support</li>
-              </ul>
-              <div style="margin-top:14px">
-                <a class="btn btn-ghost" href="#/contact">Starten</a>
-              </div>
-            </div>
-
-            <div class="plan highlight">
-              <div style="font-weight:950;color:var(--primary)">Pro</div>
-              <div class="price">€49</div>
-              <div style="color:var(--muted);font-weight:700">Für wachsende Kampagnen</div>
-              <ul>
-                <li>Team-Workflows</li>
-                <li>Freigabe-Prozess</li>
-                <li>Erweitertes Reporting</li>
-              </ul>
-              <div style="margin-top:14px">
-                <a class="btn btn-primary" href="#/contact">Demo anfragen</a>
-              </div>
-            </div>
-
-            <div class="plan">
-              <div style="font-weight:950">Business</div>
-              <div class="price">Custom</div>
-              <div style="color:var(--muted);font-weight:700">Für große Teams</div>
-              <ul>
-                <li>SSO / Rollen & Rechte</li>
-                <li>SLA & Onboarding</li>
-                <li>Individuelle Integrationen</li>
-              </ul>
-              <div style="margin-top:14px">
-                <a class="btn btn-accent" href="#/contact">Kontakt</a>
-              </div>
-            </div>
-          </div>
-        </section>
-      `,
-
-      "/resources": () => html`
-        <div class="breadcrumb"><a href="#/">Home</a> / Ressourcen</div>
-        <h1 class="page-title">Ressourcen</h1>
-        <p class="page-sub">Mehrere Ebenen: Hier geht’s zu Unterseiten wie Guides und Case Studies.</p>
-
-        <section class="section">
-          <div class="grid-3">
-            <a class="feature" href="#/resources/guides">
-              <div class="icon">G</div><h3>Guides</h3>
-              <p>Best Practices für Briefings, Deals und Reporting.</p>
-            </a>
-            <a class="feature" href="#/resources/case-studies">
-              <div class="icon">C</div><h3>Case Studies</h3>
-              <p>Beispiele, wie Partnerschaften skaliert werden.</p>
-            </a>
-            <a class="feature" href="#/resources/templates">
-              <div class="icon">T</div><h3>Templates</h3>
-              <p>Vorlagen für Briefings & Deliverables.</p>
-            </a>
-          </div>
-        </section>
-      `,
-
-      "/resources/guides": () => html`
-        <div class="breadcrumb"><a href="#/">Home</a> / <a href="#/resources">Ressourcen</a> / Guides</div>
-        <h1 class="page-title">Guides</h1>
-        <p class="page-sub">Unterseite (Ebene 2) — du kannst beliebig weitere Ebenen hinzufügen.</p>
-
-        <section class="section">
-          <div class="grid-3">
-            <div class="feature"><div class="icon">1</div><h3>Briefing-Checkliste</h3><p>Was in jedes Briefing gehört.</p></div>
-            <div class="feature"><div class="icon">2</div><h3>Deliverables definieren</h3><p>Formate, Deadlines, Freigaben.</p></div>
-            <div class="feature"><div class="icon">3</div><h3>KPIs auswählen</h3><p>Welche Kennzahlen zum Ziel passen.</p></div>
-          </div>
-
-          <div class="callout" style="margin-top:16px">
-            <h3>Noch tiefer?</h3>
-            <p>Beispiel für Ebene 3: <a href="#/resources/guides/briefing" style="color:var(--primary);font-weight:900">#/resources/guides/briefing</a></p>
-            <a class="btn btn-ghost" href="#/resources/guides/briefing">Ebene 3 öffnen</a>
-          </div>
-        </section>
-      `,
-
-      "/resources/guides/briefing": () => html`
-        <div class="breadcrumb">
-          <a href="#/">Home</a> / <a href="#/resources">Ressourcen</a> / <a href="#/resources/guides">Guides</a> / Briefing
+          </aside>
         </div>
-        <h1 class="page-title">Guide: Briefing-Struktur</h1>
-        <p class="page-sub">Ebene 3 — Beispielcontent (leicht austauschbar).</p>
+      </section>
 
-        <section class="section">
-          <div class="feature">
-            <div class="icon">✓</div>
-            <h3>Empfohlene Struktur</h3>
-            <p>
-              Ziel • Zielgruppe • Kernbotschaft • Do/Don'ts • Deliverables • Deadline • Hashtags/Links • Freigabeprozess • Payment.
-            </p>
+      <section class="section">
+        <div class="how">
+          <div class="card pad">
+            <h2 style="margin:0 0 8px 0;letter-spacing:-.02em">So funktioniert’s</h2>
+            <p style="margin:0;color:var(--muted);font-weight:650">Ein typischer Influencer-Plattform-Flow: klar, schnell, nachvollziehbar.</p>
+
+            <div style="margin-top:14px;display:grid;gap:10px">
+              <div class="step">
+                <div class="n">1</div>
+                <div><strong>Match</strong><p>Creator/Brand findet passende Kampagne oder Creator.</p></div>
+              </div>
+              <div class="step">
+                <div class="n">2</div>
+                <div><strong>Briefing</strong><p>Guidelines, Assets, Deadlines — alles in einem Paket.</p></div>
+              </div>
+              <div class="step">
+                <div class="n">3</div>
+                <div><strong>Deliver & Approval</strong><p>Links hochladen, freigeben, payout auslösen.</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card pad" style="background:var(--soft)">
+            <h2 style="margin:0 0 8px 0;letter-spacing:-.02em">Creator / Brand Split</h2>
+            <p style="margin:0;color:var(--muted);font-weight:650">Genau wie bei vielen Plattformen: zwei Einstiege, ein System.</p>
+
             <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-              <a class="btn btn-primary" href="#/contact">Hilfe beim Setup</a>
-              <a class="btn btn-ghost" href="#/resources/templates">Templates</a>
+              <a class="btn btn-primary" href="#/creators">Creator-Seite</a>
+              <a class="btn btn-ghost" href="#/brands">Brand-Seite</a>
+              <a class="btn btn-accent" href="#/resources/guides">Guides</a>
             </div>
           </div>
-        </section>
-      `,
+        </div>
+      </section>
+    `,
 
-      "/resources/case-studies": () => html`
-        <div class="breadcrumb"><a href="#/">Home</a> / <a href="#/resources">Ressourcen</a> / Case Studies</div>
-        <h1 class="page-title">Case Studies</h1>
-        <p class="page-sub">Beispiele (Platzhalter) — ersetze sie durch echte Cases.</p>
+    "/creators": () => html`
+      <div class="breadcrumb"><a href="#/">Home</a> / Creator</div>
+      <h1 class="page-title">Für Creator</h1>
+      <p class="page-sub">Kampagnen finden, Briefings verstehen, Deliverables abgeben — ohne Chaos.</p>
 
-        <section class="section">
-          <div class="grid-3">
-            <div class="feature"><div class="icon">A</div><h3>Brand A</h3><p>Launch in 5 Tagen, 12 Creator, klarer Freigabe-Flow.</p></div>
-            <div class="feature"><div class="icon">B</div><h3>Brand B</h3><p>Weniger DMs, mehr Struktur: 30% weniger Rückfragen.</p></div>
-            <div class="feature"><div class="icon">C</div><h3>Brand C</h3><p>Reporting automatisiert, Links & Proofs zentral gesammelt.</p></div>
+      <section class="section">
+        <div class="grid-3">
+          <div class="card feature">
+            <div class="icon">🎯</div><h3>Matches</h3><p>Nur passende Brands & Kampagnen.</p>
           </div>
-        </section>
-      `,
+          <div class="card feature">
+            <div class="icon">📦</div><h3>Briefing-Pack</h3><p>Assets + Do/Don'ts + Deadlines an einem Ort.</p>
+          </div>
+          <div class="card feature">
+            <div class="icon">💸</div><h3>Payout</h3><p>Status & Auszahlung transparent.</p>
+          </div>
+        </div>
+      </section>
 
-      "/resources/templates": () => html`
-        <div class="breadcrumb"><a href="#/">Home</a> / <a href="#/resources">Ressourcen</a> / Templates</div>
-        <h1 class="page-title">Templates</h1>
-        <p class="page-sub">Kurze Vorlagen (Beispiele).</p>
+      <section class="section">
+        <div class="card pad" style="background:var(--soft)">
+          <h2 style="margin:0 0 8px 0">Beispiel-Kampagnen</h2>
+          <p style="margin:0;color:var(--muted);font-weight:650">Cards wie auf typischen Plattformen (Platzhalter).</p>
 
-        <section class="section">
-          <div class="split">
-            <div class="feature">
-              <div class="icon">B</div>
-              <h3>Briefing-Template</h3>
-              <p>Ziel, Botschaft, Do/Don'ts, Deliverables, Deadline, Assets.</p>
+          <div class="grid-3" style="margin-top:14px">
+            ${campaignCard("UGC + Reel", "Beauty", "€250–€450", "7 Tage")}
+            ${campaignCard("Story Bundle", "Food", "€120–€220", "5 Tage")}
+            ${campaignCard("TikTok Spark", "Fashion", "€300–€700", "10 Tage")}
+          </div>
+
+          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn btn-primary" href="#/contact">Creator bewerben</a>
+            <a class="btn btn-ghost" href="#/resources/templates">Templates</a>
+          </div>
+        </div>
+      </section>
+    `,
+
+    "/brands": () => html`
+      <div class="breadcrumb"><a href="#/">Home</a> / Brands</div>
+      <h1 class="page-title">Für Brands</h1>
+      <p class="page-sub">Creator finden, Kampagnen strukturieren, Freigaben & Reporting sauber abwickeln.</p>
+
+      <section class="section">
+        <div class="grid-3">
+          <div class="card feature"><div class="icon">🔎</div><h3>Creator Search</h3><p>Shortlists nach Stil & Zielgruppe.</p></div>
+          <div class="card feature"><div class="icon">🧠</div><h3>Briefing Standard</h3><p>Einheitlich fürs Team — weniger Rückfragen.</p></div>
+          <div class="card feature"><div class="icon">📊</div><h3>Reporting</h3><p>Links/Proofs sammeln & auswerten.</p></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="card pad">
+          <h2 style="margin:0 0 8px 0">Flow</h2>
+          <div style="display:grid;gap:10px;margin-top:10px">
+            <div class="step"><div class="n">1</div><div><strong>Briefing erstellen</strong><p>Guidelines, Assets, Deliverables, Deadline.</p></div></div>
+            <div class="step"><div class="n">2</div><div><strong>Creator einladen</strong><p>Deal klar machen — ohne Ping-Pong.</p></div></div>
+            <div class="step"><div class="n">3</div><div><strong>Approval & Payout</strong><p>Review, Freigabe, Auszahlung.</p></div></div>
+          </div>
+
+          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn btn-primary" href="#/contact">Demo anfragen</a>
+            <a class="btn btn-ghost" href="#/pricing">Preise</a>
+          </div>
+        </div>
+      </section>
+    `,
+
+    "/pricing": () => html`
+      <div class="breadcrumb"><a href="#/">Home</a> / Preise</div>
+      <h1 class="page-title">Preise</h1>
+      <p class="page-sub">Einfaches Pricing-Layout (typisch für solche Plattformen).</p>
+
+      <section class="section">
+        <div class="pricing">
+          <div class="card plan">
+            <div style="font-weight:1100">Starter</div>
+            <div class="price">€0</div>
+            <div style="color:var(--muted);font-weight:750">Für erste Kampagnen</div>
+            <ul>
+              <li>Campaign Board</li>
+              <li>Briefings & Deliverables</li>
+              <li>Basis Support</li>
+            </ul>
+            <div style="margin-top:14px"><a class="btn btn-ghost" href="#/contact">Starten</a></div>
+          </div>
+
+          <div class="card plan highlight">
+            <div style="font-weight:1100;color:var(--primary-700)">Pro</div>
+            <div class="price">€49</div>
+            <div style="color:var(--muted);font-weight:750">Für Teams</div>
+            <ul>
+              <li>Approval Workflow</li>
+              <li>Reporting</li>
+              <li>Team Rollen</li>
+            </ul>
+            <div style="margin-top:14px"><a class="btn btn-primary" href="#/contact">Demo</a></div>
+          </div>
+
+          <div class="card plan">
+            <div style="font-weight:1100">Business</div>
+            <div class="price">Custom</div>
+            <div style="color:var(--muted);font-weight:750">Enterprise</div>
+            <ul>
+              <li>SLA & Onboarding</li>
+              <li>Integrationen</li>
+              <li>SSO / Rechte</li>
+            </ul>
+            <div style="margin-top:14px"><a class="btn btn-accent" href="#/contact">Kontakt</a></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section faq">
+        <h2 style="margin:0 0 12px 0">FAQ</h2>
+        <details><summary>Ist das ein Vertrag?</summary><p>Beispieltext — hier deine echten Konditionen eintragen.</p></details>
+        <details><summary>Wie läuft Auszahlung?</summary><p>Beispieltext — z. B. nach Freigabe/Proof.</p></details>
+        <details><summary>Kann ich mehrere Brands/Creator verwalten?</summary><p>Beispieltext — über Rollen & Projekte.</p></details>
+      </section>
+    `,
+
+    "/resources": () => html`
+      <div class="breadcrumb"><a href="#/">Home</a> / Ressourcen</div>
+      <h1 class="page-title">Ressourcen</h1>
+      <p class="page-sub">Mehrere Ebenen: Unterseiten und Unter-Unterseiten.</p>
+
+      <section class="section">
+        <div class="grid-3">
+          <a class="card feature" href="#/resources/guides"><div class="icon">📚</div><h3>Guides</h3><p>Best Practices & Playbooks.</p></a>
+          <a class="card feature" href="#/resources/templates"><div class="icon">🧩</div><h3>Templates</h3><p>Briefing- & Deliverable-Vorlagen.</p></a>
+          <a class="card feature" href="#/resources/cases"><div class="icon">🏁</div><h3>Cases</h3><p>Beispiele & Learnings.</p></a>
+        </div>
+      </section>
+    `,
+
+    "/resources/guides": () => html`
+      <div class="breadcrumb"><a href="#/">Home</a> / <a href="#/resources">Ressourcen</a> / Guides</div>
+      <h1 class="page-title">Guides</h1>
+      <p class="page-sub">Ebene 2 – und hier geht’s noch tiefer.</p>
+
+      <section class="section">
+        <div class="grid-3">
+          <a class="card feature" href="#/resources/guides/briefing"><div class="icon">📝</div><h3>Briefing</h3><p>Struktur, Do/Don'ts, Assets.</p></a>
+          <a class="card feature" href="#/resources/guides/approval"><div class="icon">✅</div><h3>Approval</h3><p>Freigabe ohne Reibung.</p></a>
+          <a class="card feature" href="#/resources/guides/reporting"><div class="icon">📈</div><h3>Reporting</h3><p>KPIs, Proof, Auswertung.</p></a>
+        </div>
+      </section>
+    `,
+
+    "/resources/guides/briefing": () => html`
+      <div class="breadcrumb"><a href="#/">Home</a> / <a href="#/resources">Ressourcen</a> / <a href="#/resources/guides">Guides</a> / Briefing</div>
+      <h1 class="page-title">Guide: Briefing</h1>
+      <p class="page-sub">Ebene 3 – Beispielseite.</p>
+
+      <section class="section">
+        <div class="card pad">
+          <h2 style="margin:0 0 10px 0">Checkliste</h2>
+          <div class="grid-2" style="margin-top:12px">
+            <div class="card pad" style="box-shadow:none">
+              <strong style="font-weight:1100">Muss rein</strong>
+              <ul style="margin:10px 0 0 0;color:var(--muted);font-weight:750">
+                <li>Ziel & KPIs</li><li>Zielgruppe</li><li>Kernbotschaft</li><li>Deliverables</li><li>Deadline</li>
+              </ul>
             </div>
-            <div class="feature">
-              <div class="icon">D</div>
-              <h3>Deliverable-Check</h3>
-              <p>Link, Caption, Hashtags, Markierungen, Upload-Zeitpunkt.</p>
+            <div class="card pad" style="box-shadow:none">
+              <strong style="font-weight:1100">Nice to have</strong>
+              <ul style="margin:10px 0 0 0;color:var(--muted);font-weight:750">
+                <li>Beispiele</li><li>Tonality</li><li>Freigabeprozess</li><li>Usage Rights</li><li>Hashtags/Links</li>
+              </ul>
             </div>
           </div>
-        </section>
-      `,
+          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn btn-primary" href="#/contact">Setup anfragen</a>
+            <a class="btn btn-ghost" href="#/resources/templates">Templates</a>
+          </div>
+        </div>
+      </section>
+    `,
 
-      "/contact": () => html`
-        <div class="breadcrumb"><a href="#/">Home</a> / Kontakt</div>
-        <h1 class="page-title">Kontakt</h1>
-        <p class="page-sub">Beispiel-Formular (ohne Backend). Du kannst später Email/API anschließen.</p>
+    "/resources/guides/approval": () => html`
+      <div class="breadcrumb"><a href="#/">Home</a> / <a href="#/resources">Ressourcen</a> / <a href="#/resources/guides">Guides</a> / Approval</div>
+      <h1 class="page-title">Guide: Approval</h1>
+      <p class="page-sub">Ebene 3 – Beispielseite.</p>
+      <section class="section">
+        <div class="card pad">
+          <h2 style="margin:0 0 10px 0">Tipps</h2>
+          <p style="margin:0;color:var(--muted);font-weight:650">Klare Kriterien + kurze Feedback-Loops + „final approval“ Definition.</p>
+        </div>
+      </section>
+    `,
 
-        <section class="section">
-          <form class="form" id="contactForm">
+    "/resources/guides/reporting": () => html`
+      <div class="breadcrumb"><a href="#/">Home</a> / <a href="#/resources">Ressourcen</a> / <a href="#/resources/guides">Guides</a> / Reporting</div>
+      <h1 class="page-title">Guide: Reporting</h1>
+      <p class="page-sub">Ebene 3 – Beispielseite.</p>
+      <section class="section">
+        <div class="card pad">
+          <h2 style="margin:0 0 10px 0">KPIs</h2>
+          <p style="margin:0;color:var(--muted);font-weight:650">Reach, Watchtime, CTR, Saves, Coupon/UTM — je nach Ziel.</p>
+        </div>
+      </section>
+    `,
+
+    "/resources/templates": () => html`
+      <div class="breadcrumb"><a href="#/">Home</a> / <a href="#/resources">Ressourcen</a> / Templates</div>
+      <h1 class="page-title">Templates</h1>
+      <p class="page-sub">Ebene 2 – Vorlagen.</p>
+      <section class="section">
+        <div class="grid-2">
+          <div class="card pad"><strong style="font-weight:1100">Briefing Template</strong><p style="margin:8px 0 0 0;color:var(--muted);font-weight:650">Ziel, Botschaft, Do/Don'ts, Deliverables, Deadline.</p></div>
+          <div class="card pad"><strong style="font-weight:1100">Deliverable Checklist</strong><p style="margin:8px 0 0 0;color:var(--muted);font-weight:650">Links, Caption, Tags, Markierung, Timing.</p></div>
+        </div>
+      </section>
+    `,
+
+    "/resources/cases": () => html`
+      <div class="breadcrumb"><a href="#/">Home</a> / <a href="#/resources">Ressourcen</a> / Cases</div>
+      <h1 class="page-title">Cases</h1>
+      <p class="page-sub">Ebene 2 – Beispiele.</p>
+      <section class="section">
+        <div class="grid-3">
+          <div class="card feature"><div class="icon">A</div><h3>Launch A</h3><p>12 Creator, 5 Tage Setup, klare Freigabe.</p></div>
+          <div class="card feature"><div class="icon">B</div><h3>Scale B</h3><p>30% weniger Rückfragen durch Standard-Briefings.</p></div>
+          <div class="card feature"><div class="icon">C</div><h3>Report C</h3><p>Proofs zentral, KPIs schneller verfügbar.</p></div>
+        </div>
+      </section>
+    `,
+
+    "/contact": () => html`
+      <div class="breadcrumb"><a href="#/">Home</a> / Kontakt</div>
+      <h1 class="page-title">Kontakt</h1>
+      <p class="page-sub">Demo-Formular (ohne Backend).</p>
+      <section class="section">
+        <div class="card pad" style="max-width:720px">
+          <form id="form" style="display:grid;gap:12px">
             <div>
-              <label for="name">Name</label>
-              <input id="name" name="name" placeholder="Max Mustermann" required />
+              <label style="font-weight:1000">Name</label>
+              <input required name="name" placeholder="Max Mustermann"
+                style="width:100%;padding:12px;border-radius:14px;border:1px solid var(--border);font:inherit;outline:none">
             </div>
             <div>
-              <label for="email">E-Mail</label>
-              <input id="email" name="email" type="email" placeholder="max@email.de" required />
+              <label style="font-weight:1000">E-Mail</label>
+              <input required type="email" name="email" placeholder="max@email.de"
+                style="width:100%;padding:12px;border-radius:14px;border:1px solid var(--border);font:inherit;outline:none">
             </div>
             <div>
-              <label for="msg">Nachricht</label>
-              <textarea id="msg" name="msg" placeholder="Worum geht’s?"></textarea>
+              <label style="font-weight:1000">Nachricht</label>
+              <textarea name="msg" placeholder="Worum geht’s?"
+                style="width:100%;min-height:120px;padding:12px;border-radius:14px;border:1px solid var(--border);font:inherit;outline:none"></textarea>
             </div>
             <div style="display:flex;gap:10px;flex-wrap:wrap">
               <button class="btn btn-primary" type="submit">Senden</button>
               <a class="btn btn-ghost" href="#/pricing">Preise</a>
             </div>
-            <div id="formNote" style="color:var(--muted);font-weight:700"></div>
+            <div id="note" style="color:var(--muted);font-weight:850"></div>
           </form>
-        </section>
-      `,
+        </div>
+      </section>
+    `,
 
-      "/legal/imprint": () => html`
-        <div class="breadcrumb"><a href="#/">Home</a> / Impressum</div>
-        <h1 class="page-title">Impressum</h1>
-        <p class="page-sub">Platzhalter — hier trägst du deine Firmendaten ein.</p>
-        <section class="section">
-          <div class="feature">
-            <div class="icon">i</div>
-            <h3>Angaben</h3>
-            <p>
-              Firmenname • Adresse • Vertretungsberechtigte Person • Kontakt • Handelsregister • USt-ID
-            </p>
+    "/legal/imprint": () => html`
+      <div class="breadcrumb"><a href="#/">Home</a> / Impressum</div>
+      <h1 class="page-title">Impressum</h1>
+      <p class="page-sub">Platzhalter – hier deine Daten eintragen.</p>
+      <section class="section"><div class="card pad">Firma • Adresse • Kontakt • Register • USt-ID</div></section>
+    `,
+
+    "/legal/privacy": () => html`
+      <div class="breadcrumb"><a href="#/">Home</a> / Datenschutz</div>
+      <h1 class="page-title">Datenschutz</h1>
+      <p class="page-sub">Platzhalter – juristisch korrekt ausarbeiten lassen.</p>
+      <section class="section"><div class="card pad">Zwecke • Hosting • Cookies • Kontakt • Rechte • AV-Verträge</div></section>
+    `,
+  };
+
+  function campaignCard(title, niche, payout, time){
+    return html`
+      <div class="card pad" style="border-radius:18px">
+        <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+          <div>
+            <div style="font-weight:1100">${title}</div>
+            <div style="color:var(--muted);font-weight:750;margin-top:4px">${niche}</div>
           </div>
-        </section>
-      `,
+          <span class="pill">${payout}</span>
+        </div>
+        <div style="margin-top:10px;color:var(--muted);font-weight:650">
+          Deadline: ${time} • Deliverables: Link + Content
+        </div>
+        <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn btn-accent" href="#/resources/templates">Briefing ansehen</a>
+          <a class="btn btn-ghost" href="#/contact">Bewerben</a>
+        </div>
+      </div>
+    `;
+  }
 
-      "/legal/privacy": () => html`
-        <div class="breadcrumb"><a href="#/">Home</a> / Datenschutz</div>
-        <h1 class="page-title">Datenschutzerklärung</h1>
-        <p class="page-sub">Platzhalter — bitte juristisch korrekt ausformulieren lassen.</p>
-        <section class="section">
-          <div class="feature">
-            <div class="icon">§</div>
-            <h3>Hinweis</h3>
-            <p>
-              Zwecke der Verarbeitung • Hosting • Cookies/Tracking • Kontaktformular • Betroffenenrechte • Auftragsverarbeiter
-            </p>
-          </div>
-        </section>
-      `,
-    };
+  function render(){
+    const p = pathFromHash();
+    app.innerHTML = (pages[p] ? pages[p]() : html`
+      <div class="breadcrumb"><a href="#/">Home</a> / 404</div>
+      <h1 class="page-title">Nicht gefunden</h1>
+      <p class="page-sub">Diese Route existiert nicht: <code>${p}</code></p>
+      <section class="section"><a class="btn btn-primary" href="#/">Zur Startseite</a></section>
+    `);
+    setActiveNav(p);
 
-    function normalizePath(hash) {
-      const raw = (hash || "#/").replace(/^#/, "");
-      // sicherstellen, dass es mit / startet
-      return raw.startsWith("/") ? raw : "/" + raw;
+    const form = document.getElementById("form");
+    if(form){
+      form.addEventListener("submit",(e)=>{
+        e.preventDefault();
+        document.getElementById("note").textContent = "Demo: Formular abgeschickt (hier später Backend/Email anbinden).";
+        form.reset();
+      }, { once:true });
     }
+  }
 
-    function render() {
-      const path = normalizePath(location.hash);
-      const view = pages[path] || pages["/resources"] && path.startsWith("/resources")
-        ? pages[path] // exact match first
-        : null;
-
-      // Fallback: 404 freundlich
-      const content = pages[path]
-        ? pages[path]()
-        : html`
-          <div class="breadcrumb"><a href="#/">Home</a> / 404</div>
-          <h1 class="page-title">Seite nicht gefunden</h1>
-          <p class="page-sub">Diese Route existiert nicht: <code>${path}</code></p>
-          <section class="section">
-            <div class="callout">
-              <h3>Weiter</h3>
-              <p>Zur Startseite oder in die Ressourcen.</p>
-              <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
-                <a class="btn btn-primary" href="#/">Startseite</a>
-                <a class="btn btn-ghost" href="#/resources">Ressourcen</a>
-              </div>
-            </div>
-          </section>
-        `;
-
-      app.innerHTML = content;
-      setActiveNav(path);
-
-      // Kontaktformular Demo (kein Backend)
-      const form = document.getElementById("contactForm");
-      if (form) {
-        form.addEventListener("submit", (e) => {
-          e.preventDefault();
-          const note = document.getElementById("formNote");
-          if (note) note.textContent = "Demo: Formular abgeschickt (hier später Backend/Email anbinden).";
-          form.reset();
-        }, { once: true });
-      }
-    }
-
-    // initial
-    document.getElementById("year").textContent = new Date().getFullYear();
-    window.addEventListener("hashchange", render);
-    if (!location.hash) location.hash = "#/";
-    render();
-  </script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+  window.addEventListener("hashchange", render);
+  if(!location.hash) location.hash = "#/";
+  render();
+</script>
 </body>
 </html>
