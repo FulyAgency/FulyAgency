@@ -3,23 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Collably — Influencer x Brands</title>
+  <title>InfluenceHub — Creator x Brands</title>
+  <meta name="description" content="Startseite einer Influencer/Brand-Plattform: Deals, Briefings, Freigaben, Auszahlungen." />
   <style>
     :root{
       --bg:#ffffff;
       --text:#0b1220;
-      --muted:#546174;
-      --border:#e6ebf2;
-      --soft:#f7f9fc;
-      --shadow: 0 18px 50px rgba(15,23,42,.08);
-      --radius: 18px;
+      --muted:#526277;
+      --border:#e6ecf4;
+      --soft:#f6f8fc;
 
-      /* andere Farben (weiß bleibt Basis) */
-      --primary:#ff3d7f;      /* pink */
-      --primary-700:#e12d6c;
-      --accent:#1ecad3;       /* cyan */
-      --accent-700:#0eaab2;
-      --ink:#0b1220;
+      /* andere Farben (weiß bleibt) */
+      --primary:#6d28d9;       /* violet */
+      --primary-700:#5b21b6;
+      --accent:#06b6d4;        /* cyan */
+      --accent-700:#0891b2;
+
+      --shadow: 0 18px 55px rgba(15,23,42,.10);
+      --radius: 18px;
     }
 
     *{ box-sizing:border-box; }
@@ -31,18 +32,18 @@
       line-height:1.5;
     }
     a{ color:inherit; text-decoration:none; }
-    .container{ width:min(1140px, calc(100% - 48px)); margin-inline:auto; }
+    .container{ width:min(1160px, calc(100% - 48px)); margin-inline:auto; }
 
     /* Header */
     header{
-      position:sticky; top:0; z-index:30;
+      position:sticky; top:0; z-index:50;
       background:rgba(255,255,255,.86);
       backdrop-filter: blur(12px);
       border-bottom:1px solid var(--border);
     }
     .nav{
       display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0; gap:14px;
+      gap:14px; padding:14px 0;
     }
     .brand{
       display:flex; align-items:center; gap:10px;
@@ -51,17 +52,16 @@
     .logo{
       width:36px; height:36px; border-radius:12px;
       background: linear-gradient(135deg, var(--primary), var(--accent));
-      box-shadow: 0 14px 28px rgba(255,61,127,.18);
+      box-shadow: 0 14px 28px rgba(109,40,217,.18);
     }
     nav.links{ display:flex; gap:10px; align-items:center; }
     nav.links a{
       padding:10px 12px; border-radius:12px;
-      font-weight:900; color:var(--muted);
+      color:var(--muted); font-weight:900;
     }
     nav.links a:hover{ background:var(--soft); color:var(--text); }
-    nav.links a.active{ background: rgba(255,61,127,.10); color: var(--primary-700); }
-    .cta{ display:flex; gap:10px; align-items:center; }
 
+    .cta{ display:flex; gap:10px; align-items:center; }
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:10px;
       padding:12px 16px;
@@ -69,30 +69,23 @@
       border:1px solid transparent;
       font-weight:950;
       cursor:pointer;
-      transition: transform .08s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
       user-select:none;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
       white-space:nowrap;
     }
     .btn:active{ transform: translateY(1px); }
-    .btn-primary{
-      background: var(--primary);
-      color:#fff;
-      box-shadow: 0 16px 30px rgba(255,61,127,.18);
-    }
-    .btn-primary:hover{ background: var(--primary-700); }
-    .btn-ghost{
-      background:#fff;
-      border-color: var(--border);
-    }
-    .btn-ghost:hover{ border-color:#d5dceb; }
+    .btn-primary{ background:var(--primary); color:#fff; box-shadow: 0 16px 30px rgba(109,40,217,.18); }
+    .btn-primary:hover{ background:var(--primary-700); }
+    .btn-ghost{ background:#fff; border-color:var(--border); }
+    .btn-ghost:hover{ border-color:#d4dceb; }
     .btn-accent{
-      background: rgba(30,202,211,.14);
-      border-color: rgba(30,202,211,.35);
-      color: #06464a;
+      background: rgba(6,182,212,.14);
+      border-color: rgba(6,182,212,.35);
+      color:#043a44;
     }
     .btn-accent:hover{
-      background: rgba(30,202,211,.22);
-      border-color: rgba(30,202,211,.55);
+      background: rgba(6,182,212,.22);
+      border-color: rgba(6,182,212,.55);
     }
 
     .burger{
@@ -104,11 +97,9 @@
       align-items:center; justify-content:center;
       cursor:pointer;
     }
-    .burger span{ width:18px; height:2px; background:var(--ink); position:relative; display:block; }
-    .burger span::before,.burger span::after{
-      content:""; position:absolute; left:0; width:18px; height:2px; background:var(--ink);
-    }
-    .burger span::before{ top:-6px; } .burger span::after{ top:6px; }
+    .burger span{ width:18px; height:2px; background:var(--text); position:relative; display:block; }
+    .burger span:before,.burger span:after{ content:""; position:absolute; left:0; width:18px; height:2px; background:var(--text); }
+    .burger span:before{ top:-6px; } .burger span:after{ top:6px; }
 
     .mobile{ display:none; padding:0 0 14px 0; }
     .mobile .stack{ display:flex; flex-direction:column; gap:8px; padding:10px 0; }
@@ -120,113 +111,114 @@
     }
     .mobile a:hover{ background:var(--soft); }
 
-    /* Layout helpers */
-    main{ padding-bottom:18px; }
-    .section{ padding:34px 0; }
-    .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
-    .grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-
-    .card{
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      background:#fff;
-      box-shadow: 0 8px 30px rgba(15,23,42,.05);
-    }
-    .pad{ padding:18px; }
-
-    .badge{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:6px 12px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background: rgba(255,61,127,.06);
-      color: var(--primary-700);
-      font-weight:900;
-      font-size:14px;
-    }
-
-    /* Hero */
-    .hero{
-      padding:54px 0 22px 0;
-    }
-    .hero-wrap{
+    /* Sections */
+    main{ padding-bottom: 24px; }
+    .hero{ padding:56px 0 18px 0; }
+    .hero-grid{
       display:grid;
       grid-template-columns: 1.1fr .9fr;
       gap:20px;
       align-items:stretch;
     }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(109,40,217,.06);
+      color: var(--primary);
+      font-weight:950;
+      font-size:14px;
+    }
     .title{
-      font-size: clamp(36px, 4.2vw, 58px);
-      line-height:1.03;
+      font-size: clamp(36px, 4.3vw, 60px);
+      line-height:1.02;
       margin:12px 0 12px 0;
-      letter-spacing:-.04em;
+      letter-spacing:-.045em;
       font-weight:1100;
     }
     .sub{
+      margin:0;
       color:var(--muted);
       font-size:18px;
-      max-width: 62ch;
       font-weight:650;
-      margin:0;
+      max-width: 62ch;
     }
-    .hero-actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
 
-    .hero-panel{
+    .panel{
       border:1px solid var(--border);
       border-radius: 22px;
       background:
-        radial-gradient(900px 300px at 20% 10%, rgba(255,61,127,.14), transparent 60%),
-        radial-gradient(900px 300px at 80% 30%, rgba(30,202,211,.16), transparent 60%),
+        radial-gradient(900px 320px at 15% 10%, rgba(109,40,217,.14), transparent 60%),
+        radial-gradient(900px 320px at 85% 25%, rgba(6,182,212,.16), transparent 60%),
         #fff;
       box-shadow: var(--shadow);
       padding:18px;
     }
-    .panel-head{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px;
-      margin-bottom: 12px;
-    }
-    .panel-head strong{ font-weight:1100; }
+    .panel-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
     .pill{
-      font-size:12px;
-      font-weight:950;
-      color:#0b1220;
+      font-size:12px; font-weight:950;
       padding:6px 10px;
       border-radius:999px;
-      border:1px solid rgba(11,18,32,.10);
-      background: rgba(255,255,255,.7);
+      border:1px solid rgba(11,18,32,.12);
+      background: rgba(255,255,255,.70);
     }
-
+    .mini-card{
+      margin-top:12px;
+      border:1px solid rgba(11,18,32,.10);
+      border-radius:18px;
+      background: rgba(255,255,255,.78);
+      padding:14px;
+    }
     .kpis{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap:10px;
       margin-top:12px;
     }
-    .kpis .k{
+    .k{
       border:1px solid rgba(11,18,32,.10);
       border-radius:16px;
-      background: rgba(255,255,255,.75);
+      background: rgba(255,255,255,.78);
       padding:12px;
     }
     .k .num{ font-weight:1100; font-size:18px; letter-spacing:-.02em; }
     .k .lbl{ color:var(--muted); font-weight:850; font-size:12px; }
 
-    /* Feature blocks like influencer platforms */
-    .feature{
-      padding:18px;
+    .section{ padding:34px 0; }
+    .section h2{
+      margin:0 0 10px 0;
+      font-size:28px;
+      letter-spacing:-.02em;
+      font-weight:1100;
     }
+    .lead{
+      margin:0 0 18px 0;
+      color:var(--muted);
+      font-weight:650;
+      max-width: 70ch;
+    }
+
+    .grid-3{ display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; }
+    .card{
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background:#fff;
+      box-shadow: 0 10px 30px rgba(15,23,42,.06);
+    }
+    .pad{ padding:18px; }
+
     .icon{
-      width:44px; height:44px;
-      border-radius:16px;
+      width:46px; height:46px; border-radius:16px;
       display:flex; align-items:center; justify-content:center;
       font-weight:1100;
-      background: rgba(30,202,211,.14);
-      color: #05565b;
-      border:1px solid rgba(30,202,211,.30);
+      background: rgba(6,182,212,.14);
+      border:1px solid rgba(6,182,212,.30);
+      color:#06444f;
     }
-    .feature h3{ margin:12px 0 6px 0; font-size:18px; letter-spacing:-.01em; }
-    .feature p{ margin:0; color:var(--muted); font-weight:650; }
+    .card h3{ margin:12px 0 6px 0; font-size:18px; letter-spacing:-.01em; }
+    .card p{ margin:0; color:var(--muted); font-weight:650; }
 
     .how{
       display:grid;
@@ -238,97 +230,70 @@
       display:flex; gap:12px;
       padding:14px;
       border:1px solid var(--border);
-      border-radius: 18px;
-      background: #fff;
+      border-radius:18px;
+      background:#fff;
     }
     .step .n{
-      width:34px; height:34px;
-      border-radius:12px;
+      width:34px; height:34px; border-radius:12px;
       display:flex; align-items:center; justify-content:center;
       font-weight:1100;
-      background: rgba(255,61,127,.12);
+      background: rgba(109,40,217,.12);
+      border:1px solid rgba(109,40,217,.24);
       color: var(--primary-700);
-      border:1px solid rgba(255,61,127,.24);
       flex:0 0 auto;
     }
     .step strong{ font-weight:1100; }
     .step p{ margin:4px 0 0 0; color:var(--muted); font-weight:650; }
 
-    .divider{
-      height:1px; background:var(--border);
-      margin: 24px 0;
+    .logos{
+      display:flex; gap:12px; flex-wrap:wrap;
+      opacity:.9;
     }
-
-    .breadcrumb{
-      margin: 18px 0 0 0;
-      color: var(--muted);
-      font-weight:850;
-      font-size:14px;
-    }
-    .breadcrumb a{ color: var(--primary-700); }
-    .page-title{
-      font-size: 36px;
-      letter-spacing:-.03em;
-      margin: 10px 0 10px 0;
-      font-weight:1100;
-    }
-    .page-sub{
-      margin:0 0 18px 0;
-      color:var(--muted);
-      font-weight:650;
-    }
-
-    .pricing{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-    .plan{ padding:18px; }
-    .plan.highlight{
-      border: 1px solid rgba(255,61,127,.35);
-      box-shadow: 0 18px 50px rgba(255,61,127,.10);
-    }
-    .price{ font-size:32px; font-weight:1100; letter-spacing:-.03em; }
-    .plan ul{ margin:12px 0 0 0; padding-left:18px; color:var(--muted); font-weight:750; }
-    .plan li{ margin:7px 0; }
-
-    .faq details{
+    .logo-pill{
+      padding:10px 12px;
+      border-radius:999px;
       border:1px solid var(--border);
-      border-radius:16px;
-      padding: 12px 14px;
-      background:#fff;
+      background: #fff;
+      color: #283244;
+      font-weight:950;
+      font-size:13px;
     }
-    .faq details + details{ margin-top:10px; }
-    .faq summary{ cursor:pointer; font-weight:1000; }
-    .faq p{ color:var(--muted); font-weight:650; margin:8px 0 0 0; }
+
+    .cta-band{
+      border:1px solid var(--border);
+      border-radius: 22px;
+      background: linear-gradient(180deg, #fff, rgba(109,40,217,.05));
+      box-shadow: var(--shadow);
+      padding: 18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
 
     footer{
-      margin-top: 26px;
-      border-top: 1px solid var(--border);
-      padding: 22px 0;
-      color: var(--muted);
+      border-top:1px solid var(--border);
+      padding:22px 0;
+      color:var(--muted);
+      margin-top: 10px;
     }
-    .footer-grid{
-      display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
-    }
+    .footer-grid{ display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; }
     .footer-links{ display:flex; gap:12px; flex-wrap:wrap; }
-    .footer-links a{ color: var(--muted); font-weight:900; }
-    .footer-links a:hover{ color: var(--text); }
+    .footer-links a{ color:var(--muted); font-weight:900; }
+    .footer-links a:hover{ color:var(--text); }
 
-    /* Responsive */
     @media (max-width: 980px){
-      .hero-wrap{ grid-template-columns:1fr; }
-      .grid-2{ grid-template-columns:1fr; }
-      .grid-3{ grid-template-columns:1fr; }
-      .how{ grid-template-columns:1fr; }
-      .pricing{ grid-template-columns:1fr; }
+      .hero-grid{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .how{ grid-template-columns: 1fr; }
+      .kpis{ grid-template-columns: 1fr; }
     }
     @media (max-width: 780px){
       nav.links, .cta{ display:none; }
       .burger{ display:flex; }
       .mobile{ display:block; }
       .mobile[hidden]{ display:none; }
-      .kpis{ grid-template-columns:1fr; }
     }
   </style>
 </head>
@@ -337,525 +302,275 @@
 <header>
   <div class="container">
     <div class="nav">
-      <a class="brand" href="#/">
+      <a class="brand" href="#">
         <span class="logo" aria-hidden="true"></span>
-        <span>Collably</span>
+        <span>InfluenceHub</span>
       </a>
 
       <nav class="links" aria-label="Navigation">
-        <a data-nav href="#/creators">Creator</a>
-        <a data-nav href="#/brands">Brands</a>
-        <a data-nav href="#/pricing">Preise</a>
-        <a data-nav href="#/resources">Ressourcen</a>
-        <a data-nav href="#/contact">Kontakt</a>
+        <a href="#creator">Creator</a>
+        <a href="#brands">Brands</a>
+        <a href="#how">So funktioniert’s</a>
+        <a href="#faq">FAQ</a>
       </nav>
 
       <div class="cta">
-        <a class="btn btn-ghost" href="#/contact">Demo</a>
-        <a class="btn btn-primary" href="#/creators">Jetzt starten</a>
+        <a class="btn btn-ghost" href="#contact">Kontakt</a>
+        <a class="btn btn-primary" href="#creator">Jetzt starten</a>
       </div>
 
-      <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false"><span></span></button>
+      <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span>
+      </button>
     </div>
 
     <div class="mobile" id="mobileNav" hidden>
       <div class="stack">
-        <a data-nav href="#/creators">Creator</a>
-        <a data-nav href="#/brands">Brands</a>
-        <a data-nav href="#/pricing">Preise</a>
-        <a data-nav href="#/resources">Ressourcen</a>
-        <a data-nav href="#/contact">Kontakt</a>
+        <a href="#creator">Creator</a>
+        <a href="#brands">Brands</a>
+        <a href="#how">So funktioniert’s</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Kontakt</a>
       </div>
       <div class="stack">
-        <a class="btn btn-primary" href="#/creators">Jetzt starten</a>
-        <a class="btn btn-ghost" href="#/contact">Demo</a>
+        <a class="btn btn-primary" href="#creator">Jetzt starten</a>
+        <a class="btn btn-ghost" href="#contact">Kontakt</a>
       </div>
     </div>
   </div>
 </header>
 
-<main class="container" id="app"></main>
+<main class="container">
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-grid">
+      <div>
+        <span class="badge">✨ Deals • Briefings • Freigaben • Auszahlungen</span>
+        <h1 class="title">Eine Plattform, die Creator und Brands sauber zusammenbringt.</h1>
+        <p class="sub">
+          Kampagnen starten, Deliverables tracken und Zusammenarbeit standardisieren —
+          ohne Chaos in DMs. Klarer Flow wie bei typischen Influencer-Plattformen.
+        </p>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="#creator">Ich bin Creator</a>
+          <a class="btn btn-ghost" href="#brands">Ich bin Brand</a>
+          <a class="btn btn-accent" href="#how">Ablauf ansehen</a>
+        </div>
+
+        <div class="section" style="padding:22px 0 0 0">
+          <div class="logos" aria-label="Beispiel-Logos">
+            <span class="logo-pill">BrandOne</span>
+            <span class="logo-pill">GlowCo</span>
+            <span class="logo-pill">UrbanWear</span>
+            <span class="logo-pill">FitLabs</span>
+            <span class="logo-pill">TasteBox</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="panel" aria-label="Dashboard Vorschau">
+        <div class="panel-head">
+          <strong style="font-weight:1100">Campaign Board</strong>
+          <span class="pill">Live • 12 Creator</span>
+        </div>
+
+        <div class="mini-card">
+          <div style="font-weight:1100">Sommer Drop — UGC + Reels</div>
+          <div style="color:var(--muted);font-weight:650;margin-top:4px">
+            Deliverables: 1 Reel + 3 Stories • Deadline: 7 Tage
+          </div>
+          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+            <span class="pill">Briefing</span>
+            <span class="pill">Assets</span>
+            <span class="pill">Approval</span>
+            <span class="pill">Payout</span>
+          </div>
+        </div>
+
+        <div class="kpis">
+          <div class="k"><div class="num">80%</div><div class="lbl">Creator Earnings</div></div>
+          <div class="k"><div class="num">3–7</div><div class="lbl">Tage bis Launch</div></div>
+          <div class="k"><div class="num">1</div><div class="lbl">Ort für alles</div></div>
+        </div>
+
+        <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn btn-primary" href="#contact">Demo anfragen</a>
+          <a class="btn btn-ghost" href="#how">So läuft’s</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- CREATOR / BRAND SPLIT -->
+  <section class="section" id="creator">
+    <h2>Für Creator</h2>
+    <p class="lead">Finde Kampagnen, arbeite nach klaren Briefings und liefere Deliverables ab — ohne Hin und Her.</p>
+
+    <div class="grid-3">
+      <div class="card pad">
+        <div class="icon">🎯</div>
+        <h3>Passende Matches</h3>
+        <p>Nischen-, Zielgruppen- und Format-Fit statt Massenanfragen.</p>
+      </div>
+      <div class="card pad">
+        <div class="icon">📦</div>
+        <h3>Briefing-Paket</h3>
+        <p>Assets, Do/Don'ts und Deadlines zentral — weniger Rückfragen.</p>
+      </div>
+      <div class="card pad">
+        <div class="icon">💸</div>
+        <h3>Transparente Auszahlung</h3>
+        <p>Status, Freigabe und Payout nachvollziehbar an einem Ort.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="brands">
+    <h2>Für Brands</h2>
+    <p class="lead">Creator finden, Kampagnen launchen, Freigaben und Reporting standardisieren — skalierbar fürs Team.</p>
+
+    <div class="grid-3">
+      <div class="card pad">
+        <div class="icon">🔎</div>
+        <h3>Creator-Shortlists</h3>
+        <p>Nach Stil, Audience und Plattform filtern und speichern.</p>
+      </div>
+      <div class="card pad">
+        <div class="icon">✅</div>
+        <h3>Approval Workflow</h3>
+        <p>Review & Freigabe ohne endlose Chat-Threads.</p>
+      </div>
+      <div class="card pad">
+        <div class="icon">📈</div>
+        <h3>Proof & Reporting</h3>
+        <p>Links/Belege sammeln und Ergebnisse schneller auswerten.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how">
+    <div class="how">
+      <div>
+        <h2>So funktioniert’s</h2>
+        <p class="lead">Der klassische Flow einer Influencer-Plattform: matchen → briefen → liefern → freigeben → auszahlen.</p>
+
+        <div class="step">
+          <div class="n">1</div>
+          <div><strong>Match</strong><p>Brand findet Creator (oder Creator findet Kampagne).</p></div>
+        </div>
+        <div class="step" style="margin-top:10px">
+          <div class="n">2</div>
+          <div><strong>Briefing</strong><p>Guidelines, Assets, Deliverables, Deadline — alles zentral.</p></div>
+        </div>
+        <div class="step" style="margin-top:10px">
+          <div class="n">3</div>
+          <div><strong>Deliverable & Approval</strong><p>Links hochladen → Review → Freigabe → Payout.</p></div>
+        </div>
+
+        <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn btn-primary" href="#contact">Demo anfragen</a>
+          <a class="btn btn-ghost" href="#faq">FAQ</a>
+        </div>
+      </div>
+
+      <div class="card pad" style="background:var(--soft); box-shadow:none">
+        <h2 style="margin:0 0 10px 0">Was du bekommst</h2>
+        <p class="lead" style="margin-bottom:14px">Ein System statt Tool-Wildwuchs.</p>
+
+        <div class="grid-3" style="grid-template-columns:1fr; gap:10px">
+          <div class="card pad" style="box-shadow:none">
+            <div style="font-weight:1100">Campaign Board</div>
+            <p>Alle Kampagnen, Status, Deadlines und Deliverables in einer Übersicht.</p>
+          </div>
+          <div class="card pad" style="box-shadow:none">
+            <div style="font-weight:1100">Briefing Center</div>
+            <p>Assets, Guidelines und Anforderungen sauber gesammelt.</p>
+          </div>
+          <div class="card pad" style="box-shadow:none">
+            <div style="font-weight:1100">Approval + Payout</div>
+            <p>Freigabeprozess und Auszahlung logisch verknüpft.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="section" id="contact">
+    <div class="cta-band">
+      <div>
+        <div style="font-weight:1100;font-size:20px;letter-spacing:-.02em">Bereit für klarere Kampagnen?</div>
+        <div style="color:var(--muted);font-weight:650">Sag kurz, ob du Creator oder Brand bist — wir schicken dir den passenden Einstieg.</div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn btn-primary" href="#creator">Creator Einstieg</a>
+        <a class="btn btn-ghost" href="#brands">Brand Einstieg</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <h2>FAQ</h2>
+    <p class="lead">Kurz & typisch für solche Seiten. Texte kannst du 1:1 austauschen.</p>
+
+    <div class="grid-3" style="grid-template-columns:1fr; gap:10px">
+      <div class="card pad" style="box-shadow:none">
+        <div style="font-weight:1100">Wie läuft eine Kooperation ab?</div>
+        <p>Match → Briefing → Deliverables → Review/Freigabe → Auszahlung.</p>
+      </div>
+      <div class="card pad" style="box-shadow:none">
+        <div style="font-weight:1100">Gibt es Mindestlaufzeiten?</div>
+        <p>Beispiel: Nein — flexible Zusammenarbeit je Kampagne.</p>
+      </div>
+      <div class="card pad" style="box-shadow:none">
+        <div style="font-weight:1100">Wie werden Deliverables geprüft?</div>
+        <p>Über einen einfachen Review-Status inkl. Kommentarverlauf.</p>
+      </div>
+    </div>
+  </section>
+</main>
 
 <footer>
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div style="font-weight:1100;color:var(--text)">Collably</div>
-        <div style="max-width:56ch;margin-top:6px;font-weight:650">
-          Influencer x Brand Plattform — Single-File Routing mit Unterseiten-Ebenen.
+        <div style="font-weight:1100;color:var(--text)">InfluenceHub</div>
+        <div style="max-width:58ch;margin-top:6px;font-weight:650">
+          Startseiten-Template für eine Influencer/Brand-Plattform.
         </div>
       </div>
       <div class="footer-links">
-        <a href="#/resources">Ressourcen</a>
-        <a href="#/legal/imprint">Impressum</a>
-        <a href="#/legal/privacy">Datenschutz</a>
+        <a href="#top">Nach oben</a>
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
       </div>
     </div>
-    <div style="margin-top:12px;font-weight:900">© <span id="year"></span> Collably</div>
+    <div style="margin-top:12px;font-weight:900">© <span id="year"></span> InfluenceHub</div>
   </div>
 </footer>
 
 <script>
-  // Mobile menu
-  document.addEventListener("click", (e) => {
-    const burger = document.getElementById("burger");
-    const mobile = document.getElementById("mobileNav");
-    if (!burger || !mobile) return;
-
-    if (e.target === burger || burger.contains(e.target)) {
-      const isOpen = !mobile.hasAttribute("hidden");
-      if (isOpen) { mobile.setAttribute("hidden",""); burger.setAttribute("aria-expanded","false"); }
-      else { mobile.removeAttribute("hidden"); burger.setAttribute("aria-expanded","true"); }
-    }
-  });
-  window.addEventListener("hashchange", () => {
-    const burger = document.getElementById("burger");
-    const mobile = document.getElementById("mobileNav");
-    if (!burger || !mobile) return;
-    mobile.setAttribute("hidden","");
-    burger.setAttribute("aria-expanded","false");
+  // Mobile menu toggle
+  const burger = document.getElementById("burger");
+  const mobile = document.getElementById("mobileNav");
+  burger?.addEventListener("click", () => {
+    const open = !mobile.hasAttribute("hidden");
+    if (open) { mobile.setAttribute("hidden",""); burger.setAttribute("aria-expanded","false"); }
+    else { mobile.removeAttribute("hidden"); burger.setAttribute("aria-expanded","true"); }
   });
 
-  const app = document.getElementById("app");
-  const html = (s,...v)=>s.map((x,i)=>x+(v[i]??"")).join("");
-
-  function pathFromHash(){
-    const raw = (location.hash || "#/").replace(/^#/, "");
-    return raw.startsWith("/") ? raw : "/" + raw;
-  }
-  function setActiveNav(path){
-    document.querySelectorAll("[data-nav]").forEach(a=>{
-      a.classList.remove("active");
-      const route = a.getAttribute("href").replace(/^#/, "");
-      if (path===route || path.startsWith(route + "/")) a.classList.add("active");
+  // Close mobile menu after clicking a link
+  document.querySelectorAll("#mobileNav a").forEach(a => {
+    a.addEventListener("click", () => {
+      mobile.setAttribute("hidden","");
+      burger.setAttribute("aria-expanded","false");
     });
-  }
-
-  const pages = {
-    "/": () => html`
-      <section class="hero">
-        <div class="hero-wrap">
-          <div>
-            <span class="badge">✨ Deals. Briefings. Auszahlungen.</span>
-            <h1 class="title">Influencer & Brands – in einem sauberen Flow.</h1>
-            <p class="sub">
-              Kampagnen starten, Deliverables tracken, Freigaben sammeln –
-              ohne Chaos in DMs. Klarer Aufbau wie bei typischen Creator-Plattformen.
-            </p>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="#/creators">Ich bin Creator</a>
-              <a class="btn btn-ghost" href="#/brands">Ich bin Brand</a>
-              <a class="btn btn-accent" href="#/resources">Ressourcen</a>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="grid-3">
-              <div class="card feature">
-                <div class="icon">⚡</div>
-                <h3>Schnell live</h3>
-                <p>Standard-Briefings + Vorlagen → Launch in Tagen statt Wochen.</p>
-              </div>
-              <div class="card feature">
-                <div class="icon">🧾</div>
-                <h3>Klare Deals</h3>
-                <p>Umfang, Timing, Assets und Regeln sauber dokumentiert.</p>
-              </div>
-              <div class="card feature">
-                <div class="icon">✅</div>
-                <h3>Freigaben</h3>
-                <p>Review & Approval ohne endloses Hin und Her.</p>
-              </div>
-            </div>
-          </div>
-
-          <aside class="hero-panel">
-            <div class="panel-head">
-              <strong>Campaign Board</strong>
-              <span class="pill">Live • 12 Creator</span>
-            </div>
-
-            <div class="card pad" style="border-radius:18px;border:1px solid rgba(11,18,32,.10);background:rgba(255,255,255,.78)">
-              <div style="font-weight:1000">Sommer Drop — UGC + Reels</div>
-              <div style="color:var(--muted);font-weight:650;margin-top:4px">Deliverables: 1 Reel + 3 Stories • Deadline: 7 Tage</div>
-              <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
-                <span class="pill">Briefing</span>
-                <span class="pill">Assets</span>
-                <span class="pill">Approval</span>
-                <span class="pill">Payout</span>
-              </div>
-            </div>
-
-            <div class="kpis">
-              <div class="k"><div class="num">80%</div><div class="lbl">Creator Earnings</div></div>
-              <div class="k"><div class="num">3–7</div><div class="lbl">Tage bis Launch</div></div>
-              <div class="k"><div class="num">1</div><div class="lbl">Ort für alles</div></div>
-            </div>
-
-            <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-              <a class="btn btn-primary" href="#/contact">Demo anfragen</a>
-              <a class="btn btn-ghost" href="#/pricing">Preise</a>
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="how">
-          <div class="card pad">
-            <h2 style="margin:0 0 8px 0;letter-spacing:-.02em">So funktioniert’s</h2>
-            <p style="margin:0;color:var(--muted);font-weight:650">Ein typischer Influencer-Plattform-Flow: klar, schnell, nachvollziehbar.</p>
-
-            <div style="margin-top:14px;display:grid;gap:10px">
-              <div class="step">
-                <div class="n">1</div>
-                <div><strong>Match</strong><p>Creator/Brand findet passende Kampagne oder Creator.</p></div>
-              </div>
-              <div class="step">
-                <div class="n">2</div>
-                <div><strong>Briefing</strong><p>Guidelines, Assets, Deadlines — alles in einem Paket.</p></div>
-              </div>
-              <div class="step">
-                <div class="n">3</div>
-                <div><strong>Deliver & Approval</strong><p>Links hochladen, freigeben, payout auslösen.</p></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card pad" style="background:var(--soft)">
-            <h2 style="margin:0 0 8px 0;letter-spacing:-.02em">Creator / Brand Split</h2>
-            <p style="margin:0;color:var(--muted);font-weight:650">Genau wie bei vielen Plattformen: zwei Einstiege, ein System.</p>
-
-            <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-              <a class="btn btn-primary" href="#/creators">Creator-Seite</a>
-              <a class="btn btn-ghost" href="#/brands">Brand-Seite</a>
-              <a class="btn btn-accent" href="#/resources/guides">Guides</a>
-            </div>
-          </div>
-        </div>
-      </section>
-    `,
-
-    "/creators": () => html`
-      <div class="breadcrumb"><a href="#/">Home</a> / Creator</div>
-      <h1 class="page-title">Für Creator</h1>
-      <p class="page-sub">Kampagnen finden, Briefings verstehen, Deliverables abgeben — ohne Chaos.</p>
-
-      <section class="section">
-        <div class="grid-3">
-          <div class="card feature">
-            <div class="icon">🎯</div><h3>Matches</h3><p>Nur passende Brands & Kampagnen.</p>
-          </div>
-          <div class="card feature">
-            <div class="icon">📦</div><h3>Briefing-Pack</h3><p>Assets + Do/Don'ts + Deadlines an einem Ort.</p>
-          </div>
-          <div class="card feature">
-            <div class="icon">💸</div><h3>Payout</h3><p>Status & Auszahlung transparent.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="card pad" style="background:var(--soft)">
-          <h2 style="margin:0 0 8px 0">Beispiel-Kampagnen</h2>
-          <p style="margin:0;color:var(--muted);font-weight:650">Cards wie auf typischen Plattformen (Platzhalter).</p>
-
-          <div class="grid-3" style="margin-top:14px">
-            ${campaignCard("UGC + Reel", "Beauty", "€250–€450", "7 Tage")}
-            ${campaignCard("Story Bundle", "Food", "€120–€220", "5 Tage")}
-            ${campaignCard("TikTok Spark", "Fashion", "€300–€700", "10 Tage")}
-          </div>
-
-          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-            <a class="btn btn-primary" href="#/contact">Creator bewerben</a>
-            <a class="btn btn-ghost" href="#/resources/templates">Templates</a>
-          </div>
-        </div>
-      </section>
-    `,
-
-    "/brands": () => html`
-      <div class="breadcrumb"><a href="#/">Home</a> / Brands</div>
-      <h1 class="page-title">Für Brands</h1>
-      <p class="page-sub">Creator finden, Kampagnen strukturieren, Freigaben & Reporting sauber abwickeln.</p>
-
-      <section class="section">
-        <div class="grid-3">
-          <div class="card feature"><div class="icon">🔎</div><h3>Creator Search</h3><p>Shortlists nach Stil & Zielgruppe.</p></div>
-          <div class="card feature"><div class="icon">🧠</div><h3>Briefing Standard</h3><p>Einheitlich fürs Team — weniger Rückfragen.</p></div>
-          <div class="card feature"><div class="icon">📊</div><h3>Reporting</h3><p>Links/Proofs sammeln & auswerten.</p></div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="card pad">
-          <h2 style="margin:0 0 8px 0">Flow</h2>
-          <div style="display:grid;gap:10px;margin-top:10px">
-            <div class="step"><div class="n">1</div><div><strong>Briefing erstellen</strong><p>Guidelines, Assets, Deliverables, Deadline.</p></div></div>
-            <div class="step"><div class="n">2</div><div><strong>Creator einladen</strong><p>Deal klar machen — ohne Ping-Pong.</p></div></div>
-            <div class="step"><div class="n">3</div><div><strong>Approval & Payout</strong><p>Review, Freigabe, Auszahlung.</p></div></div>
-          </div>
-
-          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-            <a class="btn btn-primary" href="#/contact">Demo anfragen</a>
-            <a class="btn btn-ghost" href="#/pricing">Preise</a>
-          </div>
-        </div>
-      </section>
-    `,
-
-    "/pricing": () => html`
-      <div class="breadcrumb"><a href="#/">Home</a> / Preise</div>
-      <h1 class="page-title">Preise</h1>
-      <p class="page-sub">Einfaches Pricing-Layout (typisch für solche Plattformen).</p>
-
-      <section class="section">
-        <div class="pricing">
-          <div class="card plan">
-            <div style="font-weight:1100">Starter</div>
-            <div class="price">€0</div>
-            <div style="color:var(--muted);font-weight:750">Für erste Kampagnen</div>
-            <ul>
-              <li>Campaign Board</li>
-              <li>Briefings & Deliverables</li>
-              <li>Basis Support</li>
-            </ul>
-            <div style="margin-top:14px"><a class="btn btn-ghost" href="#/contact">Starten</a></div>
-          </div>
-
-          <div class="card plan highlight">
-            <div style="font-weight:1100;color:var(--primary-700)">Pro</div>
-            <div class="price">€49</div>
-            <div style="color:var(--muted);font-weight:750">Für Teams</div>
-            <ul>
-              <li>Approval Workflow</li>
-              <li>Reporting</li>
-              <li>Team Rollen</li>
-            </ul>
-            <div style="margin-top:14px"><a class="btn btn-primary" href="#/contact">Demo</a></div>
-          </div>
-
-          <div class="card plan">
-            <div style="font-weight:1100">Business</div>
-            <div class="price">Custom</div>
-            <div style="color:var(--muted);font-weight:750">Enterprise</div>
-            <ul>
-              <li>SLA & Onboarding</li>
-              <li>Integrationen</li>
-              <li>SSO / Rechte</li>
-            </ul>
-            <div style="margin-top:14px"><a class="btn btn-accent" href="#/contact">Kontakt</a></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section faq">
-        <h2 style="margin:0 0 12px 0">FAQ</h2>
-        <details><summary>Ist das ein Vertrag?</summary><p>Beispieltext — hier deine echten Konditionen eintragen.</p></details>
-        <details><summary>Wie läuft Auszahlung?</summary><p>Beispieltext — z. B. nach Freigabe/Proof.</p></details>
-        <details><summary>Kann ich mehrere Brands/Creator verwalten?</summary><p>Beispieltext — über Rollen & Projekte.</p></details>
-      </section>
-    `,
-
-    "/resources": () => html`
-      <div class="breadcrumb"><a href="#/">Home</a> / Ressourcen</div>
-      <h1 class="page-title">Ressourcen</h1>
-      <p class="page-sub">Mehrere Ebenen: Unterseiten und Unter-Unterseiten.</p>
-
-      <section class="section">
-        <div class="grid-3">
-          <a class="card feature" href="#/resources/guides"><div class="icon">📚</div><h3>Guides</h3><p>Best Practices & Playbooks.</p></a>
-          <a class="card feature" href="#/resources/templates"><div class="icon">🧩</div><h3>Templates</h3><p>Briefing- & Deliverable-Vorlagen.</p></a>
-          <a class="card feature" href="#/resources/cases"><div class="icon">🏁</div><h3>Cases</h3><p>Beispiele & Learnings.</p></a>
-        </div>
-      </section>
-    `,
-
-    "/resources/guides": () => html`
-      <div class="breadcrumb"><a href="#/">Home</a> / <a href="#/resources">Ressourcen</a> / Guides</div>
-      <h1 class="page-title">Guides</h1>
-      <p class="page-sub">Ebene 2 – und hier geht’s noch tiefer.</p>
-
-      <section class="section">
-        <div class="grid-3">
-          <a class="card feature" href="#/resources/guides/briefing"><div class="icon">📝</div><h3>Briefing</h3><p>Struktur, Do/Don'ts, Assets.</p></a>
-          <a class="card feature" href="#/resources/guides/approval"><div class="icon">✅</div><h3>Approval</h3><p>Freigabe ohne Reibung.</p></a>
-          <a class="card feature" href="#/resources/guides/reporting"><div class="icon">📈</div><h3>Reporting</h3><p>KPIs, Proof, Auswertung.</p></a>
-        </div>
-      </section>
-    `,
-
-    "/resources/guides/briefing": () => html`
-      <div class="breadcrumb"><a href="#/">Home</a> / <a href="#/resources">Ressourcen</a> / <a href="#/resources/guides">Guides</a> / Briefing</div>
-      <h1 class="page-title">Guide: Briefing</h1>
-      <p class="page-sub">Ebene 3 – Beispielseite.</p>
-
-      <section class="section">
-        <div class="card pad">
-          <h2 style="margin:0 0 10px 0">Checkliste</h2>
-          <div class="grid-2" style="margin-top:12px">
-            <div class="card pad" style="box-shadow:none">
-              <strong style="font-weight:1100">Muss rein</strong>
-              <ul style="margin:10px 0 0 0;color:var(--muted);font-weight:750">
-                <li>Ziel & KPIs</li><li>Zielgruppe</li><li>Kernbotschaft</li><li>Deliverables</li><li>Deadline</li>
-              </ul>
-            </div>
-            <div class="card pad" style="box-shadow:none">
-              <strong style="font-weight:1100">Nice to have</strong>
-              <ul style="margin:10px 0 0 0;color:var(--muted);font-weight:750">
-                <li>Beispiele</li><li>Tonality</li><li>Freigabeprozess</li><li>Usage Rights</li><li>Hashtags/Links</li>
-              </ul>
-            </div>
-          </div>
-          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-            <a class="btn btn-primary" href="#/contact">Setup anfragen</a>
-            <a class="btn btn-ghost" href="#/resources/templates">Templates</a>
-          </div>
-        </div>
-      </section>
-    `,
-
-    "/resources/guides/approval": () => html`
-      <div class="breadcrumb"><a href="#/">Home</a> / <a href="#/resources">Ressourcen</a> / <a href="#/resources/guides">Guides</a> / Approval</div>
-      <h1 class="page-title">Guide: Approval</h1>
-      <p class="page-sub">Ebene 3 – Beispielseite.</p>
-      <section class="section">
-        <div class="card pad">
-          <h2 style="margin:0 0 10px 0">Tipps</h2>
-          <p style="margin:0;color:var(--muted);font-weight:650">Klare Kriterien + kurze Feedback-Loops + „final approval“ Definition.</p>
-        </div>
-      </section>
-    `,
-
-    "/resources/guides/reporting": () => html`
-      <div class="breadcrumb"><a href="#/">Home</a> / <a href="#/resources">Ressourcen</a> / <a href="#/resources/guides">Guides</a> / Reporting</div>
-      <h1 class="page-title">Guide: Reporting</h1>
-      <p class="page-sub">Ebene 3 – Beispielseite.</p>
-      <section class="section">
-        <div class="card pad">
-          <h2 style="margin:0 0 10px 0">KPIs</h2>
-          <p style="margin:0;color:var(--muted);font-weight:650">Reach, Watchtime, CTR, Saves, Coupon/UTM — je nach Ziel.</p>
-        </div>
-      </section>
-    `,
-
-    "/resources/templates": () => html`
-      <div class="breadcrumb"><a href="#/">Home</a> / <a href="#/resources">Ressourcen</a> / Templates</div>
-      <h1 class="page-title">Templates</h1>
-      <p class="page-sub">Ebene 2 – Vorlagen.</p>
-      <section class="section">
-        <div class="grid-2">
-          <div class="card pad"><strong style="font-weight:1100">Briefing Template</strong><p style="margin:8px 0 0 0;color:var(--muted);font-weight:650">Ziel, Botschaft, Do/Don'ts, Deliverables, Deadline.</p></div>
-          <div class="card pad"><strong style="font-weight:1100">Deliverable Checklist</strong><p style="margin:8px 0 0 0;color:var(--muted);font-weight:650">Links, Caption, Tags, Markierung, Timing.</p></div>
-        </div>
-      </section>
-    `,
-
-    "/resources/cases": () => html`
-      <div class="breadcrumb"><a href="#/">Home</a> / <a href="#/resources">Ressourcen</a> / Cases</div>
-      <h1 class="page-title">Cases</h1>
-      <p class="page-sub">Ebene 2 – Beispiele.</p>
-      <section class="section">
-        <div class="grid-3">
-          <div class="card feature"><div class="icon">A</div><h3>Launch A</h3><p>12 Creator, 5 Tage Setup, klare Freigabe.</p></div>
-          <div class="card feature"><div class="icon">B</div><h3>Scale B</h3><p>30% weniger Rückfragen durch Standard-Briefings.</p></div>
-          <div class="card feature"><div class="icon">C</div><h3>Report C</h3><p>Proofs zentral, KPIs schneller verfügbar.</p></div>
-        </div>
-      </section>
-    `,
-
-    "/contact": () => html`
-      <div class="breadcrumb"><a href="#/">Home</a> / Kontakt</div>
-      <h1 class="page-title">Kontakt</h1>
-      <p class="page-sub">Demo-Formular (ohne Backend).</p>
-      <section class="section">
-        <div class="card pad" style="max-width:720px">
-          <form id="form" style="display:grid;gap:12px">
-            <div>
-              <label style="font-weight:1000">Name</label>
-              <input required name="name" placeholder="Max Mustermann"
-                style="width:100%;padding:12px;border-radius:14px;border:1px solid var(--border);font:inherit;outline:none">
-            </div>
-            <div>
-              <label style="font-weight:1000">E-Mail</label>
-              <input required type="email" name="email" placeholder="max@email.de"
-                style="width:100%;padding:12px;border-radius:14px;border:1px solid var(--border);font:inherit;outline:none">
-            </div>
-            <div>
-              <label style="font-weight:1000">Nachricht</label>
-              <textarea name="msg" placeholder="Worum geht’s?"
-                style="width:100%;min-height:120px;padding:12px;border-radius:14px;border:1px solid var(--border);font:inherit;outline:none"></textarea>
-            </div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap">
-              <button class="btn btn-primary" type="submit">Senden</button>
-              <a class="btn btn-ghost" href="#/pricing">Preise</a>
-            </div>
-            <div id="note" style="color:var(--muted);font-weight:850"></div>
-          </form>
-        </div>
-      </section>
-    `,
-
-    "/legal/imprint": () => html`
-      <div class="breadcrumb"><a href="#/">Home</a> / Impressum</div>
-      <h1 class="page-title">Impressum</h1>
-      <p class="page-sub">Platzhalter – hier deine Daten eintragen.</p>
-      <section class="section"><div class="card pad">Firma • Adresse • Kontakt • Register • USt-ID</div></section>
-    `,
-
-    "/legal/privacy": () => html`
-      <div class="breadcrumb"><a href="#/">Home</a> / Datenschutz</div>
-      <h1 class="page-title">Datenschutz</h1>
-      <p class="page-sub">Platzhalter – juristisch korrekt ausarbeiten lassen.</p>
-      <section class="section"><div class="card pad">Zwecke • Hosting • Cookies • Kontakt • Rechte • AV-Verträge</div></section>
-    `,
-  };
-
-  function campaignCard(title, niche, payout, time){
-    return html`
-      <div class="card pad" style="border-radius:18px">
-        <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
-          <div>
-            <div style="font-weight:1100">${title}</div>
-            <div style="color:var(--muted);font-weight:750;margin-top:4px">${niche}</div>
-          </div>
-          <span class="pill">${payout}</span>
-        </div>
-        <div style="margin-top:10px;color:var(--muted);font-weight:650">
-          Deadline: ${time} • Deliverables: Link + Content
-        </div>
-        <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
-          <a class="btn btn-accent" href="#/resources/templates">Briefing ansehen</a>
-          <a class="btn btn-ghost" href="#/contact">Bewerben</a>
-        </div>
-      </div>
-    `;
-  }
-
-  function render(){
-    const p = pathFromHash();
-    app.innerHTML = (pages[p] ? pages[p]() : html`
-      <div class="breadcrumb"><a href="#/">Home</a> / 404</div>
-      <h1 class="page-title">Nicht gefunden</h1>
-      <p class="page-sub">Diese Route existiert nicht: <code>${p}</code></p>
-      <section class="section"><a class="btn btn-primary" href="#/">Zur Startseite</a></section>
-    `);
-    setActiveNav(p);
-
-    const form = document.getElementById("form");
-    if(form){
-      form.addEventListener("submit",(e)=>{
-        e.preventDefault();
-        document.getElementById("note").textContent = "Demo: Formular abgeschickt (hier später Backend/Email anbinden).";
-        form.reset();
-      }, { once:true });
-    }
-  }
+  });
 
   document.getElementById("year").textContent = new Date().getFullYear();
-  window.addEventListener("hashchange", render);
-  if(!location.hash) location.hash = "#/";
-  render();
 </script>
 </body>
 </html>
